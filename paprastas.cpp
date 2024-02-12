@@ -32,7 +32,7 @@ int main() {
     char metodas;
     std::cout << "Pasirinkite skaičiavimo būdą (v - vidurkis, m - mediana): ";
     std::cin >> metodas;
-    std::cin.ignore(); // Valo buferį po paskutinio įvedimo
+    std::cin.ignore();
 
     for (int i = 0; i < m; ++i) {
         std::string vardas;
@@ -60,7 +60,7 @@ int main() {
         } else {
             galutinis = 0.4 * mediana(nd) + 0.6 * egz;
         }
-        galutiniai_balai.push_back(galutinis); // Teisingai įdeda galutinį balą
+        galutiniai_balai.push_back(galutinis);
     }
 
     std::cout << "Visų studentų galutiniai balai:" << std::endl;

@@ -34,7 +34,7 @@ int main() {
         int egz;
         std::cout << "Iveskite egzamino rezultata: ";
         std::cin >> egz;
-        std::cin.ignore(); // Išvalyti įvesties buferį
+        std::cin.ignore();
 
         double galutinis = 0.4 * vidurkis(nd) + 0.6 * egz;
         galutiniai_balai.push_back(galutinis);

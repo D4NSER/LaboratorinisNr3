@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct {
     char vardas[50];
@@ -9,7 +10,7 @@ typedef struct {
     int egzaminas;
 } Studentas;
 
-// rusiuoju masyvus didejimo tvarka
+// Funkcija, skirta int masyvo rūšiavimui didėjimo tvarka
 void sort(int *array, int size) {
     for (int i = 0; i < size - 1; i++) {
         for (int j = 0; j < size - i - 1; j++) {
@@ -22,8 +23,9 @@ void sort(int *array, int size) {
     }
 }
 
+// Funkcija, skirta medianos apskaičiavimui
 double calculateMedian(int *array, int size) {
-    sort(array, size);
+    sort(array, size); // Rūšiuojame masyvą
     if (size % 2 == 0) {
         return (array[size / 2 - 1] + array[size / 2]) / 2.0;
     } else {
@@ -31,44 +33,59 @@ double calculateMedian(int *array, int size) {
     }
 }
 
+void generateRandomGrades(Studentas *studentas) {
+    studentas->nd_kiekis = rand() % 10 + 1; // nd KIEKIS - tarp 1 ir 10
+    studentas->nd_rezultatai = (int *)malloc(studentas->nd_kiekis * sizeof(int));
+    for (int i = 0; i < studentas->nd_kiekis; i++) {
+        studentas->nd_rezultatai[i] = rand() % 10 + 1; //nd - tarp 1 ir 10
+    }
+    studentas->egzaminas = rand() % 10 + 1; //egzas - tarp 1 ir 10
+}
+
 int main() {
     int m = 0, i, j;
     Studentas *studentai = NULL;
-    char testi = 't';
-    char metodas;
+    char testi = 't', metodas, generavimas;
 
-    printf("Pasirinkite skaiciavimo metoda (v - vidurkis, m - mediana): ");
+    srand(time(NULL)); 
+
+    printf("Pasirinkite skaičiavimo metodą (v - vidurkis, m - mediana): ");
     scanf(" %c", &metodas);
+    printf("Ar norite generuoti balus atsitiktinai? (t - Taip / n - Ne): ");
+    scanf(" %c", &generavimas);
 
     while (testi == 't') {
         studentai = (Studentas *)realloc(studentai, (m + 1) * sizeof(Studentas));
-        printf("Iveskite studento varda ir pavarde: ");
+        printf("Įveskite studento vardą ir pavardę: ");
         scanf("%s %s", studentai[m].vardas, studentai[m].pavarde);
-        
-        studentai[m].nd_rezultatai = NULL;
-        studentai[m].nd_kiekis = 0;
-        printf("Iveskite ND rezultatus (0 baigia ivedima): ");
-        int rez = 1;
-        while (rez != 0) {
-            scanf("%d", &rez);
-            if (rez != 0) {
-                studentai[m].nd_rezultatai = (int *)realloc(studentai[m].nd_rezultatai, (studentai[m].nd_kiekis + 1) * sizeof(int));
-                studentai[m].nd_rezultatai[studentai[m].nd_kiekis] = rez;
-                studentai[m].nd_kiekis++;
+
+        if (generavimas == 't') {
+            generateRandomGrades(&studentai[m]);
+        } else {
+            studentai[m].nd_rezultatai = NULL;
+            studentai[m].nd_kiekis = 0;
+            printf("Įveskite ND rezultatus (0 baigia įvedimą): ");
+            int rez = 1;
+            while (rez != 0) {
+                scanf("%d", &rez);
+                if (rez != 0) {
+                    studentai[m].nd_rezultatai = (int *)realloc(studentai[m].nd_rezultatai, (studentai[m].nd_kiekis + 1) * sizeof(int));
+                    studentai[m].nd_rezultatai[studentai[m].nd_kiekis] = rez;
+                    studentai[m].nd_kiekis++;
+                }
             }
+            printf("Įveskite egzamino rezultatą: ");
+            scanf("%d", &studentai[m].egzaminas);
         }
 
-        printf("Iveskite egzamino rezultata: ");
-        scanf("%d", &studentai[m].egzaminas);
-
         m++;
-        printf("Ar norite ivesti dar viena studenta? (t/n): ");
+        printf("Ar norite įvesti dar vieną studentą? (t/n): ");
         scanf(" %c", &testi);
     }
 
     for (i = 0; i < m; i++) {
         double galutinis;
-        if (metodas == 'v' || metodas == 'V') { 
+        if (metodas == 'v' || metodas == 'V') {
             double vidurkis = 0;
             for (j = 0; j < studentai[i].nd_kiekis; j++) {
                 vidurkis += studentai[i].nd_rezultatai[j];
@@ -82,7 +99,7 @@ int main() {
         printf("%s %s: Galutinis balas = %.2f\n", studentai[i].vardas, studentai[i].pavarde, galutinis);
     }
 
-   
+    // Atminties valymas
     for (i = 0; i < m; i++) {
         free(studentai[i].nd_rezultatai);
     }

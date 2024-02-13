@@ -1,9 +1,19 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
 #include <string>
-#include <algorithm> // Pridėta dėl std::sort
 
-double vidurkis(const std::vector<int>& nd) {
+using namespace std;
+
+struct Studentas {
+    string vardas, pavarde;
+    vector<int> nd;
+    int egzaminas;
+};
+
+double vidurkis(const vector<int>& nd) {
+    if (nd.empty()) return 0.0;
     double suma = 0.0;
     for (int pazymys : nd) {
         suma += pazymys;
@@ -11,61 +21,66 @@ double vidurkis(const std::vector<int>& nd) {
     return suma / nd.size();
 }
 
-double mediana(std::vector<int> nd) {
-    size_t dydis = nd.size();
-    std::sort(nd.begin(), nd.end());
-    if (dydis % 2 == 0) {
-        return (nd[dydis / 2 - 1] + nd[dydis / 2]) / 2.0;
+double mediana(vector<int> nd) {
+    if (nd.empty()) return 0.0;
+    sort(nd.begin(), nd.end());
+    size_t n = nd.size();
+    if (n % 2 == 0) {
+        return (nd[n / 2 - 1] + nd[n / 2]) / 2.0;
     } else {
-        return nd[dydis / 2];
+        return nd[n / 2];
     }
 }
 
+void spausdintiAntrastes(bool naudotiVidurki) {
+    cout << left << setw(15) << "Vardas"
+         << setw(15) << "Pavarde"
+         << setw(15) << (naudotiVidurki ? "Galutinis (Vid.)" : "Galutinis(Med.)") << endl;
+    cout << "------------------------------------------------------------" << endl;
+}
+
+void spausdintiRezultata(const Studentas& s, bool naudotiVidurki) {
+    double galutinis = naudotiVidurki ? 0.4 * vidurkis(s.nd) + 0.6 * s.egzaminas
+                                      : 0.4 * mediana(s.nd) + 0.6 * s.egzaminas;
+    cout << left << setw(15) << s.vardas
+         << setw(15) << s.pavarde
+         << setw(15) << fixed << setprecision(2) << galutinis << endl;
+}
+
 int main() {
-    int m; // Studentų skaičius
-    std::cout << "Įveskite studentų skaičių: ";
-    std::cin >> m;
+    vector<Studentas> studentai;
+    Studentas temp;
+    char testi = 't';
+    bool naudotiVidurki;
 
-    std::vector<std::string> vardai;
-    std::vector<double> galutiniai_balai;
+    cout << "Norite skaiciuoti pagal mediana (0) ar vidurki (1)? ";
+    cin >> naudotiVidurki;
 
-    char metodas;
-    std::cout << "Pasirinkite skaičiavimo būdą (v - vidurkis, m - mediana): ";
-    std::cin >> metodas;
-    std::cin.ignore();
+    while (testi == 't' || testi == 'T') {
+        cout << "Iveskite studento varda: ";
+        cin >> temp.vardas;
+        cout << "Iveskite studento pavarde: ";
+        cin >> temp.pavarde;
 
-    for (int i = 0; i < m; ++i) {
-        std::string vardas;
-        std::cout << "Įveskite " << i + 1 << "-ojo studento vardą: ";
-        std::cin >> vardas;
-        vardai.push_back(vardas);
-
-        int n; // Namų darbų skaičius
-        std::cout << "Įveskite namų darbų skaičių: ";
-        std::cin >> n;
-
-        std::vector<int> nd(n);
-        for (int j = 0; j < n; ++j) {
-            std::cout << "Įveskite namų darbų Nr." << j + 1 << " rezultatą: ";
-            std::cin >> nd[j];
+        temp.nd.clear();
+        int pazymys;
+        cout << "Iveskite namu darbu rezultatus (baigti, ivedus neigiama sk.): ";
+        while (cin >> pazymys && pazymys >= 0) {
+            temp.nd.push_back(pazymys);
         }
 
-        int egz;
-        std::cout << "Įveskite egzamino rezultatą: ";
-        std::cin >> egz;
+        cout << "Iveskite egzamino rezultata: ";
+        cin >> temp.egzaminas;
 
-        double galutinis;
-        if (metodas == 'v' || metodas == 'V') {
-            galutinis = 0.4 * vidurkis(nd) + 0.6 * egz;
-        } else {
-            galutinis = 0.4 * mediana(nd) + 0.6 * egz;
-        }
-        galutiniai_balai.push_back(galutinis);
+        studentai.push_back(temp);
+
+        cout << "Ar norite ivesti dar viena studenta? (t/n): ";
+        cin >> testi;
     }
 
-    std::cout << "Visų studentų galutiniai balai:" << std::endl;
-    for (size_t i = 0; i < vardai.size(); ++i) {
-        std::cout << vardai[i] << " galutinis balas: " << galutiniai_balai[i] << std::endl;
+    spausdintiAntrastes(naudotiVidurki);
+    for (const auto& studentas : studentai) {
+        spausdintiRezultata(studentas, naudotiVidurki);
     }
 
     return 0;

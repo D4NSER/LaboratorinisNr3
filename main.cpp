@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <string>
 
-using namespace std
+using namespace std;
 
 struct Studentas {
     string vardas, pavarde;

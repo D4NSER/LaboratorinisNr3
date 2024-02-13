@@ -36,6 +36,12 @@ double mediana(std::vector<int> nd) {
 
 void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, char skaiciavimoBudas) {
     std::cout << std::fixed << std::setprecision(2);
+    std::string skaiciavimoMetodas = (skaiciavimoBudas == 'v' || skaiciavimoBudas == 'V') ? "Vidurkis" : "Mediana";
+
+    std::cout << "Studentų galutiniai balai (" << skaiciavimoMetodas << "):\n";
+    std::cout << "-------------------------------------------------\n";
+    std::cout << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(20) << "Galutinis balas\n";
+    std::cout << "-------------------------------------------------\n";
 
     for (const Studentas& studentas : studentai) {
         double galutinisPazymys = 0.0;
@@ -46,9 +52,9 @@ void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, char ska
             galutinisPazymys = 0.4 * mediana(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
         }
 
-        std::cout << studentas.vardas << " " << studentas.pavarde 
-                  << ": Galutinis balas = " << galutinisPazymys << std::endl;
+        std::cout << std::left << std::setw(15) << studentas.vardas << std::setw(15) << studentas.pavarde << std::setw(20) << galutinisPazymys << "\n";
     }
+    std::cout << "-------------------------------------------------\n";
 }
 
 void generateRandomGrades(Studentas& studentas) {
@@ -98,13 +104,8 @@ void manualInput(std::vector<Studentas>& studentai) {
         std::cout << "Ar norite įvesti dar vieną studentą? (t/n): ";
         std::cin >> testi;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-        if (testi != 't') {
-            break;
-        }
     }
 }
-
 
 void generateGradesOnly(std::vector<Studentas>& studentai) {
     for (Studentas& studentas : studentai) {
@@ -130,14 +131,7 @@ int main() {
                   << "4 - Baigti darbą\n"
                   << "Pasirinkite veiksmą: ";
         std::cin >> pasirinkimas;
-
-        //if (pasirinkimas == 4) break;
-
-        // if (pasirinkimas == 5) {
-        //     studentai.clear();
-        //     std::cout << "Studentų sąrašas išvalytas.\n";
-        //     continue;
-        // }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Important to ignore leftovers
 
         char skaiciavimoBudas = ' ';
         if (pasirinkimas < 4) {
@@ -162,7 +156,7 @@ int main() {
                     studentai.push_back(naujasStudentas);
                 }
                 break;
-        } 
+        }
 
         if (pasirinkimas < 4) {
             spausdintiGalutiniusBalus(studentai, skaiciavimoBudas);

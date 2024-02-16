@@ -6,15 +6,24 @@
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
 
 struct Studentas {
-    std::string vardas;
-    std::string pavarde;
-    std::vector<int> nd_rezultatai;
+    string vardas;
+    string pavarde;
+    vector<int> nd_rezultatai;
     int egzaminas;
 };
 
-double vidurkis(const std::vector<int>& nd) {
+bool sortByVardas(const Studentas& a, const Studentas& b){
+    return a.vardas < b.vardas;
+    //return a.pavarde < b.pavarde;
+}
+
+double vidurkis(const vector<int>& nd) {
     if(nd.empty()) return 0.0;
     double suma = 0.0;
     for (int pazymys : nd) {
@@ -23,9 +32,9 @@ double vidurkis(const std::vector<int>& nd) {
     return suma / nd.size();
 }
 
-double mediana(std::vector<int> nd) {
+double mediana(vector<int> nd) {
     if(nd.empty()) return 0.0;
-    std::sort(nd.begin(), nd.end());
+    sort(nd.begin(), nd.end());
     size_t dydis = nd.size();
     if (dydis % 2 == 0) {
         return (nd[dydis / 2 - 1] + nd[dydis / 2]) / 2.0;
@@ -34,20 +43,28 @@ double mediana(std::vector<int> nd) {
     }
 }
 
-void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, char skaiciavimoBudas) {
-    std::cout << std::fixed << std::setprecision(2);
+void spausdintiGalutiniusBalus(const vector<Studentas>& studentai, const string& isvedimoFailoVardas = "") {
+    ostream& out = isvedimoFailoVardas.empty() ? cout : *new ofstream(isvedimoFailoVardas);
 
-    for (const Studentas& studentas : studentai) {
-        double galutinisPazymys = 0.0;
+    //rusiuoju pagal vartotojo pasirirnkima
+    vector<Studentas> surusiuotiStudentai = studentai;
+    sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
 
-        if (skaiciavimoBudas == 'v' || skaiciavimoBudas == 'V') {
-            galutinisPazymys = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-        } else if (skaiciavimoBudas == 'm' || skaiciavimoBudas == 'M') {
-            galutinisPazymys = 0.4 * mediana(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-        }
+    out << fixed << setprecision(2);
+    out << "Studentų galutiniai balai:\n";
+    out << "----------------------------------------------------------------\n";
+    out << left << setw(15) << "Vardas" << setw(15) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)\n";
+    out << "----------------------------------------------------------------\n";
 
-        std::cout << studentas.vardas << " " << studentas.pavarde 
-                  << ": Galutinis balas = " << galutinisPazymys << std::endl;
+    for (const Studentas& studentas : surusiuotiStudentai) {
+        double galutinisVidurkis = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        double galutineMediana = 0.4 * mediana(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        out << left << setw(15) << studentas.vardas << setw(15) << studentas.pavarde << setw(20) << galutinisVidurkis << setw(20) << galutineMediana << "\n";
+    }
+    out << "----------------------------------------------------------------\n";
+
+    if (!isvedimoFailoVardas.empty()) {
+        delete &out; //uzdarau jei naudojau ofstream'a
     }
 }
 
@@ -69,44 +86,39 @@ void generateRandomNamesAndGrades(Studentas& studentas) {
     generateRandomGrades(studentas);
 }
 
-void manualInput(std::vector<Studentas>& studentai) {
+void manualInput(vector<Studentas>& studentai) {
     char testi = 't';
 
     while (testi == 't') {
         Studentas naujasStudentas;
 
-        std::cout << "Įveskite studento vardą: ";
-        std::getline(std::cin, naujasStudentas.vardas);
+        cout << "Įveskite studento vardą: ";
+        getline(cin, naujasStudentas.vardas);
 
-        std::cout << "Įveskite studento pavardę: ";
-        std::getline(std::cin, naujasStudentas.pavarde);
+        cout << "Įveskite studento pavardę: ";
+        getline(cin, naujasStudentas.pavarde);
 
         int pazymys;
-        std::cout << "Įveskite namų darbų pažymius (0 norint baigti): ";
-        while (std::cin >> pazymys && pazymys != 0) {
+        cout << "Įveskite namų darbų pažymius (0 norint baigti): ";
+        while (cin >> pazymys && pazymys != 0) {
             naujasStudentas.nd_rezultatai.push_back(pazymys);
         }
-        std::cin.clear(); //Valo bet kokias klaidas
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.clear(); //Valo bet kokias klaidas
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        std::cout << "Įveskite egzamino rezultatą: ";
-        std::cin >> naujasStudentas.egzaminas;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Įveskite egzamino rezultatą: ";
+        cin >> naujasStudentas.egzaminas;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         studentai.push_back(naujasStudentas);
 
-        std::cout << "Ar norite įvesti dar vieną studentą? (t/n): ";
-        std::cin >> testi;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-        if (testi != 't') {
-            break;
-        }
+        cout << "Ar norite įvesti dar vieną studentą? (t/n): ";
+        cin >> testi;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
-
-void generateGradesOnly(std::vector<Studentas>& studentai) {
+void generateGradesOnly(vector<Studentas>& studentai) {
     for (Studentas& studentas : studentai) {
         studentas.nd_rezultatai.clear();
         int ndKiekis = rand() % 10 + 1;
@@ -117,36 +129,49 @@ void generateGradesOnly(std::vector<Studentas>& studentai) {
     }
 }
 
+void readFileDataFromFile(vector<Studentas>& studentai, const string&failoVardas){
+    ifstream failas(failoVardas);
+    if (!failas.is_open()) {
+        cerr << "Nepavyko atidaryti failo: " << failoVardas << endl;
+        return;
+    }
+
+    Studentas studentas;
+    string eilute;
+    getline(failas, eilute); //praleidziu pirma failo eilute
+
+     while (getline(failas, eilute)) {
+        istringstream eilutesSrautas(eilute);
+        eilutesSrautas >> studentas.vardas >> studentas.pavarde;
+
+        int pazymys;
+        studentas.nd_rezultatai.clear();
+        while (eilutesSrautas >> pazymys && pazymys != -1) {
+            studentas.nd_rezultatai.push_back(pazymys);
+        }
+
+        studentas.egzaminas = pazymys;
+        studentai.push_back(studentas);
+    }
+    
+    failas.close();
+}
+
 int main() {
     srand(static_cast<unsigned int>(time(nullptr)));
-    std::vector<Studentas> studentai;
+    vector<Studentas> studentai;
     int pasirinkimas = 0;
 
-    while (pasirinkimas != 4) {
-        std::cout << "Meniu:\n"
+    while (pasirinkimas != 5) {
+        cout << "Meniu:\n"
                   << "1 - Įvesti studentų duomenis rankiniu būdu\n"
                   << "2 - Generuoti pažymius esamiems studentams\n"
                   << "3 - Generuoti ir pažymius, ir studentų vardus bei pavardes\n"
-                  << "4 - Baigti darbą\n"
+                  << "4 - Skaityti duomenis iš failo\n"
+                  << "5 - Baigti darbą\n"
                   << "Pasirinkite veiksmą: ";
-        std::cin >> pasirinkimas;
-
-        //if (pasirinkimas == 4) break;
-
-        // if (pasirinkimas == 5) {
-        //     studentai.clear();
-        //     std::cout << "Studentų sąrašas išvalytas.\n";
-        //     continue;
-        // }
-
-        char skaiciavimoBudas = ' ';
-        if (pasirinkimas < 4) {
-            do {
-                std::cout << "Pasirinkite skaičiavimo būdą (v - vidurkis, m - mediana): ";
-                std::cin >> skaiciavimoBudas;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }   while(skaiciavimoBudas != 'v' && skaiciavimoBudas != 'V' && skaiciavimoBudas != 'm' && skaiciavimoBudas != 'M');
-        }
+        cin >> pasirinkimas;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Important to ignore leftovers
 
         switch (pasirinkimas) {
             case 1:
@@ -162,10 +187,16 @@ int main() {
                     studentai.push_back(naujasStudentas);
                 }
                 break;
-        } 
+            case 4:
+                string failoVardas;
+                cout << "Įveskite failo pavadinimą: ";
+                cin >> failoVardas;
+                readFileDataFromFile(studentai, failoVardas);
+                break;
+        }
 
-        if (pasirinkimas < 4) {
-            spausdintiGalutiniusBalus(studentai, skaiciavimoBudas);
+        if (pasirinkimas < 5) {
+            spausdintiGalutiniusBalus(studentai);
         }
     }
 

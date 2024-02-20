@@ -18,11 +18,6 @@ struct Studentas {
     int egzaminas;
 };
 
-bool sortByVardas(const Studentas& a, const Studentas& b){
-    return a.vardas < b.vardas;
-    //return a.pavarde < b.pavarde;
-}
-
 double vidurkis(const vector<int>& nd) {
     if(nd.empty()) return 0.0;
     double suma = 0.0;
@@ -43,30 +38,60 @@ double mediana(vector<int> nd) {
     }
 }
 
-void spausdintiGalutiniusBalus(const vector<Studentas>& studentai, char skaiciavimoBudas, const string& isvedimoFailoVardas = "") {
-    ostream& out = isvedimoFailoVardas.empty() ? cout : *new ofstream(isvedimoFailoVardas);
+bool sortByVardas(const Studentas& a, const Studentas& b){
+    return a.vardas < b.vardas;
+}
 
-    // Rūšiavimas pagal pasirinkimą
-     vector<Studentas> surusiuotiStudentai = studentai;
-    sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas); // arba kitas rūšiavimo būdas
+bool sortByPavarde(const Studentas& a, const Studentas& b){
+    return a.pavarde < b.pavarde;
+}
+
+bool sortByVidurkis(const Studentas& a, const Studentas& b) {
+    double vidurkisA = 0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas;
+    double vidurkisB = 0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas;
+    return vidurkisA < vidurkisB;
+}
+
+bool sortByMediana(const Studentas& a, const Studentas& b) {
+    double medianaA = 0.4 * mediana(a.nd_rezultatai) + 0.6 * a.egzaminas;
+    double medianaB = 0.4 * mediana(b.nd_rezultatai) + 0.6 * b.egzaminas;
+    return medianaA < medianaB;
+}
+
+void spausdintiGalutiniusBalus(const vector<Studentas>& studentai, const string& isvedimoFailoVardas = "", int rusiavimoTipas = 1) {
+    ostream& out = isvedimoFailoVardas.empty() ? cout : *new ofstream(isvedimoFailoVardas);
+    vector<Studentas> surusiuotiStudentai = studentai;
+
+    switch (rusiavimoTipas) {
+        case 1: 
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
+            break;
+        case 2:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByPavarde);
+            break;
+        case 3:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVidurkis);
+            break;
+        case 4:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByMediana);
+            break;
+    }
 
     out << fixed << setprecision(2);
-    string skaiciavimoMetodas = (skaiciavimoBudas == 'v' || skaiciavimoBudas == 'V') ? "Vidurkis" : "Mediana";
-
-    out << "Studentų galutiniai balai (" << skaiciavimoMetodas << "):\n";
-    out << "-------------------------------------------------\n";
-    out << left << setw(15) << "Vardas" << setw(15) << "Pavardė" << setw(20) << "Galutinis balas\n";
-    out << "-------------------------------------------------\n";
+    out << "Studentų galutiniai balai:\n";
+    out << "----------------------------------------------------------------\n";
+    out << left << setw(15) << "Vardas" << setw(15) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)\n";
+    out << "----------------------------------------------------------------\n";
 
     for (const Studentas& studentas : surusiuotiStudentai) {
-        double galutinisPazymys = (skaiciavimoBudas == 'v' || skaiciavimoBudas == 'V') ? 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas : 0.4 * mediana(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-
-        out << left << setw(15) << studentas.vardas << setw(15) << studentas.pavarde << setw(20) << galutinisPazymys << "\n";
+        double galutinisVidurkis = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        double galutineMediana = 0.4 * mediana(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        out << left << setw(15) << studentas.vardas << setw(15) << studentas.pavarde << setw(20) << galutinisVidurkis << setw(20) << galutineMediana << "\n";
     }
-    out << "-------------------------------------------------\n";
+    out << "----------------------------------------------------------------\n";
 
     if (!isvedimoFailoVardas.empty()) {
-        delete &out; // Uždarome failą, jei naudojome ofstream
+        delete &out; //uzdarau jei naudojau ofstream'a
     }
 }
 
@@ -140,6 +165,8 @@ void readFileDataFromFile(vector<Studentas>& studentai, const string&failoVardas
 
     Studentas studentas;
     string eilute;
+    getline(failas, eilute); //praleidziu pirma failo eilute
+
      while (getline(failas, eilute)) {
         istringstream eilutesSrautas(eilute);
         eilutesSrautas >> studentas.vardas >> studentas.pavarde;
@@ -171,16 +198,7 @@ int main() {
                   << "5 - Baigti darbą\n"
                   << "Pasirinkite veiksmą: ";
         cin >> pasirinkimas;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Important to ignore leftovers
-
-        char skaiciavimoBudas = ' ';
-        if (pasirinkimas < 5) {
-            do {
-                cout << "Pasirinkite skaičiavimo būdą (v - vidurkis, m - mediana): ";
-                cin >> skaiciavimoBudas;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }   while(skaiciavimoBudas != 'v' && skaiciavimoBudas != 'V' && skaiciavimoBudas != 'm' && skaiciavimoBudas != 'M');
-        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (pasirinkimas) {
             case 1:
@@ -201,11 +219,33 @@ int main() {
                 cout << "Įveskite failo pavadinimą: ";
                 cin >> failoVardas;
                 readFileDataFromFile(studentai, failoVardas);
+
+                int isvedimoPasirinkimas;
+                cout << "Pasirinkite išvedimo būdą\n"
+                    << "1 - Išvesti į konsolę\n"
+                    << "2 - Išvesti į norimą failą\n"
+                    << "Pasirinkite veiksmą: ";
+                cin >> isvedimoPasirinkimas;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                 if (isvedimoPasirinkimas == 2) {
+                    string isvedimoFailoVardas;
+                    cout << "Įveskite išvedimo failo pavadinimą: ";
+                    getline(cin, isvedimoFailoVardas);
+                    
+                    int rusiavimoTipas;
+                    cout << "Pasirinkite rūšiavimo būdą: 1 - Pagal vardą, 2 - Pagal pavardę, 3 - Pagal vidurkį, 4 - Pagal medianą: ";
+                    cin >> rusiavimoTipas;
+
+                    spausdintiGalutiniusBalus(studentai, isvedimoFailoVardas, rusiavimoTipas);
+                } else {
+                    spausdintiGalutiniusBalus(studentai);
+                }
                 break;
-        }
+            }
 
         if (pasirinkimas < 5) {
-            spausdintiGalutiniusBalus(studentai, skaiciavimoBudas);
+            spausdintiGalutiniusBalus(studentai);
         }
     }
 

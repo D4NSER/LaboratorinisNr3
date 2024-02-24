@@ -8,8 +8,10 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <chrono>
 
 using namespace std;
+using namespace chrono;
 
 struct Studentas {
     string vardas;
@@ -17,11 +19,6 @@ struct Studentas {
     vector<int> nd_rezultatai;
     int egzaminas;
 };
-
-bool sortByVardas(const Studentas& a, const Studentas& b){
-    return a.vardas < b.vardas;
-    //return a.pavarde < b.pavarde;
-}
 
 double vidurkis(const vector<int>& nd) {
     if(nd.empty()) return 0.0;
@@ -43,12 +40,44 @@ double mediana(vector<int> nd) {
     }
 }
 
-void spausdintiGalutiniusBalus(const vector<Studentas>& studentai, const string& isvedimoFailoVardas = "") {
-    ostream& out = isvedimoFailoVardas.empty() ? cout : *new ofstream(isvedimoFailoVardas);
+bool sortByVardas(const Studentas& a, const Studentas& b){
+    return a.vardas < b.vardas;
+}
 
-    //rusiuoju pagal vartotojo pasirirnkima
+bool sortByPavarde(const Studentas& a, const Studentas& b){
+    return a.pavarde < b.pavarde;
+}
+
+bool sortByVidurkis(const Studentas& a, const Studentas& b) {
+    double vidurkisA = 0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas;
+    double vidurkisB = 0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas;
+    return vidurkisA < vidurkisB;
+}
+
+bool sortByMediana(const Studentas& a, const Studentas& b) {
+    double medianaA = 0.4 * mediana(a.nd_rezultatai) + 0.6 * a.egzaminas;
+    double medianaB = 0.4 * mediana(b.nd_rezultatai) + 0.6 * b.egzaminas;
+    return medianaA < medianaB;
+}
+
+void spausdintiGalutiniusBalus(const vector<Studentas>& studentai, const string& isvedimoFailoVardas = "", int rusiavimoTipas = 1){
+    ostream& out = isvedimoFailoVardas.empty() ? cout : *new ofstream(isvedimoFailoVardas);
     vector<Studentas> surusiuotiStudentai = studentai;
-    sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
+
+    switch (rusiavimoTipas) {
+        case 1:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
+            break;
+        case 2:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByPavarde);
+            break;
+        case 3:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVidurkis);
+            break;
+        case 4:
+            sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByMediana);
+            break;
+    }
 
     out << fixed << setprecision(2);
     out << "Studentų galutiniai balai:\n";
@@ -153,8 +182,56 @@ void readFileDataFromFile(vector<Studentas>& studentai, const string&failoVardas
         studentas.egzaminas = pazymys;
         studentai.push_back(studentas);
     }
-    
+
     failas.close();
+}
+
+string pasirinktiFaila()
+{
+    string failoPavadinimas;
+
+    cout << "Pasirinkite faila is kurio norite skaityti duomenis:\n"
+         << "1 - kursiokai.txt\n"
+         << "2 - studentai10000.txt\n"
+         << "3 - studentai100000.txt\n"
+         << "4 - studentai1000000.txt\n";
+
+    int pasirinkimas;
+    cin >> pasirinkimas;
+
+    switch (pasirinkimas)
+    {
+    case 1:
+        failoPavadinimas = "kursiokai.txt";
+        break;
+    case 2:
+        failoPavadinimas = "studentai10000.txt";
+        break;
+    case 3:
+        failoPavadinimas = "studentai100000.txt";
+        break;
+    case 4:
+        failoPavadinimas = "studentai1000000.txt";
+        break;
+    default:
+        cout << "Neteisingas pasirinkimas. Skaitoma is kursiokai.txt\n";
+        failoPavadinimas = "kursiokai.txt";
+    }
+
+    return failoPavadinimas;
+}
+
+int pasirinktiRusiavimoTipa() {
+    cout << "Pasirinkite rūšiavimo būdą:\n"
+         << "1 - Pagal vardą\n"
+         << "2 - Pagal pavardę\n"
+         << "3 - Pagal vidurkį\n"
+         << "4 - Pagal mediana\n"
+         << "Įveskite pasirinkimą: ";
+    int rusiavimoTipas;
+    cin >> rusiavimoTipas;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    return rusiavimoTipas;
 }
 
 int main() {
@@ -162,16 +239,23 @@ int main() {
     vector<Studentas> studentai;
     int pasirinkimas = 0;
 
+    double visoLaikoSuma = 0.0;
+    int testuSkaicius = 0;
+
+    vector<double> testuLaikai;
+
     while (pasirinkimas != 5) {
+        auto start = chrono::high_resolution_clock::now();
+
         cout << "Meniu:\n"
-                  << "1 - Įvesti studentų duomenis rankiniu būdu\n"
-                  << "2 - Generuoti pažymius esamiems studentams\n"
-                  << "3 - Generuoti ir pažymius, ir studentų vardus bei pavardes\n"
-                  << "4 - Skaityti duomenis iš failo\n"
-                  << "5 - Baigti darbą\n"
-                  << "Pasirinkite veiksmą: ";
+             << "1 - Įvesti studentų duomenis rankiniu būdu\n"
+             << "2 - Generuoti pažymius esamiems studentams\n"
+             << "3 - Generuoti ir pažymius, ir studentų vardus bei pavardes\n"
+             << "4 - Skaityti duomenis iš failo\n"
+             << "5 - Baigti darbą\n"
+             << "Pasirinkite veiksmą: ";
         cin >> pasirinkimas;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Important to ignore leftovers
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (pasirinkimas) {
             case 1:
@@ -188,17 +272,28 @@ int main() {
                 }
                 break;
             case 4:
-                string failoVardas;
-                cout << "Įveskite failo pavadinimą: ";
-                cin >> failoVardas;
-                readFileDataFromFile(studentai, failoVardas);
+                {
+                    readFileDataFromFile(studentai, pasirinktiFaila());
+                    int rusiavimoTipas = pasirinktiRusiavimoTipa();
+                    spausdintiGalutiniusBalus(studentai, "isvedimas.txt", rusiavimoTipas);
+                    break;
+                }
+            case 5:
                 break;
         }
 
-        if (pasirinkimas < 5) {
-            spausdintiGalutiniusBalus(studentai);
+        if (pasirinkimas != 5) {
+            auto end = chrono::high_resolution_clock::now();
+            chrono::duration<double> time = end - start;
+            double laikas = time.count();
+            cout << "Operacija užtruko: " << laikas << " s" << endl;
+            visoLaikoSuma += laikas;
+            testuSkaicius++;
         }
     }
+
+    double vidurkis = visoLaikoSuma / testuSkaicius;
+    cout << "Keliu testu laiku vidurkis: " << vidurkis << " s" << endl;
 
     return 0;
 }

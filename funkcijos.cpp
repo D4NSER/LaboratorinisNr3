@@ -8,7 +8,6 @@
 #include <string>
 #include <sstream>
 
-// Rūšiavimo funkcijos
 bool sortByVardas(const Studentas& a, const Studentas& b) {
     return a.vardas < b.vardas;
 }
@@ -29,7 +28,6 @@ bool sortByMediana(const Studentas& a, const Studentas& b) {
     return medianaA < medianaB;
 }
 
-// Spausdina studentų galutinius balus
 void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, const std::string& isvedimoFailoVardas, int rusiavimoTipas) {
     std::ostream* out;
     std::ofstream fileOut;
@@ -43,7 +41,6 @@ void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, const st
 
     std::vector<Studentas> surusiuotiStudentai = studentai;
 
-    // Rūšiavimas
     switch (rusiavimoTipas) {
         case 1:
             sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
@@ -59,11 +56,10 @@ void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, const st
             break;
     }
 
-    // Spausdinimas
     *out << std::fixed << std::setprecision(2);
     *out << "Studentų galutiniai balai:\n";
     *out << "----------------------------------------------------------------\n";
-    *out << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)\n";
+    *out << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė" << std::setw(20) << "Galutinis (Vid.)" << std::setw(20) << "Galutinis (Med.)" << std::endl;
     *out << "----------------------------------------------------------------\n";
 
     for (const Studentas& studentas : surusiuotiStudentai) {
@@ -78,56 +74,66 @@ void spausdintiGalutiniusBalus(const std::vector<Studentas>& studentai, const st
     }
 }
 
-// Rankinis studentų duomenų įvedimas
 void manualInput(std::vector<Studentas>& studentai) {
     char testi = 't';
     while (testi == 't' || testi == 'T') {
         Studentas naujasStudentas;
+        std::string temp;
 
         std::cout << "Įveskite studento vardą: ";
-        std::getline(std::cin, naujasStudentas.vardas);
-
+        std::cin >> naujasStudentas.vardas;
         std::cout << "Įveskite studento pavardę: ";
-        std::getline(std::cin, naujasStudentas.pavarde);
+        std::cin >> naujasStudentas.pavarde;
 
         std::cout << "Įveskite namų darbų pažymius (0 norint baigti): ";
         int pazymys;
-        while (std::cin >> pazymys && pazymys != 0) {
+        while (true) {
+            std::cin >> pazymys;
+            if (std::cin.fail() || pazymys < 0 || pazymys > 10) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Neteisingai įvestas pažymys. Turi būti sveikasis skaičius nuo 0 iki 10." << std::endl;
+                continue;
+            }
+            if (pazymys == 0) {
+                break;
+            }
             naujasStudentas.nd_rezultatai.push_back(pazymys);
         }
-        std::cin.clear(); // Valo bet kokias klaidas
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         std::cout << "Įveskite egzamino rezultatą: ";
-        std::cin >> naujasStudentas.egzaminas;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        while (true) {
+            std::cin >> naujasStudentas.egzaminas;
+            if (std::cin.fail() || naujasStudentas.egzaminas < 0 || naujasStudentas.egzaminas > 10) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Neteisingai įvestas egzamino rezultatas. Turi būti sveikasis skaičius nuo 0 iki 10." << std::endl;
+                continue;
+            }
+            break;
+        }
 
         studentai.push_back(naujasStudentas);
 
         std::cout << "Ar norite įvesti dar vieną studentą? (t/n): ";
         std::cin >> testi;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 }
 
-// Generuoja tik pažymius esamiems studentams
 void generateGradesOnly(std::vector<Studentas>& studentai) {
     for (Studentas& studentas : studentai) {
         generateRandomGrades(studentas);
     }
 }
 
-// Skaito studentų duomenis iš failo
 void readFileDataFromFile(std::vector<Studentas>& studentai, const std::string& failoVardas) {
     std::ifstream failas(failoVardas);
     if (!failas.is_open()) {
-        std::cerr << "Nepavyko atidaryti failo: " << failoVardas << std::endl;
-        return;
+        throw std::runtime_error("Nepavyko atidaryti failo: " + failoVardas);
     }
 
     Studentas studentas;
     std::string eilute;
-    getline(failas, eilute); // Praleidžiama antraštė
 
     while (getline(failas, eilute)) {
         std::istringstream eilutesSrautas(eilute);

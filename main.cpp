@@ -110,6 +110,9 @@ int main() {
                 } catch (const std::exception& e) {
                     std::cerr << "Failo skaitymo klaida: " << e.what() << '\n';
                 }
+                catch (const std::runtime_error& e) {
+                std::cerr << "Klaida: " << e.what() << '\n';
+                 }
                 break;
             case 5:
                 try {

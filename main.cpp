@@ -17,7 +17,7 @@ int main() {
                   << "2 - Generuoti pažymius esamiems studentams" << std::endl
                   << "3 - Generuoti ir pažymius, ir studentų vardus bei pavardes" << std::endl
                   << "4 - Skaityti duomenis iš failo" << std::endl
-                  << "5 - Spausdinti studentų sąrašą" << std::endl
+                  << "5 - Pakeisti rūšiavimo tipą" << std::endl
                   << "0 - Baigti darbą" << std::endl
                   << "Pasirinkite veiksmą: ";
         std::cin >> pasirinkimas;
@@ -26,6 +26,7 @@ int main() {
         switch (pasirinkimas) {
             case 1:
                 manualInput(studentai);
+                spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
                 break;
             case 2:
                 generateGradesOnly(studentai);
@@ -36,15 +37,51 @@ int main() {
                     generateRandomNamesAndGrades(naujasStudentas);
                     studentai.push_back(naujasStudentas);
                 }
+                spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
                 break;
             case 4: {
-                std::string failoVardas = "duomenys.txt"; // Pakeiskite į reikiamą failo vardą
-                readFileDataFromFile(studentai, failoVardas);
+                std::string failoVardas;
+                std::cout << "Pasirinkite failą:" << std::endl
+                          << "1 - studentai10000.txt" << std::endl
+                          << "2 - studentai100000.txt" << std::endl
+                          << "3 - studentai1000000.txt" << std::endl
+                          << "4 - kursiokai.txt" << std::endl
+                          << "Pasirinkimas: ";
+                int failoPasirinkimas;
+                std::cin >> failoPasirinkimas;
+                switch (failoPasirinkimas) {
+                    case 1: failoVardas = "studentai10000.txt"; break;
+                    case 2: failoVardas = "studentai100000.txt"; break;
+                    case 3: failoVardas = "studentai1000000.txt"; break;
+                    case 4: failoVardas = "kursiokai.txt"; break;
+                    default: std::cout << "Neteisingas pasirinkimas." << std::endl; break;
+                }
+
+                if (!failoVardas.empty()) {
+                    int rusiavimoTipas;
+                    std::cout << "Pasirinkite rūšiavimo būdą:" << std::endl
+                              << "1 - Pagal vardą" << std::endl
+                              << "2 - Pagal pavardę" << std::endl
+                              << "3 - Pagal vidurkį" << std::endl
+                              << "4 - Pagal medianą" << std::endl
+                              << "Pasirinkimas: ";
+                    std::cin >> rusiavimoTipas;
+
+                    readFileDataFromFile(studentai, failoVardas);
+                    spausdintiGalutiniusBalus(studentai, "isvedimas.txt", rusiavimoTipas);
+                }
                 break;
             }
-            case 5: {
-                int rusiavimoTipas = 1; // Galite leisti vartotojui pasirinkti rūšiavimo tipą
-                spausdintiGalutiniusBalus(studentai, "", rusiavimoTipas); // Paskutinis parametras nurodo išvedimo failo vardą, jei reikia
+            case 5:{
+                int rusiavimoTipas;
+                std::cout << "Pasirinkite naują rūšiavimo būdą:" << std::endl
+                          << "1 - Pagal vardą" << std::endl
+                          << "2 - Pagal pavardę" << std::endl
+                          << "3 - Pagal vidurkį" << std::endl
+                          << "4 - Pagal medianą" << std::endl
+                          << "Pasirinkimas: ";
+                std::cin >> rusiavimoTipas;
+                spausdintiGalutiniusBalus(studentai, "isvedimas.txt", rusiavimoTipas);
                 break;
             }
             case 0:

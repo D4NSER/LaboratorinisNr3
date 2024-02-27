@@ -5,19 +5,18 @@
 #include <cstdlib>
 #include <ctime>
 #include <limits>
+#include <stdexcept>
+#include <fstream>
 
-int main()
-{
+int main() {
     srand(static_cast<unsigned int>(time(nullptr)));
 
     std::vector<Studentas> studentai;
     int pasirinkimas;
-    int rusiavimoTipas = 1;
+    int rusiavimoTipas;
 
-    do
-    {
-        try
-        {
+    do {
+        try {
             std::cout << "Meniu:" << std::endl
                       << "1 - Įvesti studentų duomenis rankiniu būdu" << std::endl
                       << "2 - Generuoti pažymius esamiems studentams" << std::endl
@@ -27,103 +26,119 @@ int main()
                       << "0 - Baigti darbą" << std::endl
                       << "Pasirinkite veiksmą: ";
             std::cin >> pasirinkimas;
-            if (!std::cin)
-            {
+            if (!std::cin) {
                 throw std::invalid_argument("Netinkamas pasirinkimas.");
             }
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-            switch (pasirinkimas)
-            {
+            switch (pasirinkimas) {
             case 1:
-                manualInput(studentai);
-                spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
+                try {
+                    manualInput(studentai);
+                    spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
+                } catch (const std::exception& e) {
+                    std::cerr << "Įvedimo klaida: " << e.what() << '\n';
+                }
                 break;
             case 2:
-                generateGradesOnly(studentai);
+                try {
+                    generateGradesOnly(studentai);
+                } catch (const std::exception& e) {
+                    std::cerr << "Pažymių generavimo klaida: " << e.what() << '\n';
+                }
                 break;
             case 3:
-                for (int i = 0; i < 5; ++i)
-                { // Generuojame 5 atsitiktinius studentus kaip pavyzdį
-                    Studentas naujasStudentas;
-                    generateRandomNamesAndGrades(naujasStudentas);
-                    studentai.push_back(naujasStudentas);
+                try {
+                    for (int i = 0; i < 5; ++i) {
+                        Studentas naujasStudentas;
+                        generateRandomNamesAndGrades(naujasStudentas);
+                        studentai.push_back(naujasStudentas);
+                    }
+                    spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
+                } catch (const std::exception& e) {
+                    std::cerr << "Studentų generavimo klaida: " << e.what() << '\n';
                 }
-                spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
                 break;
             case 4:
-            {
-                std::string failoVardas;
-                std::cout << "Pasirinkite failą:" << std::endl
-                          << "1 - studentai10000.txt" << std::endl
-                          << "2 - studentai100000.txt" << std::endl
-                          << "3 - studentai1000000.txt" << std::endl
-                          << "4 - kursiokai.txt" << std::endl
-                          << "Pasirinkimas: ";
-                int failoPasirinkimas;
-                std::cin >> failoPasirinkimas;
-                switch (failoPasirinkimas)
-                {
-                case 1:
-                    failoVardas = "studentai10000.txt";
-                    break;
-                case 2:
-                    failoVardas = "studentai100000.txt";
-                    break;
-                case 3:
-                    failoVardas = "studentai1000000.txt";
-                    break;
-                case 4:
-                    failoVardas = "kursiokai.txt";
-                    break;
-                default:
-                    std::cout << "Neteisingas pasirinkimas." << std::endl;
-                    break;
-                }
+                try {
+                    std::string failoVardas;
+                    std::cout << "Pasirinkite failą:" << std::endl
+                              << "1 - studentai10000.txt" << std::endl
+                              << "2 - studentai100000.txt" << std::endl
+                              << "3 - studentai1000000.txt" << std::endl
+                              << "4 - kursiokai.txt" << std::endl
+                              << "Pasirinkimas: ";
+                    int failoPasirinkimas;
+                    std::cin >> failoPasirinkimas;
+                    if (std::cin.fail()) {
+                        throw std::invalid_argument("Netinkamas failo pasirinkimas.");
+                    }
 
-                if (!failoVardas.empty())
-                {
-                    int rusiavimoTipas;
-                    std::cout << "Pasirinkite rūšiavimo būdą:" << std::endl
+                    switch (failoPasirinkimas) {
+                    case 1:
+                        failoVardas = "studentai10000.txt";
+                        break;
+                    case 2:
+                        failoVardas = "studentai100000.txt";
+                        break;
+                    case 3:
+                        failoVardas = "studentai1000000.txt";
+                        break;
+                    case 4:
+                        failoVardas = "kursiokai.txt";
+                        break;
+                    default:
+                        std::cout << "Neteisingas pasirinkimas." << std::endl;
+                        continue;
+                    }
+
+                    if (!failoVardas.empty()) {
+                        std::cout << "Pasirinkite rūšiavimo būdą:" << std::endl
+                                  << "1 - Pagal vardą" << std::endl
+                                  << "2 - Pagal pavardę" << std::endl
+                                  << "3 - Pagal vidurkį" << std::endl
+                                  << "4 - Pagal medianą" << std::endl
+                                  << "Pasirinkimas: ";
+                        std::cin >> rusiavimoTipas;
+                        if (std::cin.fail()) {
+                            throw std::invalid_argument("Netinkamas rūšiavimo būdo pasirinkimas.");
+                        }
+
+                        readFileDataFromFile(studentai, failoVardas);
+                        spausdintiGalutiniusBalus(studentai, "isvedimas.txt", rusiavimoTipas);
+                    }
+                } catch (const std::exception& e) {
+                    std::cerr << "Failo skaitymo klaida: " << e.what() << '\n';
+                }
+                break;
+            case 5:
+                try {
+                    std::cout << "Pasirinkite naują rūšiavimo būdą:" << std::endl
                               << "1 - Pagal vardą" << std::endl
                               << "2 - Pagal pavardę" << std::endl
                               << "3 - Pagal vidurkį" << std::endl
                               << "4 - Pagal medianą" << std::endl
                               << "Pasirinkimas: ";
                     std::cin >> rusiavimoTipas;
-
-                    readFileDataFromFile(studentai, failoVardas);
+                    if (std::cin.fail()) {
+                        throw std::invalid_argument("Netinkamas rūšiavimo būdo pasirinkimas.");
+                    }
                     spausdintiGalutiniusBalus(studentai, "isvedimas.txt", rusiavimoTipas);
+                } catch (const std::exception& e) {
+                    std::cerr << "Rūšiavimo būdo keitimo klaida: " << e.what() << '\n';
                 }
                 break;
-            }
-            case 5:
-            {
-                int rusiavimoTipas;
-                std::cout << "Pasirinkite naują rūšiavimo būdą:" << std::endl
-                          << "1 - Pagal vardą" << std::endl
-                          << "2 - Pagal pavardę" << std::endl
-                          << "3 - Pagal vidurkį" << std::endl
-                          << "4 - Pagal medianą" << std::endl
-                          << "Pasirinkimas: ";
-                std::cin >> rusiavimoTipas;
-                spausdintiGalutiniusBalus(studentai, "isvedimas.txt", rusiavimoTipas);
-                break;
-            }
             case 0:
                 std::cout << "Programa baigia darbą." << std::endl;
                 break;
             default:
                 std::cout << "Neatpažintas pasirinkimas. Bandykite dar kartą." << std::endl;
                 break;
-            
             }
-            }
-            catch (const std::invalid_argument &e)
-            {
-                std::cerr << "Klaida: " << e.what() << '\n';
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } catch (const std::invalid_argument& e) {
+            std::cerr << "Klaida: " << e.what() << '\n';
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             catch (const std::exception &e)
             {

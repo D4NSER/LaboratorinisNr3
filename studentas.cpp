@@ -1,14 +1,12 @@
 #include "studentas.h"
-#include <algorithm> // dėl sort funkcijos
-#include <numeric> // dėl accumulate funkcijos
+#include <algorithm>
+#include <numeric>
 
-// Skaičiuoja vidurkį
 double vidurkis(const std::vector<int>& nd) {
     if(nd.empty()) return 0.0;
     return std::accumulate(nd.begin(), nd.end(), 0.0) / nd.size();
 }
 
-// Skaičiuoja medianą
 double mediana(std::vector<int> nd) {
     if(nd.empty()) return 0.0;
     sort(nd.begin(), nd.end());
@@ -20,7 +18,6 @@ double mediana(std::vector<int> nd) {
     }
 }
 
-// Generuoja atsitiktinius pažymius
 void generateRandomGrades(Studentas& studentas) {
     studentas.nd_rezultatai.resize(rand() % 10 + 1);
     for (int& grade : studentas.nd_rezultatai) {
@@ -29,7 +26,6 @@ void generateRandomGrades(Studentas& studentas) {
     studentas.egzaminas = rand() % 10 + 1;
 }
 
-// Generuoja atsitiktinius vardus, pavardes ir pažymius
 void generateRandomNamesAndGrades(Studentas& studentas) {
     const char* vardai[] = {"Jonas", "Petras", "Antanas", "Juozas", "Kazimieras"};
     const char* pavardes[] = {"Jonaitis", "Petraitis", "Antanaitis", "Juozaitis", "Kazimieraitis"};

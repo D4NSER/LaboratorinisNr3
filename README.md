@@ -1,7 +1,7 @@
 v0.4 tyrimų laikai
 
 Pirmasis tyrimas: 
-            Failų generavimas apytiksliai užtruko: 77.5183 sekundžių.
+            Failų generavimas apytiksliai užtruko: 78.0753 sekundžių.
 
 Antrasis tyrimas: 
             Studentų rūšiavimas ir išsaugojimas iš 1000 įrašų failo apytiksliai užtruko: 0.000426255 sekundžių.

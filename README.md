@@ -1,8 +1,16 @@
 v0.4 tyrimų laikai
 
 Pirmasis tyrimas: 
+
             
-            Failų generavimas apytiksliai užtruko: 78.0753 sekundžių.
+            Pirmasis bandymas: 78.5183 s.
+            Antrasis bandymas: 77.8162 s.
+            Trečiasis bandymas: 79.0568 s.
+            Ketvirtasis bandymas: 93.6235 s.
+            Penktasis bandymas: 86.7234 s. 
+            Šeštasis bandymas: 98.1055 s.
+            Septintasis bandymas: 94.3955 s.
+            Aštuntasis bandymas: 97.6658 s.
 
 Antrasis tyrimas: 
 

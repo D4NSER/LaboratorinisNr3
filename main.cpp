@@ -164,7 +164,7 @@ int main()
                 break;
             case 6:
             {
-                auto start = std::chrono::high_resolution_clock::now(); 
+                auto start = std::chrono::high_resolution_clock::now();
                 generateStudentFiles(sizes);
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> elapsed = end - start;
@@ -172,18 +172,33 @@ int main()
                 break;
             }
             break;
-            case 7: 
+            case 7:
             {
-                for (auto size : sizes)
+                std::cout << "Pasirinkite, kurį studentų failą norite rūšiuoti:" << std::endl;
+                for (size_t i = 0; i < sizes.size(); ++i)
                 {
-                    auto start = std::chrono::high_resolution_clock::now();
-                    rusiuotiStudentus(sizes);
-                    auto end = std::chrono::high_resolution_clock::now();
-                    std::chrono::duration<double> elapsed = end - start;
-                    std::cout << "Studentų rūšiavimas ir išsaugojimas iš " << size << " įrašų failo užtruko: " << elapsed.count() << " sekundžių." << std::endl;
+                    std::cout << i + 1 << " - studentai" << sizes[i] << ".txt" << std::endl;
                 }
+                std::cout << "Pasirinkimas: ";
+                size_t choice;
+                std::cin >> choice;
+
+                if (std::cin.fail() || choice < 1 || choice > sizes.size())
+                {
+                    std::cerr << "Neteisingas pasirinkimas." << std::endl;
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    break;
+                }
+
+                auto startOverall = std::chrono::high_resolution_clock::now();
+                rusiuotiStudentus(std::vector<int>{sizes[choice - 1]});
+                auto endOverall = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> elapsedOverall = endOverall - startOverall;
+                std::cout << "Visas rūšiavimo ir išsaugojimo procesas užtruko: " << elapsedOverall.count() << " sekundžių." << std::endl;
+
+                break;
             }
-            break;
 
             case 0:
                 std::cout << "Programa baigia darbą." << std::endl;

@@ -164,20 +164,20 @@ int main()
                 break;
             case 6:
             {
-                auto start = std::chrono::high_resolution_clock::now();  // Pradeda laiko matavimą
+                auto start = std::chrono::high_resolution_clock::now(); 
                 generateStudentFiles(sizes);
-                auto end = std::chrono::high_resolution_clock::now();  // Baigia laiko matavimą
-                std::chrono::duration<double> elapsed = end - start;  // Skaičiuoja praeitą laiką
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> elapsed = end - start;
                 std::cout << "Failų generavimas užtruko: " << elapsed.count() << " sekundžių." << std::endl;
                 break;
             }
             break;
-            case 7:
+            case 7: 
             {
                 for (auto size : sizes)
                 {
                     auto start = std::chrono::high_resolution_clock::now();
-                    rusiuotiStudentus(studentai);
+                    rusiuotiStudentus(sizes);
                     auto end = std::chrono::high_resolution_clock::now();
                     std::chrono::duration<double> elapsed = end - start;
                     std::cout << "Studentų rūšiavimas ir išsaugojimas iš " << size << " įrašų failo užtruko: " << elapsed.count() << " sekundžių." << std::endl;

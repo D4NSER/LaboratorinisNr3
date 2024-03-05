@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 bool sortByVardas(const Studentas &a, const Studentas &b)
 {
@@ -164,7 +165,8 @@ void readFileDataFromFile(std::vector<Studentas> &studentai, const std::string &
 
         int pazymys;
         studentas.nd_rezultatai.clear();
-        while (eilutesSrautas >> pazymys && pazymys != -1) {
+        while (eilutesSrautas >> pazymys && pazymys != -1)
+        {
             studentas.nd_rezultatai.push_back(pazymys);
         }
 
@@ -182,15 +184,22 @@ void generateStudentFiles(const std::vector<int> &sizes)
         std::string fileName = "studentai" + std::to_string(size) + ".txt";
         std::ofstream outFile(fileName);
 
+        outFile << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavardė";
+        for (int i = 1; i <= 15; ++i)
+        {
+            outFile << std::setw(10) << "ND" + std::to_string(i);
+        }
+        outFile << std::setw(10) << "Egz." << std::endl;
+
         for (int i = 1; i <= size; i++)
         {
-            outFile << "Vardas" << i << " Pavarde" << i;
-            int ndCount = rand() % 10 + 1; // Generuoti nuo 1 iki 10 namų darbų pažymių
-            for (int j = 0; j < ndCount; j++)
+            outFile << std::left << std::setw(15) << "Vardas" + std::to_string(i)
+                    << std::setw(15) << "Pavardė" + std::to_string(i);
+            for (int j = 0; j < 15; j++)
             {
-                outFile << " " << (rand() % 10 + 1); // Generuoti pažymius nuo 1 iki 10
+                outFile << std::setw(10) << (rand() % 10 + 1);
             }
-            outFile << " " << (rand() % 10 + 1); // Egzamino pažymys
+            outFile << std::setw(10) << (rand() % 10 + 1);
             outFile << std::endl;
         }
 
@@ -198,31 +207,88 @@ void generateStudentFiles(const std::vector<int> &sizes)
     }
 }
 
-void rusiuotiStudentus(const std::vector<Studentas>& studentai) {
-    std::vector<Studentas> kietiakiai, vargsiukai;
+void rusiuotiStudentus(const std::vector<int> &sizes)
+{
+    std::cout << "Pasirinkite, kurį studentų failą norite rūšiuoti:" << std::endl;
+    for (size_t i = 0; i < sizes.size(); ++i)
+    {
+        std::cout << i + 1 << " - studentai" << sizes[i] << ".txt" << std::endl;
+    }
+    std::cout << "Pasirinkimas: ";
+    size_t choice;
+    std::cin >> choice;
 
-    for (const auto& studentas : studentai) {
+    if (std::cin.fail() || choice < 1 || choice > sizes.size())
+    {
+        std::cerr << "Neteisingas pasirinkimas." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+
+    std::string failoVardas = "studentai" + std::to_string(sizes[choice - 1]) + ".txt";
+    std::ifstream inFile(failoVardas);
+    if (!inFile.is_open())
+    {
+        std::cerr << "Nepavyko atidaryti failo: " << failoVardas << std::endl;
+        return;
+    }
+
+    std::string headerLine;
+    std::getline(inFile, headerLine);
+
+    std::vector<Studentas> studentai, kietiakiai, vargsiukai;
+    Studentas tempStudentas;
+    int pazymys;
+
+    while (inFile >> tempStudentas.vardas >> tempStudentas.pavarde)
+    {
+        tempStudentas.nd_rezultatai.clear();
+        while (inFile >> pazymys)
+        {
+            tempStudentas.nd_rezultatai.push_back(pazymys);
+        }
+        if (!tempStudentas.nd_rezultatai.empty())
+        {
+            tempStudentas.egzaminas = tempStudentas.nd_rezultatai.back();
+            tempStudentas.nd_rezultatai.pop_back();
+        }
+        studentai.push_back(tempStudentas);
+        inFile.clear();
+        inFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    inFile.close();
+
+    for (const auto &studentas : studentai)
+    {
         double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-        if (galutinisBalas < 5.0) {
+        if (galutinisBalas < 5.0)
+        {
             vargsiukai.push_back(studentas);
-        } else {
+        }
+        else
+        {
             kietiakiai.push_back(studentas);
         }
     }
 
-    std::ofstream kietiakiaiFailas("kietiakiai.txt");
-    std::ofstream vargsiukaiFailas("vargsiukai.txt");
+    std::ofstream kietiakiaiFailas("kietiakiai.txt"), vargsiukaiFailas("vargsiukai.txt");
 
-    for (const auto& studentas : kietiakiai) {
-        kietiakiaiFailas << studentas.vardas << " " << studentas.pavarde << " " << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) << std::endl;
+    for (const auto &studentas : kietiakiai)
+    {
+        double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        kietiakiaiFailas << studentas.vardas << " " << studentas.pavarde << " " << std::fixed << std::setprecision(2) << galutinisBalas << std::endl;
     }
 
-    for (const auto& studentas : vargsiukai) {
-        vargsiukaiFailas << studentas.vardas << " " << studentas.pavarde << " " << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) << std::endl;
+    for (const auto &studentas : vargsiukai)
+    {
+        double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        vargsiukaiFailas << studentas.vardas << " " << studentas.pavarde << " " << std::fixed << std::setprecision(2) << galutinisBalas << std::endl;
     }
 
     kietiakiaiFailas.close();
     vargsiukaiFailas.close();
 
-    std::cout << "Studentai išsaugoti į failus: kietiakiai.txt ir vargsiukai.txt." << std::endl;
+    std::cout << "Studentai iš " << failoVardas << " išsaugoti į atitinkamus failus: kietiakiai.txt ir vargsiukai.txt." << std::endl;
 }

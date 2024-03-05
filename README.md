@@ -13,8 +13,9 @@ Pirmasis tyrimas:
 
 Antrasis tyrimas: 
 
-            Studentų rūšiavimas ir išsaugojimas iš 1000 įrašų failo vidutiniškai  užtruko: 0.00298643 sekundžių.
-            Studentų rūšiavimas ir išsaugojimas iš 10000 įrašų failo vidutiniškai  užtruko: 0.00137933 sekundžių.
-            Studentų rūšiavimas ir išsaugojimas iš 100000 įrašų failo vidutiniškai  užtruko: 0.000879161 sekundžių.
-            Studentų rūšiavimas ir išsaugojimas iš 1000000 įrašų failo vidutiniškai  užtruko: 0.000996651 sekundžių.
-            Studentų rūšiavimas ir išsaugojimas iš 10000000 įrašų failo vidutiniškai užtruko: 0.00102753 sekundžių.
+            Visų sukurtų failų (5 bandymų) rezultatai ir vidurkis:
+            1000 studentų: 1.57113 s, 2.96479 s, 1.99284 s, 0.882874 s, 2.64196 s
+            10000 student: 2.22114 s, 3.91882 s, 5.05933 s, 3.36831 s, 5.66899 s
+            100000 student
+            1000000 student
+            10000000 student

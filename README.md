@@ -14,8 +14,8 @@ Pirmasis tyrimas:
 Antrasis tyrimas: 
 
             Visų sukurtų failų (5 bandymų) rezultatai ir vidurkis:
-            1000 studentų: 1.57113 s, 2.96479 s, 1.99284 s, 0.882874 s, 2.64196 s
-            10000 student: 2.22114 s, 3.91882 s, 5.05933 s, 3.36831 s, 5.66899 s
+            1000 studentų: 0.498031 s, 0.649975 s, 0.460933 s, 0.388394 s, 0.604644 s
+            10000 student: 0.357909 s, 0.480445 s, 0.559713 s, 0.431002 s, 0.545368 s
             100000 studentų: 2.26494 s, 9.32131 s, 10.853 s, 7.40771 s, 5.55585 s
             1000000 studentų:
             10000000 studentų:

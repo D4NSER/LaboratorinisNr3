@@ -9,6 +9,8 @@ Pirmasis tyrimas:
             Ketvirtasis bandymas: 93.6235 s.
             Penktasis bandymas: 86.7234 s. 
 
+            Vidutinis greitis (sparta): 83,14764 s. 
+
 Antrasis tyrimas: 
 
             Studentų rūšiavimas ir išsaugojimas iš 1000 įrašų failo vidutiniškai  užtruko: 0.00298643 sekundžių.

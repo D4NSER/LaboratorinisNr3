@@ -8,9 +8,6 @@ Pirmasis tyrimas:
             Trečiasis bandymas: 79.0568 s.
             Ketvirtasis bandymas: 93.6235 s.
             Penktasis bandymas: 86.7234 s. 
-            Šeštasis bandymas: 98.1055 s.
-            Septintasis bandymas: 94.3955 s.
-            Aštuntasis bandymas: 97.6658 s.
 
 Antrasis tyrimas: 
 

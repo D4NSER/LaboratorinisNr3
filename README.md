@@ -78,6 +78,7 @@ This is a repository for my VU study subject Objective Programming
 
 > [!NOTE]
 > P.S. Changing structure's type from vector into list or deque, programs speed would actually change.
+
 **DATA READING**: The impact on reading might not be significant and caught by a human eye, but if we change **_vector_** into either **_list_** or **_deque_** the time would be a little bit smaller 
 
 **SORTING DATA**: 

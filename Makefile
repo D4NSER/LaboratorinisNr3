@@ -5,8 +5,8 @@ CXXFLAGS = -std=c++17 -Wall # Updated to C++17
 # Program name
 TARGET = programa
 
-# Object files list
-OBJS = main.o app.o funkcijosVECTOR.o funkcijosLIST.o funkcijosDEQUE.o studentas.o
+# Object files list - added funkcijos.o
+OBJS = main.o app.o funkcijosVECTOR.o funkcijosLIST.o funkcijosDEQUE.o studentas.o funkcijos.o
 
 # Main rule for program compilation
 $(TARGET): $(OBJS)
@@ -30,6 +30,10 @@ funkcijosDEQUE.o: funkcijosDEQUE.cpp funkcijosDEQUE.h studentas.h
 
 studentas.o: studentas.cpp studentas.h
 	$(CXX) $(CXXFLAGS) -c studentas.cpp
+
+# Added compilation rule for funkcijos.cpp
+funkcijos.o: funkcijos.cpp funkcijos.h
+	$(CXX) $(CXXFLAGS) -c funkcijos.cpp
 
 # Clean rule
 clean:

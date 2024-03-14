@@ -7,7 +7,7 @@ This is a repository for my VU study subject Objective Programming
     RAM: 6 GB 2133 MHz LPDDR3 
     SSD: Macintosh HD 
 > [!IMPORTANT]
-> All of the testing was done with the same files of 1000, 10000, 100000, 1000000, 10000000 students.
+> All of the testing was done with the same files that contained 1000, 10000, 100000, 1000000, 10000000 students.
 
 ## Test 1
 ### Vector

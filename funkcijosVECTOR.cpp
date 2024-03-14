@@ -57,44 +57,43 @@ void generateStudentFilesVector(int size) {
     outFile.close();
 }
 
-void rusiuotStudentusVector(int size) {
-    std::string fileName = "studentai" + std::to_string(size) + ".txt";
-    std::ifstream inFile(fileName);
+void rusiuotStudentusVector(const std::string& failoVardas) {
+    std::ifstream inFile(failoVardas);
 
     if (!inFile) {
-        std::cerr << "Nepavyko atidaryti failo: " << fileName << std::endl;
+        std::cerr << "Nepavyko atidaryti failo: " << failoVardas << std::endl;
         return;
     }
 
-    std::vector<Studentas> studentai, kietiakiai, vargsiukai;
-    Studentas tempStudentas;
+    std::vector<Studentas> studentai;
     std::string eilute;
     std::getline(inFile, eilute); // Skip the header
 
     while (std::getline(inFile, eilute)) {
+        Studentas tempStudentas;
         std::istringstream eiluteStream(eilute);
         eiluteStream >> tempStudentas.vardas >> tempStudentas.pavarde;
         tempStudentas.nd_rezultatai.clear();
         int pazymys;
-
         while (eiluteStream >> pazymys) {
             tempStudentas.nd_rezultatai.push_back(pazymys);
         }
-        
         if (!tempStudentas.nd_rezultatai.empty()) {
             tempStudentas.egzaminas = tempStudentas.nd_rezultatai.back();
             tempStudentas.nd_rezultatai.pop_back();
         }
-
         studentai.push_back(tempStudentas);
     }
 
     inFile.close();
 
+    // Sorting students
     std::sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
         return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas);
     });
 
+    // Dividing students into two categories
+    std::vector<Studentas> kietiakiai, vargsiukai;
     for (const auto& studentas : studentai) {
         double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
         if (galutinisBalas < 5.0) {
@@ -104,15 +103,21 @@ void rusiuotStudentusVector(int size) {
         }
     }
 
-    // Output to files
+    // Writing sorted students into separate files
     std::ofstream kietiakiaiFile("kietiakiai.txt"), vargsiukaiFile("vargsiukai.txt");
 
-    for (const auto &studentas : kietiakiai) {
-        kietiakiaiFile << studentas.vardas << " " << studentas.pavarde << " " << std::fixed << std::setprecision(2) << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) << std::endl;
+    for (const auto& studentas : kietiakiai) {
+        kietiakiaiFile << studentas.vardas << " " << studentas.pavarde << " " 
+                       << std::fixed << std::setprecision(2) 
+                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) 
+                       << std::endl;
     }
 
-    for (const auto &studentas : vargsiukai) {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " " << std::fixed << std::setprecision(2) << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) << std::endl;
+    for (const auto& studentas : vargsiukai) {
+        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " " 
+                       << std::fixed << std::setprecision(2) 
+                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) 
+                       << std::endl;
     }
 
     kietiakiaiFile.close();

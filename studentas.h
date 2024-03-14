@@ -12,5 +12,8 @@ struct Studentas {
 };
 
 double vidurkis(const std::vector<int>& nd);
+double mediana(std::vector<int> nd);
+void generateRandomGrades(Studentas& studentas);
+void generateRandomNamesAndGrades(Studentas& studentas);
 
 #endif // STUDENTAS_H

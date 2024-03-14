@@ -1,6 +1,6 @@
 # Compiler settings
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++17 -Wall # Updated to C++17
 
 # Program name
 TARGET = programa

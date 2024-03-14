@@ -78,7 +78,7 @@ This is a repository for my VU study subject Objective Programming
 ## P.S. Changing structure's type from vector into list or deque, programs speed would actually change.
 **DATA READING**: The impact on reading might not be significant and caught by a human eye, but if we change **_vector_** into either **_list_** or **_deque_** the time would be a little bit smaller 
 
-**SORTING DATA**: **_Vector_** provides the fastest sorting because it allows random access (RA), which is super good for _quicksort_ algorithm used in std::sort
+**SORTING DATA**: **_Vector_** provides the fastest sorting because it allows random access (RA), which is super good for _quicksort_ algorithm used in std::sort. **_List_** has it's own _sort_ method which is optimized for list operations. It is **slower** than **_vector_** because it cannot access random access (RA). It is quite fast because it is designed for quick and efficient insertions and deletions. **_Deque_** is the slowest from these 3 because it doesn't support access to random access (RA) and is not designed for it, making it the **slowest** one.
 
 
 ## Test 2

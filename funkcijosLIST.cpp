@@ -82,11 +82,21 @@ void generateStudentFilesList(int size)
 void divideStudentsList(const std::string &failoVardas)
 {
     std::list<Studentas> studentai;
-    readDataList(studentai, failoVardas);
 
+    auto readStart = std::chrono::high_resolution_clock::now();
+    readDataList(studentai, failoVardas);
+    auto readEnd = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> readElapsed = readEnd - readStart;
+    std::cout << "Time taken to read data (List): " << readElapsed.count() << "s\n";
+
+    auto sortStart = std::chrono::high_resolution_clock::now();
     studentai.sort([](const Studentas &a, const Studentas &b)
                    { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+    auto sortEnd = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
+    std::cout << "Time taken to sort data (List): " << sortElapsed.count() << "s\n";
 
+    auto divideStart = std::chrono::high_resolution_clock::now();
     std::list<Studentas> kietiakiai, vargsiukai;
     for (const auto &studentas : studentai)
     {
@@ -100,6 +110,9 @@ void divideStudentsList(const std::string &failoVardas)
             kietiakiai.push_back(studentas);
         }
     }
+    auto divideEnd = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> divideElapsed = divideEnd - divideStart;
+    std::cout << "Time taken to divide students (List): " << divideElapsed.count() << "s\n";
 
     std::ofstream kietiakiaiFile("kietiakiai.txt"), vargsiukaiFile("vargsiukai.txt");
 

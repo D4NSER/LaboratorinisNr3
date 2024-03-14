@@ -6,7 +6,8 @@ This is a repository for my VU study subject Objective Programming
     CPU: 2,3 GHz Quad-Core Intel Core i5 
     RAM: 6 GB 2133 MHz LPDDR3 
     HDD: Macintosh HD 
-### All of the testing was done with the same files of 1000, 10000, 100000, 1000000, 10000000 students.
+> [!IMPORTANT]
+> All of the testing was done with the same files of 1000, 10000, 100000, 1000000, 10000000 students.
 
 ## Test 1
 ### Vector
@@ -75,7 +76,8 @@ This is a repository for my VU study subject Objective Programming
     1000000 students: 1.08464s
     10000000 students: 9.41827s
 
-## P.S. Changing structure's type from vector into list or deque, programs speed would actually change.
+> [!NOTE]
+> P.S. Changing structure's type from vector into list or deque, programs speed would actually change.
 **DATA READING**: The impact on reading might not be significant and caught by a human eye, but if we change **_vector_** into either **_list_** or **_deque_** the time would be a little bit smaller 
 
 **SORTING DATA**: 
@@ -89,6 +91,8 @@ This is a repository for my VU study subject Objective Programming
 - **_Deque_** is better than a vector for middle insertions/removals but not as efficient as a list because of it's design.
 
 In summary, if the structure of Studentas is changed from a **_vector_** to a **_list_** or **_deque_**, you might see improved performance in certain operations (like dividing students) due to the **_list's_** and **_deque's_** efficient insertion and deletion capabilities. However, sorting might be slower, especially for **_deque_**. The exact impact would depend on the specific operations and how they are implemented.
- 
+
+> [!WARNING]
+> When doing these tests try to do as many as you can, because from the first sight, the differences may not be seen because of the varying time all of the actions take 
 
 ## Test 2

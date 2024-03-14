@@ -6,8 +6,6 @@
 
 void readDataList(std::list<Studentas>& studentai, const std::string& failoVardas);
 void generateStudentFilesList(int size);
-void sortStudentsList(std::list<Studentas>& studentai);
-void writeStudentsToFile(const std::list<Studentas>& students, const std::string& fileName);
 void divideStudentsList(const std::string& failoVardas);
 
 #endif // FUNKCIJOSLIST_H

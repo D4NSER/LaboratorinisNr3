@@ -78,7 +78,17 @@ This is a repository for my VU study subject Objective Programming
 ## P.S. Changing structure's type from vector into list or deque, programs speed would actually change.
 **DATA READING**: The impact on reading might not be significant and caught by a human eye, but if we change **_vector_** into either **_list_** or **_deque_** the time would be a little bit smaller 
 
-**SORTING DATA**: **_Vector_** provides the fastest sorting because it allows random access (RA), which is super good for _quicksort_ algorithm used in _sort_. **_List_** has it's own _sort_ method which is optimized for list operations. It is **slower** than **_vector_** because it cannot access random access (RA). It is quite fast because it is designed for quick and efficient insertions and deletions. **_Deque_** is the slowest from these 3 because it doesn't support access to random access (RA) and is not designed for it, making it the **slowest** one.
+**SORTING DATA**: 
+- **_Vector_** provides the fastest sorting because it allows random access (RA), which is super good for _quicksort_ algorithm used in _sort_.
+- **_List_** has it's own _sort_ method which is optimized for list operations. It is **slower** than **_vector_** because it cannot access random access (RA). It is quite fast because it is designed for quick and efficient insertions and deletions.
+- **_Deque_** is the slowest from these 3 because it doesn't support access to random access (RA) and is not designed for it, making it the **slowest** one.
 
+**DIVIDING STUDENTS**: 
+- Using **_vector_** dividing might involve a lot of element shifting, especially if you're erasing elements from the middle.
+- **_List_** should be more efficient than a **_vector_** for dividing because it can insert and remove elements without shifting others.
+- **_Deque_** is better than a vector for middle insertions/removals but not as efficient as a list because of it's design.
+
+In summary, if the structure of Studentas is changed from a **_vector_** to a **_list_** or **_deque_**, you might see improved performance in certain operations (like dividing students) due to the **_list's_** and **_deque's_** efficient insertion and deletion capabilities. However, sorting might be slower, especially for **_deque_**. The exact impact would depend on the specific operations and how they are implemented.
+ 
 
 ## Test 2

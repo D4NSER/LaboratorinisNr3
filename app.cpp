@@ -1,6 +1,8 @@
 #include "funkcijosDEQUE.h"
 #include "funkcijosVECTOR.h"
 #include "funkcijosLIST.h"
+#include "funkcijos.h"
+#include "studentas.h"
 #include <iostream>
 #include <vector>
 #include <limits>
@@ -14,6 +16,10 @@
 #include <iomanip>
 #include <random>
 #include <filesystem>
+#include <cstdlib>
+#include <ctime>
+#include <limits>
+#include <stdexcept>
 
 enum class ContainerType { None, Vector, List, Deque };
 enum class Action { None, Generate, Sort };
@@ -75,7 +81,7 @@ Action getActionChoice() {
 std::string getSortingFileChoice() {
     std::vector<std::string> files;
 
-    std::cout << "Available files:\n";
+    std::cout << "Turimi failai:\n";
     int fileIndex = 1;
     for (const auto& entry : std::filesystem::directory_iterator(".")) {
         std::string filename = entry.path().filename().string();
@@ -86,18 +92,18 @@ std::string getSortingFileChoice() {
     }
 
     if (files.empty()) {
-        std::cout << "No student files found.\n";
+        std::cout << "Nerasti studentų failai.\n";
         return "";
     }
 
-    std::cout << "Select a file to sort: ";
+    std::cout << "Pasirinkite failą, kurį norite rūšiuoti: ";
     int choice;
     std::cin >> choice;
 
     if (std::cin.fail() || choice < 1 || choice > files.size()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Invalid selection. Please try again.\n";
+        std::cout << "Netinkamas pasirinkimas. Įveskite iš naujo.\n";
         return "";
     }
 
@@ -124,7 +130,7 @@ void performAction(ContainerType containerChoice, Action actionChoice, const std
             }
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
-            std::cout << "Time taken for file generation with size " << size << ": " << elapsed.count() << "s\n";
+            std::cout << "Užimtas laikas generuojant šio dydžio failą: " << size << ": " << elapsed.count() << "s\n";
         }
     } else if (actionChoice == Action::Sort) {
         std::string filename = getSortingFileChoice();
@@ -141,12 +147,12 @@ void performAction(ContainerType containerChoice, Action actionChoice, const std
                     divideStudentsDeque(filename);
                     break;
                 default:
-                    std::cout << "Invalid container type.\n";
+                    std::cout << "Netinkamas konteinerio pasirinkimas.\n";
                     break;
             }
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
-            std::cout << "Time taken for sorting and dividing in " << filename << ": " << elapsed.count() << "s\n";
+            std::cout << "Užimtas laikas rūšiojant ir skaidant studentus: " << filename << ": " << elapsed.count() << "s\n";
         }
     }
 }
@@ -169,7 +175,7 @@ void runApp() {
 
         performAction(containerChoice, actionChoice, sizes);
 
-        std::cout << "Do you want to perform another action? (Y/N): ";
+        std::cout << "Ar norite tęsti?? (Y/N): ";
         char userChoice;
         std::cin >> userChoice;
         if (userChoice == 'N' || userChoice == 'n') {
@@ -177,3 +183,4 @@ void runApp() {
         }
     }
 }
+

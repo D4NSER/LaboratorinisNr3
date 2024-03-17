@@ -185,3 +185,4 @@ void divideStudentsList(const std::string &failoVardas) // 2 strategija
 
     kietiakaiFile.close();
     vargsiukaiFile.close();
+}

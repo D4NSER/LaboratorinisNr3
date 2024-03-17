@@ -175,24 +175,24 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 ### Strategy 2
 #### Vector
     Time taken to read data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.0209572s
+    10000 students: 0.163544s
+    100000 students: 1.6192s
+    1000000 students: 15.753s
     10000000 students: 
 
     Time taken to sort data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.00586344s
+    10000 students: 0.0549243s
+    100000 students: 0.591112s
+    1000000 students: 5.76212s
     10000000 students: 
 
     Time taken to divide students in the file:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.000764175s
+    10000 students: 0.00705321s
+    100000 students: 0.0999966s
+    1000000 students: 0.880787s
     10000000 students: 
 
 #### List

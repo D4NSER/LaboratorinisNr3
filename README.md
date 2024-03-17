@@ -98,7 +98,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 
 # Test 2
 ### Strategy 1
-### Vector
+#### Vector
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -120,7 +120,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 
     10000000 students: 
 
-### List
+#### List
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -142,7 +142,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 
     10000000 students: 
 
-### Deque
+#### Deque
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -165,7 +165,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     10000000 students: 
 
 ### Strategy 2
-### Vector
+#### Vector
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -187,7 +187,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 
     10000000 students: 
 
-### List
+#### List
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -209,7 +209,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 
     10000000 students: 
 
-### Deque
+#### Deque
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -233,7 +233,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 
 
 ### Strategy 3
-### Vector
+#### Vector
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -255,7 +255,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 
     10000000 students: 
 
-### List
+#### List
     Time taken to read data:
     1000 students: 
     10000 students: 
@@ -277,7 +277,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 
     10000000 students: 
 
-### Deque
+#### Deque
     Time taken to read data:
     1000 students: 
     10000 students: 

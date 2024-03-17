@@ -100,68 +100,68 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 ### Strategy 1
 #### Vector
     Time taken to read data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.0228874s
+    10000 students: 0.166344s
+    100000 students: 1.59188s
+    1000000 students: 15.4619s
     10000000 students: 
 
     Time taken to sort data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.00589303s
+    10000 students: 0.0552494s
+    100000 students: 0.538313s
+    1000000 students: 6.18915s
     10000000 students: 
 
     Time taken to divide students in the file:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.000935161s
+    10000 students: 0.00835907s
+    100000 students: 0.0876151s
+    1000000 students: 1.10855s
     10000000 students: 
 
 #### List
     Time taken to read data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.0202555s
+    10000 students: 0.166206s
+    100000 students: 1.56521s
+    1000000 students: 15.9532s
     10000000 students: 
 
     Time taken to sort data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.00403285s
+    10000 students: 0.0604099s
+    100000 students: 0.799202s
+    1000000 students: 10.1229s
     10000000 students: 
 
     Time taken to divide students in the file:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.000769389s
+    10000 students: 0.0074186s
+    100000 students: 0.0936631s
+    1000000 students: 0.969208s
     10000000 students: 
 
 #### Deque
     Time taken to read data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.0232768s
+    10000 students: 0.163882s
+    100000 students: 1.56918s
+    1000000 students: 16.0526s
     10000000 students: 
 
     Time taken to sort data:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.00670575s
+    10000 students: 0.0587848s
+    100000 students: 0.616905s
+    1000000 students: 6.67419s
     10000000 students: 
 
     Time taken to divide students in the file:
-    1000 students: 
-    10000 students: 
-    100000 students: 
-    1000000 students: 
+    1000 students: 0.000968202s
+    10000 students: 0.00842794s
+    100000 students: 0.09097s
+    1000000 students: 0.964875s
     10000000 students: 
 
 ### Strategy 2

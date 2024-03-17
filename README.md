@@ -201,21 +201,21 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     10000 students: 0.163621s
     100000 students: 1.61604s
     1000000 students: 16.6939s
-    10000000 students: 
+    10000000 students: 156.007s
 
     Time taken to sort data:
     1000 students: 0.00382998s
     10000 students: 0.0571905s
     100000 students: 0.777995s
     1000000 students: 10.065s
-    10000000 students: 
+    10000000 students: 111.851s
 
     Time taken to divide students in the file:
     1000 students: 0.000549503s
     10000 students: 0.00595599s
     100000 students: 0.0938836s
     1000000 students: 1.04645s
-    10000000 students: 
+    10000000 students: 10.5176s
 
 #### Deque
     Time taken to read data:
@@ -238,6 +238,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     100000 students: 0.0840498s
     1000000 students: 0.953856s
     10000000 students: 9.93604s
+
 
 
 ### Strategy 3

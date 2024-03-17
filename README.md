@@ -96,4 +96,205 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 > [!WARNING]
 > When doing these tests try to do as many as you can, because from the first sight, the differences may not be seen because of the varying time all of the actions take 
 
-## Test 2
+# Test 2
+### Strategy 1
+### Vector
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### List
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### Deque
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### Strategy 2
+### Vector
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### List
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### Deque
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students:
+
+
+### Strategy 3
+### Vector
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### List
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+### Deque
+    Time taken to read data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to sort data:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 
+
+    Time taken to divide students in the file:
+    1000 students: 
+    10000 students: 
+    100000 students: 
+    1000000 students: 
+    10000000 students: 

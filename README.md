@@ -79,7 +79,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 | Time taken to sort data      | 0.00670575s  | 0.0587848s     | 0.616905s       | 6.67419s         | 59.6123s          |
 | Time taken to divide students| 0.000968202s | 0.00842794s    | 0.09097s        | 0.964875s        | 10.6465s          |
 
-#### Implementing this strategy:
+### Implementing this strategy:
 - **_Vector_**: May have some problems when splitting students into 2 containers because of the need for additional memory.
 - **_List_**: They don't require any additional memory when splitting students into 2 dfferent containers, but they are slower than vectors because of slower random acccess (RA).
 - **_Deque_**: They are much more efficient when it comes to splitting compared to others. They support insertion and deletion from all ends. They offer quite a fast reading and insertion but are still slower than vectors due to no access to random access (RA).
@@ -110,7 +110,7 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 | Time taken to sort data      | 0.00546757s  | 0.0559585s     | 0.588068s       | 6.6712s          | 58.1088s          |
 | Time taken to divide students| 0.00081878s  | 0.00721679s    | 0.0840498s      | 0.953856s        | 9.93604s          |
 
-#### Implementing this strategy:
+### Implementing this strategy:
 - **_Vector_**: Using it, time increases with the number of students because of slower element removal even though reading and sorting are pretty much not affected due to fast random access (RA). Performance differentiates because of file sizes.
 - **_List_**: Allos quick ellement removal and efficient classification. However, when it comes to sorting, list times get much longer due to random access (RA) issues, especially with large files.
 - **_Deque_**: Student classification and sorting times are pretty fast but reading data is tragicly slow.

@@ -1,6 +1,3 @@
-# ObjektinisProgramavimas
-This is a repository for my VU study subject Objective Programming
-
 ## Specs
 #### To start this project's review, I need to give a little intro about my computer. I have a MacBook, with these specs:
     CPU: 2,3 GHz Quad-Core Intel Core i5 

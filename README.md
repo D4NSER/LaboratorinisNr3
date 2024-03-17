@@ -57,71 +57,27 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 
 # Test 2
 ### Strategy 1
-#### Vector
-    Time taken to read data:
-    1000 students: 0.0228874s
-    10000 students: 0.166344s
-    100000 students: 1.59188s
-    1000000 students: 15.4619s
-    10000000 students: 165.159s
 
-    Time taken to sort data:
-    1000 students: 0.00589303s
-    10000 students: 0.0552494s
-    100000 students: 0.538313s
-    1000000 students: 6.18915s
-    10000000 students: 60.0473s
+##### Vector
+| Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|------------------------------|--------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data      | 0.0228874s   | 0.166344s      | 1.59188s        | 15.4619s         | 165.159s          |
+| Time taken to sort data      | 0.00589303s  | 0.0552494s     | 0.538313s       | 6.18915s         | 60.0473s          |
+| Time taken to divide students| 0.000935161s | 0.00835907s    | 0.0876151s      | 1.10855s         | 11.3426s          |
 
-    Time taken to divide students in the file:
-    1000 students: 0.000935161s
-    10000 students: 0.00835907s
-    100000 students: 0.0876151s
-    1000000 students: 1.10855s
-    10000000 students: 11.3426s
+##### List
+| Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|------------------------------|--------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data      | 0.0202555s   | 0.166206s      | 1.56521s        | 15.9532s         | 166.259s          |
+| Time taken to sort data      | 0.00403285s  | 0.0604099s     | 0.799202s       | 10.1229s         | 114.698s          |
+| Time taken to divide students| 0.000769389s | 0.0074186s     | 0.0936631s      | 0.969208s        | 9.71874s          |
 
-#### List
-    Time taken to read data:
-    1000 students: 0.0202555s
-    10000 students: 0.166206s
-    100000 students: 1.56521s
-    1000000 students: 15.9532s
-    10000000 students: 166.259s
-
-    Time taken to sort data:
-    1000 students: 0.00403285s
-    10000 students: 0.0604099s
-    100000 students: 0.799202s
-    1000000 students: 10.1229s
-    10000000 students: 114.698s
-
-    Time taken to divide students in the file:
-    1000 students: 0.000769389s
-    10000 students: 0.0074186s
-    100000 students: 0.0936631s
-    1000000 students: 0.969208s
-    10000000 students: 9.71874s
-
-#### Deque
-    Time taken to read data:
-    1000 students: 0.0232768s
-    10000 students: 0.163882s
-    100000 students: 1.56918s
-    1000000 students: 16.0526s
-    10000000 students: 164.046s
-
-    Time taken to sort data:
-    1000 students: 0.00670575s
-    10000 students: 0.0587848s
-    100000 students: 0.616905s
-    1000000 students: 6.67419s
-    10000000 students: 59.6123s
-
-    Time taken to divide students in the file:
-    1000 students: 0.000968202s
-    10000 students: 0.00842794s
-    100000 students: 0.09097s
-    1000000 students: 0.964875s
-    10000000 students: 10.6465s
+##### Deque
+| Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|------------------------------|--------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data      | 0.0232768s   | 0.163882s      | 1.56918s        | 16.0526s         | 164.046s          |
+| Time taken to sort data      | 0.00670575s  | 0.0587848s     | 0.616905s       | 6.67419s         | 59.6123s          |
+| Time taken to divide students| 0.000968202s | 0.00842794s    | 0.09097s        | 0.964875s        | 10.6465s          |
 
 #### Implementing this strategy:
 - **_Vector_**: May have some problems when splitting students into 2 containers because of the need for additional memory.
@@ -132,71 +88,27 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 >In comparison, vectors excel in reading speed but suffer in sorting time compared to lists and deques. Lists offer quicker sorting but slower reading compared to vectors. Deques provide an intermediary performance, particularly when splitting occurs infrequently but still aren't very fast.
 
 ### Strategy 2
-#### Vector
-    Time taken to read data:
-    1000 students: 0.0209572s
-    10000 students: 0.163544s
-    100000 students: 1.6192s
-    1000000 students: 15.753s
-    10000000 students: 165.401s
 
-    Time taken to sort data:
-    1000 students: 0.00586344s
-    10000 students: 0.0549243s
-    100000 students: 0.591112s
-    1000000 students: 5.76212s
-    10000000 students: 56.8978s
+##### Vector
+| Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|------------------------------|--------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data      | 0.0209572s   | 0.163544s      | 1.6192s         | 15.753s          | 165.401s          |
+| Time taken to sort data      | 0.00586344s  | 0.0549243s     | 0.591112s       | 5.76212s         | 56.8978s          |
+| Time taken to divide students| 0.000764175s | 0.00705321s    | 0.0999966s      | 0.880787s        | 9.8865s           |
 
-    Time taken to divide students in the file:
-    1000 students: 0.000764175s
-    10000 students: 0.00705321s
-    100000 students: 0.0999966s
-    1000000 students: 0.880787s
-    10000000 students: 9.8865s
+##### List
+| Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|------------------------------|--------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data      | 0.0234302s   | 0.163621s      | 1.61604s        | 16.6939s         | 156.007s          |
+| Time taken to sort data      | 0.00382998s  | 0.0571905s     | 0.777995s       | 10.065s          | 111.851s          |
+| Time taken to divide students| 0.000549503s | 0.00595599s    | 0.0938836s      | 1.04645s         | 10.5176s          |
 
-#### List
-    Time taken to read data:
-    1000 students: 0.0234302s
-    10000 students: 0.163621s
-    100000 students: 1.61604s
-    1000000 students: 16.6939s
-    10000000 students: 156.007s
-
-    Time taken to sort data:
-    1000 students: 0.00382998s
-    10000 students: 0.0571905s
-    100000 students: 0.777995s
-    1000000 students: 10.065s
-    10000000 students: 111.851s
-
-    Time taken to divide students in the file:
-    1000 students: 0.000549503s
-    10000 students: 0.00595599s
-    100000 students: 0.0938836s
-    1000000 students: 1.04645s
-    10000000 students: 10.5176s
-
-#### Deque
-    Time taken to read data:
-    1000 students: 0.0203225s
-    10000 students: 0.162119s
-    100000 students: 1.59787s
-    1000000 students: 16.8757s
-    10000000 students: 156.693s
-
-    Time taken to sort data:
-    1000 students: 0.00546757s
-    10000 students: 0.0559585s
-    100000 students: 0.588068s
-    1000000 students: 6.6712s
-    10000000 students: 58.1088s
-
-    Time taken to divide students in the file:
-    1000 students: 0.00081878s
-    10000 students: 0.00721679s
-    100000 students: 0.0840498s
-    1000000 students: 0.953856s
-    10000000 students: 9.93604s
+##### Deque
+| Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|------------------------------|--------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data      | 0.0203225s   | 0.162119s      | 1.59787s        | 16.8757s         | 156.693s          |
+| Time taken to sort data      | 0.00546757s  | 0.0559585s     | 0.588068s       | 6.6712s          | 58.1088s          |
+| Time taken to divide students| 0.00081878s  | 0.00721679s    | 0.0840498s      | 0.953856s        | 9.93604s          |
 
 #### Implementing this strategy:
 - **_Vector_**: Using it, time increases with the number of students because of slower element removal even though reading and sorting are pretty much not affected due to fast random access (RA). Performance differentiates because of file sizes.

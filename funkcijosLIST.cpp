@@ -79,59 +79,56 @@ void generateStudentFilesList(int size)
     outFile.close();
 }
 
-void divideStudentsList(const std::string &failoVardas)
-{
+void divideStudentsList(const std::string &failoVardas) {
     std::list<Studentas> studentai;
 
+    // Start timer for reading data
     auto readStart = std::chrono::high_resolution_clock::now();
     readDataList(studentai, failoVardas);
     auto readEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> readElapsed = readEnd - readStart;
-    std::cout << "Time taken to read data (List): " << readElapsed.count() << "s\n";
+    std::cout << "Skaitymas uztruko (List): " << readElapsed.count() << "s\n";
 
+    // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
     studentai.sort([](const Studentas &a, const Studentas &b)
                    { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
-    std::cout << "Time taken to sort data (List): " << sortElapsed.count() << "s\n";
+    std::cout << "Rusiavimas uztruko (List): " << sortElapsed.count() << "s\n";
 
+    // Start timer for dividing students
     auto divideStart = std::chrono::high_resolution_clock::now();
-    std::list<Studentas> kietiakiai, vargsiukai;
-    for (const auto &studentas : studentai)
-    {
+    std::list<Studentas> kietiakai, vargsiukai;
+    for (const auto &studentas : studentai) {
         double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-        if (galutinisBalas < 5.0)
-        {
+        if (galutinisBalas < 5.0) {
             vargsiukai.push_back(studentas);
-        }
-        else
-        {
-            kietiakiai.push_back(studentas);
+        } else {
+            kietiakai.push_back(studentas);
         }
     }
     auto divideEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> divideElapsed = divideEnd - divideStart;
-    std::cout << "Time taken to divide students (List): " << divideElapsed.count() << "s\n";
+    std::cout << "Skirstymas uztruko (List): " << divideElapsed.count() << "s\n";
 
-    std::ofstream kietiakiaiFile("kietiakiai.txt"), vargsiukaiFile("vargsiukai.txt");
+    // Writing sorted students into separate files
+    std::ofstream kietiakaiFile("kietiakai.txt"), vargsiukaiFile("vargsiukai.txt");
 
-    for (const auto &studentas : kietiakiai)
-    {
-        kietiakiaiFile << studentas.vardas << " " << studentas.pavarde << " "
+    for (const auto &studentas : kietiakai) {
+        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
                        << std::fixed << std::setprecision(2)
                        << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
                        << std::endl;
     }
 
-    for (const auto &studentas : vargsiukai)
-    {
+    for (const auto &studentas : vargsiukai) {
         vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
                        << std::fixed << std::setprecision(2)
                        << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
                        << std::endl;
     }
 
-    kietiakiaiFile.close();
+    kietiakaiFile.close();
     vargsiukaiFile.close();
 }

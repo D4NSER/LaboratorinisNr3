@@ -11,70 +11,29 @@ This is a repository for my VU study subject Objective Programming
 
 # Test 1
 ### Vector
-    Time taken to read data:
-    1000 students: 0.0225548s
-    10000 students: 0.161925s
-    100000 students: 1.53185s
-    1000000 students: 15.0604s
-    10000000 students: 157.078s
 
-    Time taken to sort data:
-    1000 students: 0.0060379s
-    10000 students: 0.0560185s
-    100000 students: 0.54057s
-    1000000 students: 5.98002s
-    10000000 students: 56.9632s
-
-    Time taken to divide students in the file:
-    1000 students: 0.000925204s
-    10000 students: 0.00864535s
-    100000 students: 0.0870169s
-    1000000 students: 0.923641s 
-    10000000 students: 10.0699s
+| Operation                  | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|----------------------------|---------------|----------------|-----------------|------------------|-------------------|
+| Time to read data          | 0.0225548s    | 0.161925s      | 1.53185s        | 15.0604s         | 157.078s          |
+| Time to sort data          | 0.0060379s    | 0.0560185s     | 0.54057s        | 5.98002s         | 56.9632s          |
+| Time to divide students    | 0.000925204s  | 0.00864535s    | 0.0870169s      | 0.923641s        | 10.0699s          |
 
 ### List
-    Time taken to read data:
-    1000 students: 0.0230061s
-    10000 students: 0.163591s
-    100000 students: 1.51784s
-    1000000 students: 16.9385s
-    10000000 students: 154.424s
 
-    Time taken to sort data:
-    1000 students: 0.00428305s
-    10000 students: 0.0587323s
-    100000 students: 0.727277s
-    1000000 students: 10.051s
-    10000000 students: 117.749s
-
-    Time taken to divide students in the file:
-    1000 students: 0.00102186s
-    10000 students: 0.00875401s
-    100000 students: 0.0931033s
-    1000000 students: 1.01632s
-    10000000 students: 9.35735s
+| Operation                  | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|----------------------------|---------------|----------------|-----------------|------------------|-------------------|
+| Time to read data          | 0.0230061s    | 0.163591s      | 1.51784s        | 16.9385s         | 154.424s          |
+| Time to sort data          | 0.00428305s   | 0.0587323s     | 0.727277s       | 10.051s          | 117.749s          |
+| Time to divide students    | 0.00102186s   | 0.00875401s    | 0.0931033s      | 1.01632s         | 9.35735s          |
 
 ### Deque
-    Time taken to read data:
-    1000 students: 0.021631s
-    10000 students: 0.162111s
-    100000 students: 1.50907s
-    1000000 students: 15.497s
-    10000000 students: 162.153s
 
-    Time taken to sort data:
-    1000 students: 0.00597704s
-    10000 students: 0.0568725s
-    100000 students: 0.541957s
-    1000000 students: 5.85342s
-    10000000 students: 60.6313s
+| Operation                  | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|----------------------------|---------------|----------------|-----------------|------------------|-------------------|
+| Time to read data          | 0.021631s     | 0.162111s      | 1.50907s        | 15.497s          | 162.153s          |
+| Time to sort data          | 0.00597704s   | 0.0568725s     | 0.541957s       | 5.85342s         | 60.6313s          |
+| Time to divide students    | 0.000888919s  | 0.00879198s    | 0.0869602s      | 1.08464s         | 9.41827s          |
 
-    Time taken to divide students in the file:
-    1000 students: 0.000888919s
-    10000 students: 0.00879198s
-    100000 students: 0.0869602s
-    1000000 students: 1.08464s
-    10000000 students: 9.41827s
 
 > [!NOTE]
 > P.S. Changing structure's type from vector into list or deque, programs speed would actually change.
@@ -104,21 +63,21 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     10000 students: 0.166344s
     100000 students: 1.59188s
     1000000 students: 15.4619s
-    10000000 students: 
+    10000000 students: 165.159s
 
     Time taken to sort data:
     1000 students: 0.00589303s
     10000 students: 0.0552494s
     100000 students: 0.538313s
     1000000 students: 6.18915s
-    10000000 students: 
+    10000000 students: 60.0473s
 
     Time taken to divide students in the file:
     1000 students: 0.000935161s
     10000 students: 0.00835907s
     100000 students: 0.0876151s
     1000000 students: 1.10855s
-    10000000 students: 
+    10000000 students: 11.3426s
 
 #### List
     Time taken to read data:

@@ -164,6 +164,14 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 0.964875s
     10000000 students: 
 
+#### Implementing this strategy:
+- **_Vector_**: May have some problems when splitting students into 2 containers because of the need for additional memory.
+- **_List_**: They don't require any additional memory when splitting students into 2 dfferent containers, but they are slower than vectors because of slower random acccess (RA).
+- **_Deque_**: They are much more efficient when it comes to splitting compared to others. They support insertion and deletion from all ends. They offer quite a fast reading and insertion but are still slower than vectors due to no access to random access (RA).
+
+>[INFO]
+>Comparison: Vectors excel in reading speed but suffer in sorting time compared to lists and deques. Lists offer quicker sorting but slower reading compared to vectors. Deques provide an intermediary performance, particularly when splitting occurs infrequently but still aren't very fast.
+
 ### Strategy 2
 #### Vector
     Time taken to read data:

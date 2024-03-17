@@ -85,21 +85,21 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     10000 students: 0.166206s
     100000 students: 1.56521s
     1000000 students: 15.9532s
-    10000000 students: 
+    10000000 students: 166.259s
 
     Time taken to sort data:
     1000 students: 0.00403285s
     10000 students: 0.0604099s
     100000 students: 0.799202s
     1000000 students: 10.1229s
-    10000000 students: 
+    10000000 students: 114.698s
 
     Time taken to divide students in the file:
     1000 students: 0.000769389s
     10000 students: 0.0074186s
     100000 students: 0.0936631s
     1000000 students: 0.969208s
-    10000000 students: 
+    10000000 students: 9.71874s
 
 #### Deque
     Time taken to read data:
@@ -198,7 +198,13 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     1000000 students: 0.953856s
     10000000 students: 9.93604s
 
+#### Implementing this strategy:
+- **_Vector_**: Using it, time increases with the number of students because of slower element removal even though reading and sorting are pretty much not affected due to fast random access (RA). Performance differentiates because of file sizes.
+- **_List_**: Allos quick ellement removal and efficient classification. However, when it comes to sorting, list times get much longer due to random access (RA) issues, especially with large files.
+- **_Deque_**: Student classification and sorting times are pretty fast but reading data is tragicly slow.
 
+>[!NOTE]
+>Considering all factors (reading time, sorting time, element removal time), the most effective strategy is to use the Vectors container. Despite potential slowdowns in element removal, vectors boast fast reading and sorting times due to their swift access capabilities. This makes them ideal for student classification tasks, especially when dealing with extensive files. Therefore, vectors emerge as the optimal choice, providing a balance between performance and efficiency in this scenario.
 
 ### Strategy 3
 #### Vector

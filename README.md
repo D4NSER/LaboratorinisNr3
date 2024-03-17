@@ -9,7 +9,7 @@ This is a repository for my VU study subject Objective Programming
 > [!IMPORTANT]
 > All of the testing was done with the same files that contained 1000, 10000, 100000, 1000000, 10000000 students.
 
-## Test 1
+# Test 1
 ### Vector
     Time taken to read data:
     1000 students: 0.0225548s

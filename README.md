@@ -107,21 +107,21 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
     10000 students: 0.163882s
     100000 students: 1.56918s
     1000000 students: 16.0526s
-    10000000 students: 
+    10000000 students: 164.046s
 
     Time taken to sort data:
     1000 students: 0.00670575s
     10000 students: 0.0587848s
     100000 students: 0.616905s
     1000000 students: 6.67419s
-    10000000 students: 
+    10000000 students: 59.6123s
 
     Time taken to divide students in the file:
     1000 students: 0.000968202s
     10000 students: 0.00842794s
     100000 students: 0.09097s
     1000000 students: 0.964875s
-    10000000 students: 
+    10000000 students: 10.6465s
 
 #### Implementing this strategy:
 - **_Vector_**: May have some problems when splitting students into 2 containers because of the need for additional memory.

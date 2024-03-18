@@ -164,4 +164,6 @@ Based on these results, **Vector** is the most efficient for sorting and partiti
 >[!NOTE]
 >The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate two different methods for setting up and using the Makefile builder to execute my code.
 
+### First method
+1. Go to [this](https://sourceforge.net/projects/gnuwin32/files/make/3.81/) website
 

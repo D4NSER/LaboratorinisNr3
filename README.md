@@ -182,4 +182,43 @@ Based on these results, **Vector** is the most efficient for sorting and partiti
 11. If nothing happends, you can add run.
 12. Have fun!
 
+### Second method (MacBook Hard Method)
+1. Go to the app store or into the internet and download [Xcode](https://developer.apple.com/xcode/).
+2. Start the Xcode after installing and configuring it.
+3. Go to Xcode/Preferences.
+4. Head up to the "Downloads" tab.
+5. Click on "Components".
+6. Press "Install" on the command line tools line.
+7. Once all of this is done, head up the Finder and locate your project with all of the files (INCLUDING THE MAKEFILE!)
+8. Now open up the terminal and type 'cd '.
+9. Head back to the finder and press on the name of you project. A file with a plus should've appeared by now.
+10. Drag that file with a plus right into the terminal and press enter.
+11. To make sure, you are in the right project type 'ls' and check if all of the files are there.
+12. Now type run and the name of the file (in my case it's main.cpp)
+13. Enjoy your time!
 
+### Third method (The Smart One)
+1. Download either Xcode or MinGW compilator (see above for both Windows and Mac).
+2. Once the compilator is installed and set up. Open [VisualStudio Code](https://code.visualstudio.com/download).
+3. Now open the project.
+4. Go to the extensions tab and search for "Makefile Tools" By Microsoft.
+5. Download it and then restart VSCode for it to actually get installed into your IDE.
+6. Once this is done, press on the extension on the left side of the toolbar and you'll see 6 different paths, that the extension needs.
+
+## Windows Way
+7. Now find "Make" configuration (2nd from the bottom) and edit it (Press the pencil button).
+8. Once you're in press on the square in the middle and type "mingw32-make.exe" and press enter.
+9. Now search for "Makefile" configuration (Right above the "Make" one) and press the pencil again.
+10. Now press on the square again and paste your project's path (you have to go deeper into the path, until you see makefile in there). Then press enter.
+11. Now just press the "Build" button (top left one) which will build the project.
+12. Then press the "Run code" button which will start it.
+13. Have fun!
+
+## MacBook Way
+7. Now find "Make" configuration (2nd from the bottom) and edit it (Press the pencil button).
+8. Once you're in press on the square in the middle and type "/usr/bin/make" and press enter.
+9. Now search for "Makefile" configuration (Right above the "Make" one) and press the pencil again.
+10. Now press on the square again and paste your project's path (you have to go deeper into the path, until you see makefile in there). Then press enter.
+11. Now just press the "Build" button (top left one) which will build the project.
+12. Then press the "Run code" button which will start it.
+13. Have fun!

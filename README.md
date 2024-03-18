@@ -1,5 +1,5 @@
-## Specs
-#### To start this project's review, I need to give a little intro about my computer. I have a MacBook, with these specs:
+# Specs
+### To start this project's review, I need to give a little intro about my computer. I have a MacBook, with these specs:
     CPU: 2,3 GHz Quad-Core Intel Core i5 
     RAM: 6 GB 2133 MHz LPDDR3 
     SSD: Macintosh HD 
@@ -158,3 +158,10 @@ Based on these results, **Vector** is the most efficient for sorting and partiti
 
 >[!CAUTION]
 > These tests and the overview might contain some translating or timing mistakes, because it was done in a quite small amount of time to be perfected. Be careful of any mistakes that might occur.
+
+# How to run the code?
+## Makefile creation
+>[!NOTE]
+>The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate two different methods for setting up and using the Makefile builder to execute my code.
+
+

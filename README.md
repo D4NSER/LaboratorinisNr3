@@ -162,8 +162,24 @@ Based on these results, **Vector** is the most efficient for sorting and partiti
 # How to run the code?
 ## Makefile creation
 >[!NOTE]
->The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate two different methods for setting up and using the Makefile builder to execute my code.
+>The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate a few different methods for setting up and using the Makefile builder to execute my code.
 
-### First method
+>[!WARNING]
+>I did all of this on Mac, so the tutorial will be on both OS's just to make sure, you all are ready to go!
+
+
+### First method (Windows Hard Method)
 1. Go to [this](https://sourceforge.net/projects/gnuwin32/files/make/3.81/) website
+2. Download the latest version of it.
+3. Setup the whole thing. It has quite clear intruction, but if you ever struggle, here's a [video](https://www.youtube.com/watch?v=taCJhnBXG_w) to help you!
+4. Now, once you have this, head up to you project on File Explorer.
+5. Copy the path of your project with all of the files (INCLUDING THE MAKEFILE!)
+6. Open CMD (Command Prompt).
+7. Type 'cd ' and paste the path.
+8. Now press enter and just to make sure, that you're in the right place, type 'ls' and check if all the files are there.
+9. Now just type 'make' and wait!
+10. Once everything is done, simply type 'main.exe' as it is my target in the makefile (the main file that all of other files got compiled to)
+11. If nothing happends, you can add run.
+12. Have fun!
+
 

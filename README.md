@@ -117,67 +117,44 @@ In summary, if the structure of Studentas is changed from a **_vector_** to a **
 
 ### Strategy 3
 #### Vector
-    Time taken to read data:
-    1000 students: 0.0234721s
-    10000 students: 0.16696s
-    100000 students: 1.63409s
-    1000000 students: 15.7987s
-    10000000 students: 170.903s
-
-    Time taken to sort data:
-    1000 students: 0.00544238s
-    10000 students: 0.0560425s
-    100000 students: 0.559435s
-    1000000 students: 6.42106s
-    10000000 students: 57.2009s
-
-    Time taken to divide students in the file:
-    1000 students: 0.0011887s
-    10000 students: 0.00826525s
-    100000 students: 0.0977371s
-    1000000 students: 1.02714s
-    10000000 students: 11.0873s
+| Task                              | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|-----------------------------------|---------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data           | 0.0234721s    | 0.16696s       | 1.63409s        | 15.7987s         | 170.903s          |
+| Time taken to sort data           | 0.00544238s   | 0.0560425s     | 0.559435s       | 6.42106s         | 57.2009s          |
+| Time taken to divide students     | 0.0011887s    | 0.00826525s    | 0.0977371s      | 1.02714s         | 11.0873s          |
 
 #### List
-    Time taken to read data:
-    1000 students: 0.0208152s
-    10000 students: 0.165998s
-    100000 students: 1.54981s
-    1000000 students: 15.6058s
-    10000000 students: 153.042s
-
-    Time taken to sort data:
-    1000 students: 0.00485212s
-    10000 students: 0.0577385s
-    100000 students: 0.730288s
-    1000000 students: 10.3186s
-    10000000 students: 111.985s
-
-    Time taken to divide students in the file:
-    1000 students: 0.000438091s
-    10000 students: 0.00416862s
-    100000 students: 0.0714406s
-    1000000 students: 0.814364s
-    10000000 students: 8.21541s
+| Task                              | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|-----------------------------------|---------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data           | 0.0208152s    | 0.165998s      | 1.54981s        | 15.6058s         | 153.042s          |
+| Time taken to sort data           | 0.00485212s   | 0.0577385s     | 0.730288s       | 10.3186s         | 111.985s          |
+| Time taken to divide students     | 0.000438091s  | 0.00416862s    | 0.0714406s      | 0.814364s        | 8.21541s          |
 
 #### Deque
-    Time taken to read data:
-    1000 students: 0.0215544s
-    10000 students: 0.162368s
-    100000 students: 1.63176s
-    1000000 students: 16.2804s
-    10000000 students: 154.024s
+| Task                              | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
+|-----------------------------------|---------------|----------------|-----------------|------------------|-------------------|
+| Time taken to read data           | 0.0215544s    | 0.162368s      | 1.63176s        | 16.2804s         | 154.024s          |
+| Time taken to sort data           | 0.00574811s   | 0.0559582s     | 0.577608s       | 6.46955s         | 58.3943s          |
+| Time taken to divide students     | 0.00100723s   | 0.00996933s    | 0.117997s       | 1.33683s         | 13.8873s          |
 
-    Time taken to sort data:
-    1000 students: 0.00574811s
-    10000 students: 0.0559582s
-    100000 students: 0.577608s
-    1000000 students: 6.46955s
-    10000000 students: 58.3943s
+## Overview
+### Reading Time:
+All containers exhibit similar reading times, which increase proportionally with the size of the data. This indicates that the reading time depends more on the size of the file and the complexity of the reading operations rather than the type of container used.
 
-    Time taken to divide students in the file:
-    1000 students: 0.00100723s
-    10000 students: 0.00996933s
-    100000 students: 0.117997s
-    1000000 students: 1.33683s
-    10000000 students: 13.8873s
+### Sorting Time:
+In terms of sorting, the **Vector** performs the best, showing shorter times compared to **List** and **Deque**, especially with large data sizes. This could be due to the **Vector** efficiently managing memory and having better memory accessibility.
+
+### Partitioning Time:
+Deque slightly outperforms **Vector** and **List** in partitioning time. This might be because **Deque** can insert elements to the front and back much faster and can be more efficient in certain cases compared to **List**, which needs to go through all elements to insert them the desired position.
+
+### Sorting and Partitioning Times in File:
+Comparing sorting and partitioning times in the file, we observe that **Vector** performs the best, again due to efficient memory management and fast access to elements (RA).
+
+### Most Efficient Container Usage:
+Based on these results, **Vector** is the most efficient for sorting and partitioning operations. It exhibits the best sorting time both with small and large data quantities. Therefore, if fast sorting and partitioning are crucial, it is best to use the **Vector** container.
+
+> [!NOTE]
+> All of the tests were done once because of the time all of the tests require. To get much clearer results the tests should be repeated again and the average time would show a much betterr result. The data presented in all of these tests was from my own testing and all of the numbers are mine.
+
+>[!CAUTION]
+> These tests and the overview might contain some translating or timing mistakes, because it was done in a quite small amount of time to be perfected. Be careful of any mistakes that might occur.

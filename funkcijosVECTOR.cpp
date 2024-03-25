@@ -1,4 +1,4 @@
-#include "functions_vector.h"
+#include "funkcijosVECTOR.h"
 #include "studentas.h"
 
 #include <iostream>

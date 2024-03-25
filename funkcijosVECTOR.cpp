@@ -1,4 +1,6 @@
-#include "funkcijosVECTOR.h"
+#include "functions_vector.h"
+#include "studentas.h"
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -14,32 +16,33 @@ void readDataVector(std::vector<Studentas> &studentai, const std::string &failoV
     std::ifstream file(failoVardas);
     if (!file)
     {
-        std::cerr << "Failed to open file: " << failoVardas << std::endl;
-        return; // Exit if file not opened successfully
+        std::cerr << "Nepavyko atidaryti failo: " << failoVardas << std::endl;
+        return;
     }
 
-    Studentas studentas;
     std::string line;
-    while (getline(file, line))
+    while (std::getline(file, line))
     {
         if (line.empty())
-            continue; // Skip any empty lines
+            continue;
 
         std::istringstream iss(line);
-        iss >> studentas.vardas >> studentas.pavarde;
+        std::string vardas, pavarde;
+        iss >> vardas >> pavarde;
+
+        Studentas studentas(vardas, pavarde);
 
         int pazymys;
-        studentas.nd_rezultatai.clear();
+        studentas.setNamuDarbai({});
         while (iss >> pazymys)
         {
-            studentas.nd_rezultatai.push_back(pazymys);
+            studentas.getNamuDarbai().push_back(pazymys);
         }
 
-        // Check if nd_rezultatai is not empty before accessing
-        if (!studentas.nd_rezultatai.empty())
+        if (!studentas.getNamuDarbai().empty())
         {
-            studentas.egzaminas = studentas.nd_rezultatai.back();
-            studentas.nd_rezultatai.pop_back();
+            studentas.setEgzaminas(studentas.getNamuDarbai().back());
+            studentas.getNamuDarbai().pop_back();
             studentai.push_back(studentas);
         }
     }
@@ -53,7 +56,7 @@ void generateStudentFilesVector(int size)
 
     if (!outFile)
     {
-        std::cerr << "Failed to open file: " << fileName << std::endl;
+        std::cerr << "Nepavyko atidaryti failo: " << fileName << std::endl;
         return;
     }
 
@@ -79,7 +82,9 @@ void generateStudentFilesVector(int size)
     outFile.close();
 }
 
-void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
+
+// 1 strategija
+void rusiuotStudentusVector1(const std::string &failoVardas)
 {
     std::vector<Studentas> studentai;
 
@@ -93,7 +98,7 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
     // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
     std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
-              { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+              { return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas()); });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
     std::cout << "Rusiavimas uztruko: " << sortElapsed.count() << "s\n";
@@ -103,7 +108,7 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
     std::vector<Studentas> kietiakai, vargsiukai;
     for (const auto &studentas : studentai)
     {
-        double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        double galutinisBalas = 0.4 * studentas.skaiciuotiVidurki() + 0.6 * studentas.getEgzaminas();
         if (galutinisBalas < 5.0)
         {
             vargsiukai.push_back(studentas);
@@ -122,17 +127,17 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
 
     for (const auto &studentas : kietiakai)
     {
-        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        kietiakaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                       << std::fixed << std::setprecision(2)
-                      << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                      << studentas.skaiciuotiGalutini(true)
                       << std::endl;
     }
 
     for (const auto &studentas : vargsiukai)
     {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                        << std::fixed << std::setprecision(2)
-                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                       << studentas.skaiciuotiGalutini(true)
                        << std::endl;
     }
 
@@ -140,7 +145,8 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
     vargsiukaiFile.close();
 }
 
-void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
+//2 startegija
+void rusiuotStudentusVector2(const std::string &failoVardas)
 {
     std::vector<Studentas> studentai;
 
@@ -153,8 +159,9 @@ void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
 
     // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
-    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
-              { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+        return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas());
+    });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
     std::cout << "Rusiavimas uztruko: " << sortElapsed.count() << "s\n";
@@ -162,16 +169,21 @@ void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
     // Start timer for dividing students
     auto divideStart = std::chrono::high_resolution_clock::now();
     std::vector<Studentas> vargsiukai;
-    auto it = std::remove_if(studentai.begin(), studentai.end(), [&vargsiukai](const Studentas &studentas)
-                             {
-        double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+
+    for (auto it = studentai.begin(); it != studentai.end();)
+    {
+        double galutinisBalas = 0.4 * it->skaiciuotiVidurki() + 0.6 * it->getEgzaminas();
         if (galutinisBalas < 5.0)
         {
-            vargsiukai.push_back(studentas);
-            return true;
+            vargsiukai.push_back(*it);
+            it = studentai.erase(it); // Remove the current student from the original vector
         }
-        return false; });
-    studentai.erase(it, studentai.end());
+        else
+        {
+            ++it;
+        }
+    }
+
     auto divideEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> divideElapsed = divideEnd - divideStart;
     std::cout << "Studentu skirstymas uztruko: " << divideElapsed.count() << "s\n";
@@ -181,17 +193,17 @@ void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
 
     for (const auto &studentas : studentai)
     {
-        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        kietiakaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                       << std::fixed << std::setprecision(2)
-                      << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                      << studentas.skaiciuotiGalutini(true)
                       << std::endl;
     }
 
     for (const auto &studentas : vargsiukai)
     {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                        << std::fixed << std::setprecision(2)
-                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                       << studentas.skaiciuotiGalutini(true)
                        << std::endl;
     }
 
@@ -199,6 +211,7 @@ void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
     vargsiukaiFile.close();
 }
 
+//3 strategija
 void rusiuotStudentusVector3(const std::string &failoVardas)
 {
     std::vector<Studentas> studentai;
@@ -212,8 +225,9 @@ void rusiuotStudentusVector3(const std::string &failoVardas)
 
     // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
-    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
-              { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+        return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas());
+    });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
     std::cout << "Rusiavimas uztruko (Vector): " << sortElapsed.count() << "s\n";
@@ -221,8 +235,9 @@ void rusiuotStudentusVector3(const std::string &failoVardas)
     // Start timer for dividing students
     auto divideStart = std::chrono::high_resolution_clock::now();
     std::vector<Studentas> kietiakai, vargsiukai;
-    auto iter = std::stable_partition(studentai.begin(), studentai.end(), [](const Studentas &studentas)
-                                      { return 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas >= 5.0; });
+    auto iter = std::stable_partition(studentai.begin(), studentai.end(), [](const Studentas &studentas) {
+        return studentas.skaiciuotiGalutini(true) >= 5.0;
+    });
     kietiakai.assign(studentai.begin(), iter);
     vargsiukai.assign(iter, studentai.end());
     auto divideEnd = std::chrono::high_resolution_clock::now();
@@ -234,17 +249,17 @@ void rusiuotStudentusVector3(const std::string &failoVardas)
 
     for (const auto &studentas : kietiakai)
     {
-        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        kietiakaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                       << std::fixed << std::setprecision(2)
-                      << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                      << studentas.skaiciuotiGalutini(true)
                       << std::endl;
     }
 
     for (const auto &studentas : vargsiukai)
     {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                        << std::fixed << std::setprecision(2)
-                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                       << studentas.skaiciuotiGalutini(true)
                        << std::endl;
     }
 

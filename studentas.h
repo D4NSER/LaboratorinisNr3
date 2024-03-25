@@ -1,19 +1,41 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
-struct Studentas {
+class Studentas
+{
+public:
+    Studentas();                                                      // Constructor
+    Studentas(const std::string &vardas, const std::string &pavarde); // Constructor with parameters
+
+    // Public member functions
+    void setVardas(const std::string &vardas);
+    std::string getVardas() const;
+
+    void setPavarde(const std::string &pavarde);
+    std::string getPavarde() const;
+
+    void setNamuDarbai(const std::vector<int> &nd);
+    std::vector<int> getNamuDarbai() const;
+
+    void setEgzaminas(int egzaminas);
+    int getEgzaminas() const;
+
+    double skaiciuotiVidurki() const;
+    double skaiciuotiMediana() const;
+    double skaiciuotiGalutini(bool naudotiVidurki) const;
+    void atsitiktiniai();
+    void atsitiktiniaiStudentai();
+    
+
+private:
+    // Private data members
     std::string vardas;
     std::string pavarde;
-    std::vector<int> nd_rezultatai;
+    std::vector<int> namuDarbai;
     int egzaminas;
 };
-
-double vidurkis(const std::vector<int>& nd);
-double mediana(std::vector<int> nd);
-void generateRandomGrades(Studentas& studentas);
-void generateRandomNamesAndGrades(Studentas& studentas);
 
 #endif // STUDENTAS_H

@@ -1,9 +1,9 @@
-#ifndef APP_H
-#define APP_H
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
 
 #include <vector>
 
-enum class ContainerType { None, Vector, List, Deque };
+enum class ContainerType { None, Vector };
 enum class Action { None, Generate, Sort };
 ContainerType getContainerChoice();
 Action getActionChoice();

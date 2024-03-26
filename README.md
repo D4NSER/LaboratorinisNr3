@@ -24,3 +24,18 @@
 ### Final word
 This test shows that using vectors with structures is more efficient for managing student data, especially for larger datasets.
 
+## Test 2
+>[!WARNING]
+>To correectly do the project with my code, read the text below
+
+### Running the code
+- Firstly type:
+  
+      make optimize
+- Then type this:
+
+      ./programa_O1
+      ./programa_O2
+      ./programa_O3
+- Then you just navigate through the menu and once you do the first project end the code.
+- Then do the same once again 2 more times.

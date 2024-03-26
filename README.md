@@ -39,3 +39,68 @@ This test shows that using vectors with structures is more efficient for managin
       ./programa_O3
 - Then you just navigate through the menu and once you do the first project end the code.
 - Then do the same once again 2 more times.
+
+### The results of testing
+
+01
+Time taken to read data: 0.010067386s
+Time taken to sort data: 0.000010172s
+Time taken to divide students: 0.000000076s
+
+Time taken to read data: 0.070018473s
+Time taken to sort data: 0.000028232s
+Time taken to divide students: 0.000000055s
+
+Time taken to read data: 0.602062206s
+Time taken to sort data: 0.000008321s
+Time taken to divide students: 0.000000055s
+
+Time taken to read data: 5.935979336s
+Time taken to sort data: 0.000009304s
+Time taken to divide students: 0.000000054s
+
+Time taken to read data: 57.031392832s
+Time taken to sort data: 0.000008972s
+Time taken to divide students: 0.000000060s
+
+02
+Time taken to read data: 0.009378851s
+Time taken to sort data: 0.000011912s
+Time taken to divide students: 0.000000077s
+
+Time taken to read data: 0.067764390s
+Time taken to sort data: 0.000012910s
+Time taken to divide students: 0.000000079s
+
+Time taken to read data: 0.578626220s
+Time taken to sort data: 0.000031495s
+Time taken to divide students: 0.000000058s
+
+Time taken to read data: 5.733824103s
+Time taken to sort data: 0.000009755s
+Time taken to divide students: 0.000000055s
+
+Time taken to read data: 56.621991031s
+Time taken to sort data: 0.000011455s
+Time taken to divide students: 0.000000055s
+
+03
+Time taken to read data: 0.010082715s
+Time taken to sort data: 0.000006497s
+Time taken to divide students: 0.000000071s
+
+Time taken to read data: 0.067679755s
+Time taken to sort data: 0.000026754s
+Time taken to divide students: 0.000000056s
+
+Time taken to read data: 0.577418282s
+Time taken to sort data: 0.000004985s
+Time taken to divide students: 0.000000055s
+
+Time taken to read data: 5.632994167s
+Time taken to sort data: 0.000004704s
+Time taken to divide students: 0.000000055s
+
+Time taken to read data: 55.821169947s
+Time taken to sort data: 0.000004734s
+Time taken to divide students: 0.000000053s

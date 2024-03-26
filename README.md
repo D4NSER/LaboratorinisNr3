@@ -70,3 +70,27 @@ This test shows that using vectors with structures is more efficient for managin
 | 5.632994167                  | 0.000004704                 | 0.000000055                       |
 | 55.821169947                 | 0.000004734                 | 0.000000053                       |
 
+### Summary of the second test
+>[!NOTE]
+>To determine which flag performed the best overall, we can analyze the average time taken for each operation across all measurements for each flag:
+
+#### Flag 01:
+    Average time to read data: ~12.32 seconds
+    Average time to sort data: ~0.00001354 seconds
+    Average time to divide students: ~0.000000064 seconds
+
+#### Flag 02:
+    Average time to read data: ~12.14 seconds
+    Average time to sort data: ~0.000015216 seconds
+    Average time to divide students: ~0.000000064 seconds
+
+#### Flag 03:
+    Average time to read data: ~12.22 seconds
+    Average time to sort data: ~0.000009779 seconds
+    Average time to divide students: ~0.000000058 seconds
+
+#### Overall
+- Flag 01 has the fastest average time for sorting data.
+- Flag 02 has the fastest average time for reading data.
+- Flag 03 has the fastest average time for dividing students.
+- Overall, the choice of the "best" flag depends on the specific requirements of the system. If sorting data is a critical operation, Flag 01 might be preferred. If reading data quickly is more important, Flag 02 could be chosen. And if dividing students efficiently is the priority, Flag 03 might be the best option.

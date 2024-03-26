@@ -1,6 +1,6 @@
 ## Structures vs Classes
-### The times using first strategy for vectors on my last project with structures
 
+### The times using first strategy for vectors on my last project with structures
 | Task                         | 1000 students | 10000 students | 100000 students | 1000000 students | 10000000 students |
 |------------------------------|--------------|----------------|-----------------|------------------|-------------------|
 | Time taken to read data      | 0.0228874s   | 0.166344s      | 1.59188s        | 15.4619s         | 165.159s          |
@@ -94,3 +94,61 @@ This test shows that using vectors with structures is more efficient for managin
 - Flag 02 has the fastest average time for reading data.
 - Flag 03 has the fastest average time for dividing students.
 - Overall, the choice of the "best" flag depends on the specific requirements of the system. If sorting data is a critical operation, Flag 01 might be preferred. If reading data quickly is more important, Flag 02 could be chosen. And if dividing students efficiently is the priority, Flag 03 might be the best option.
+
+## Comparing flags with structures and classes
+
+### Classes
+
+#### The size:
+![image](https://github.com/D4NSER/LaboratorinisNr2/assets/62251258/35654bf9-c8b2-40c3-9f1a-661e75ffca2d)
+
+#### The speed:
+    Listed above 😄
+
+### Struct
+
+#### The size:
+![image](https://github.com/D4NSER/LaboratorinisNr2/assets/62251258/9e7475ed-8c78-43a9-8234-fe3c54429621)
+
+#### The speed:
+
+#### Using flag 01
+| Time taken to read data (s) | Time taken to sort data (s) | Time taken to divide students (s) |
+|------------------------------|-----------------------------|-----------------------------------|
+| 0.0253237                    | 0.00542445                  | 0.00109304                        |
+| 0.173463                     | 0.0564751                   | 0.00871953                        |
+| 1.52148                      | 0.514224                    | 0.0886106                         |
+| 15.0471                      | 5.47558                     | 0.903104                          |
+| 156.591                      | 55.1543                     | 9.4095                            |
+
+#### Using flag 02
+| Time taken to read data (s) | Time taken to sort data (s) | Time taken to divide students (s) |
+|------------------------------|-----------------------------|-----------------------------------|
+| 0.0236589                    | 0.00591004                  | 0.000866724                       |
+| 0.164244                     | 0.0568401                   | 0.00946841                        |
+| 1.51731                      | 0.529778                    | 0.0858304                         |
+| 16.3108                      | 5.46567                     | 0.903327                          |
+| 150.355                      | 53.7382                     | 9.1933                            |
+
+#### Using flag 03
+| Time taken to read data (s) | Time taken to sort data (s) | Time taken to divide students (s) |
+|------------------------------|-----------------------------|-----------------------------------|
+| 0.0242589                    | 0.00667387                  | 0.00149997                        |
+| 0.164944                     | 0.057452                    | 0.00904067                        |
+| 1.61769                      | 0.550876                    | 0.0872779                         |
+| 15.0963                      | 5.56724                     | 0.900621                          |
+| 150.852                      | 55.0109                     | 9.95332                           |
+
+### Comparison
+
+#### Reading Data:
+- The classes approach generally shows faster reading times compared to the structure approach for all flags.
+
+#### Sorting Data:
+- The structure approach seems to perform slightly better in terms of sorting data across all flags, although the difference is not significant.
+
+#### Dividing Students:
+- The classes approach appears to have slightly faster times for dividing students compared to the structure approach across all flags.
+
+#### Overall
+- Overall, the classes approach tends to have better performance in terms of reading data and dividing students, while the structure approach performs slightly better in sorting data. However, the differences in performance between the two approaches are relatively minor and may vary depending on specific implementations and system configurations.

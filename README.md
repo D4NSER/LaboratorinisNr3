@@ -42,65 +42,31 @@ This test shows that using vectors with structures is more efficient for managin
 
 ### The results of testing
 
-01
-Time taken to read data: 0.010067386s
-Time taken to sort data: 0.000010172s
-Time taken to divide students: 0.000000076s
+#### Using flag 01
+| Time taken to read data (s) | Time taken to sort data (s) | Time taken to divide students (s) |
+|------------------------------|-----------------------------|-----------------------------------|
+| 0.010067386                  | 0.000010172                 | 0.000000076                       |
+| 0.070018473                  | 0.000028232                 | 0.000000055                       |
+| 0.602062206                  | 0.000008321                 | 0.000000055                       |
+| 5.935979336                  | 0.000009304                 | 0.000000054                       |
+| 57.031392832                 | 0.000008972                 | 0.000000060                       |
 
-Time taken to read data: 0.070018473s
-Time taken to sort data: 0.000028232s
-Time taken to divide students: 0.000000055s
+#### Using flag 02
+| Time taken to read data (s) | Time taken to sort data (s) | Time taken to divide students (s) |
+|------------------------------|-----------------------------|-----------------------------------|
+| 0.009378851                  | 0.000011912                 | 0.000000077                       |
+| 0.067764390                  | 0.000012910                 | 0.000000079                       |
+| 0.578626220                  | 0.000031495                 | 0.000000058                       |
+| 5.733824103                  | 0.000009755                 | 0.000000055                       |
+| 56.621991031                 | 0.000011455                 | 0.000000055                       |
 
-Time taken to read data: 0.602062206s
-Time taken to sort data: 0.000008321s
-Time taken to divide students: 0.000000055s
 
-Time taken to read data: 5.935979336s
-Time taken to sort data: 0.000009304s
-Time taken to divide students: 0.000000054s
+#### Using flag 03
+| Time taken to read data (s) | Time taken to sort data (s) | Time taken to divide students (s) |
+|------------------------------|-----------------------------|-----------------------------------|
+| 0.010082715                  | 0.000006497                 | 0.000000071                       |
+| 0.067679755                  | 0.000026754                 | 0.000000056                       |
+| 0.577418282                  | 0.000004985                 | 0.000000055                       |
+| 5.632994167                  | 0.000004704                 | 0.000000055                       |
+| 55.821169947                 | 0.000004734                 | 0.000000053                       |
 
-Time taken to read data: 57.031392832s
-Time taken to sort data: 0.000008972s
-Time taken to divide students: 0.000000060s
-
-02
-Time taken to read data: 0.009378851s
-Time taken to sort data: 0.000011912s
-Time taken to divide students: 0.000000077s
-
-Time taken to read data: 0.067764390s
-Time taken to sort data: 0.000012910s
-Time taken to divide students: 0.000000079s
-
-Time taken to read data: 0.578626220s
-Time taken to sort data: 0.000031495s
-Time taken to divide students: 0.000000058s
-
-Time taken to read data: 5.733824103s
-Time taken to sort data: 0.000009755s
-Time taken to divide students: 0.000000055s
-
-Time taken to read data: 56.621991031s
-Time taken to sort data: 0.000011455s
-Time taken to divide students: 0.000000055s
-
-03
-Time taken to read data: 0.010082715s
-Time taken to sort data: 0.000006497s
-Time taken to divide students: 0.000000071s
-
-Time taken to read data: 0.067679755s
-Time taken to sort data: 0.000026754s
-Time taken to divide students: 0.000000056s
-
-Time taken to read data: 0.577418282s
-Time taken to sort data: 0.000004985s
-Time taken to divide students: 0.000000055s
-
-Time taken to read data: 5.632994167s
-Time taken to sort data: 0.000004704s
-Time taken to divide students: 0.000000055s
-
-Time taken to read data: 55.821169947s
-Time taken to sort data: 0.000004734s
-Time taken to divide students: 0.000000053s

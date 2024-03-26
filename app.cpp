@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "funkcijosVECTOR.h"
 #include <iostream>
 #include <vector>
 #include <limits>
@@ -11,18 +11,18 @@ Action getActionChoice() {
     int choice;
     while (true) {
         std::cout << "Pasirinkite veiksma:\n"
-                  << "1. Generuoti studentu failus\n"
-                  << "2. Rusiuoti esamus studentu failus\n"
+                  << "1. Generuoti studentų failus\n"
+                  << "2. Rūšiuoti esamus studentų failus\n"
                   << "Pasirinkimas: ";
         std::cin >> choice;
         if (std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Iveskite skaiciu.\n";
+            std::cout << "Įveskite skaičių.\n";
         } else if (choice == 1 || choice == 2) {
             break;
         } else {
-            std::cout << "Netinkamas pasirinkimas. Prasome bandyti dar karta.\n";
+            std::cout << "Netinkamas pasirinkimas. Prašome bandyti dar kartą.\n";
         }
     }
 
@@ -47,18 +47,18 @@ std::string getSortingFileChoice() {
     }
 
     if (files.empty()) {
-        std::cout << "Studentu failu nerasta.\n";
+        std::cout << "Studentų failų nerasta.\n";
         return "";
     }
 
-    std::cout << "Pasirinkite, kuri studentu faila norite rusiuoti: ";
+    std::cout << "Pasirinkite, kurį studentų failą norite rūšiuoti: ";
     int choice;
     std::cin >> choice;
 
     if (std::cin.fail() || choice < 1 || choice > files.size()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Netinkamas pasirinkimas. Bandykite dar karta.\n";
+        std::cout << "Netinkamas pasirinkimas. Bandykite dar kartą.\n";
         return "";
     }
 
@@ -72,22 +72,21 @@ void performAction(Action actionChoice, const std::vector<int>& sizes) {
             generateStudentFilesVector(size);
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
-            std::cout << "Failu generavimas uztruko " << size << ": " << elapsed.count() << "s\n";
+            std::cout << std::fixed << std::setprecision(7) << "Failų generavimas užtruko " << size << ": " << elapsed.count() << "s\n";
         }
     } else if (actionChoice == Action::Sort) {
         std::string filename = getSortingFileChoice();
         if (!filename.empty()) {
             auto start = std::chrono::high_resolution_clock::now();
-            //rusiuotStudentusVector1(filename); 
+            rusiuotStudentusVector(filename); 
             //rusiuotStudentusVector2(filename); 
-            rusiuotStudentusVector3(filename); 
+            //rusiuotStudentusVector3(filename); 
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
-            std::cout << "Rusiavimas ir skirstymas faile " << filename << ": " << elapsed.count() << "s\n";
+            std::cout << std::fixed << std::setprecision(7) << "Rūšiavimas ir skirstymas faile " << filename << ": " << elapsed.count() << "s\n";
         }
     }
 }
-
 
 void runApp() {
     std::vector<int> sizes = {1000, 10000, 100000, 1000000, 10000000};
@@ -101,7 +100,7 @@ void runApp() {
 
         performAction(actionChoice, sizes);
 
-        std::cout << "Norite testi? (t/n): ";
+        std::cout << "Norite tęsti? (t/n): ";
         char userChoice;
         std::cin >> userChoice;
         if (userChoice == 'N' || userChoice == 'n') {

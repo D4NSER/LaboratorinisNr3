@@ -7,10 +7,9 @@
 class Studentas
 {
 public:
-    Studentas();                                                      // Constructor
-    Studentas(const std::string &vardas, const std::string &pavarde); // Constructor with parameters
+    Studentas();
+    Studentas(const std::string &vardas, const std::string &pavarde);
 
-    // Public member functions
     void setVardas(const std::string &vardas);
     std::string getVardas() const;
 
@@ -20,6 +19,9 @@ public:
     void setNamuDarbai(const std::vector<int> &nd);
     std::vector<int> getNamuDarbai() const;
 
+
+    void addNamuDarbas(int pazymys);
+
     void setEgzaminas(int egzaminas);
     int getEgzaminas() const;
 
@@ -28,13 +30,13 @@ public:
     double skaiciuotiGalutini(bool naudotiVidurki) const;
     void atsitiktiniai();
     void atsitiktiniaiStudentai();
-    
 
+    ~Studentas();
+    
 private:
-    // Private data members
     std::string vardas;
     std::string pavarde;
-    std::vector<int> namuDarbai;
+    std::vector<int> nd_rezultatai;
     int egzaminas;
 };
 

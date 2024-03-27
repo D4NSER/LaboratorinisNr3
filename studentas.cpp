@@ -10,7 +10,9 @@ Studentas::Studentas(const std::string& vardas, const std::string& pavarde)
     : vardas(vardas), pavarde(pavarde), egzaminas(0) {}
 
 // Destructor
-Studentas::~Studentas() {}
+Studentas::~Studentas() {
+    nd_rezultatai.clear();
+}
 
 // Public member functions
 void Studentas::setVardas(const std::string& vardas) {

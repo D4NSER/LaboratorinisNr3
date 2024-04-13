@@ -1,20 +1,54 @@
 #include "studentas.h"
 #include <algorithm>
-#include <cstdlib> // For rand()
+#include <cstdlib>
 
-// Constructor
+// Konstruktorius
 Studentas::Studentas() : egzaminas(0) {}
 
-// Constructor with parameters
 Studentas::Studentas(const std::string& vardas, const std::string& pavarde)
     : vardas(vardas), pavarde(pavarde), egzaminas(0) {}
 
-// Destructor
+// Destruktorius
 Studentas::~Studentas() {
     nd_rezultatai.clear();
+    vardas.clear();
+    pavarde.clear();
+    egzaminas = 0;
 }
 
-// Public member functions
+// Kopijavimo konstruktorius
+Studentas::Studentas(const Studentas& other)
+    : vardas(other.vardas), pavarde(other.pavarde), nd_rezultatai(other.nd_rezultatai), egzaminas(other.egzaminas) {}
+
+// Priskyrimo operatorius
+Studentas& Studentas::operator=(const Studentas& other) {
+    if (this != &other) {
+        vardas = other.vardas;
+        pavarde = other.pavarde;
+        nd_rezultatai = other.nd_rezultatai;
+        egzaminas = other.egzaminas;
+    }
+    return *this;
+}
+
+// Perkelimo konstruktorius
+Studentas::Studentas(Studentas&& other) noexcept
+    : vardas(std::move(other.vardas)), pavarde(std::move(other.pavarde)), nd_rezultatai(std::move(other.nd_rezultatai)), egzaminas(other.egzaminas) {
+    other.egzaminas = 0;
+}
+
+// Perkelimo priskyrimo operatorius
+Studentas& Studentas::operator=(Studentas&& other) noexcept {
+    if (this != &other) {
+        vardas = std::move(other.vardas);
+        pavarde = std::move(other.pavarde);
+        nd_rezultatai = std::move(other.nd_rezultatai);
+        egzaminas = other.egzaminas;
+        other.egzaminas = 0;
+    }
+    return *this;
+}
+
 void Studentas::setVardas(const std::string& vardas) {
     this->vardas = vardas;
 }

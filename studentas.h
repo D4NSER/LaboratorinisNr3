@@ -10,6 +10,14 @@ public:
     Studentas();
     Studentas(const std::string &vardas, const std::string &pavarde);
 
+    // Rule of Five
+    Studentas(const Studentas &other);                // kopijavimo konstruktorius
+    Studentas &operator=(const Studentas &other);     // priskyrimo operatorius
+    Studentas(Studentas &&other) noexcept;            // perkelimo konstruktorius
+    Studentas &operator=(Studentas &&other) noexcept; // perkelimo priskyrimo operatorius
+
+    ~Studentas();
+
     void setVardas(const std::string &vardas);
     std::string getVardas() const;
 
@@ -18,7 +26,6 @@ public:
 
     void setNamuDarbai(const std::vector<int> &nd);
     std::vector<int> getNamuDarbai() const;
-
 
     void addNamuDarbas(int pazymys);
 
@@ -31,8 +38,6 @@ public:
     void atsitiktiniai();
     void atsitiktiniaiStudentai();
 
-    ~Studentas();
-    
 private:
     std::string vardas;
     std::string pavarde;

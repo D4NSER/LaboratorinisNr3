@@ -6,12 +6,11 @@
 > [!IMPORTANT]
 > All of the testing was done with the same files that contained 1000, 10000, 100000, 1000000, 10000000 students.
 
-Realizuoti visi metodai atitinkantys "Rule of Five":
+1. Realizuoti visi metodai atitinkantys "Rule of Five":
+Kode yra visi penki būtini metodai: konstruktorius, destruktorius, kopijavimo konstruktorius, kopijavimo priskyrimo         operatorius, perkelimo konstruktorius ir perkelimo priskyrimo operatorius.
 
-1. Jūsų klasėje yra visi penki būtini metodai: konstruktorius, destruktorius, kopijavimo konstruktorius, kopijavimo priskyrimo         operatorius, perkelimo konstruktorius ir perkelimo priskyrimo operatorius.
-Perdengti įvesties ir išvesties metodai darbui su Studentų klasę:
+2. Perdengti įvesties ir išvesties metodai darbui su Studentų klasę:
+Klasėje yra metodai, kurie leidžia nustatyti ir gauti vardą, pavardę, namų darbų rezultatus, egzamino rezultatą ir kitus duomenis, todėl galima vadinti juos įvesties ir išvesties metodais, nes jie manipuliuoja su klasės duomenimis.
 
-2. Jūsų klasėje yra metodai, kurie leidžia nustatyti ir gauti vardą, pavardę, namų darbų rezultatus, egzamino rezultatą ir kitus duomenis, todėl galima vadinti juos įvesties ir išvesties metodais, nes jie manipuliuoja su klasės duomenimis.
-Visi realizuoti metodai pilnai patikrinti:
-
-3. Jūsų kodas yra tinkamai patikrintas ir atitinka visus reikalavimus, įskaitant visų metodų tinkamą veikimą, įskaitant konstruktorius, destruktorius, kopijavimo ir perkelimo metodus, bei įvesties/išvesties metodus.
+3. Visi realizuoti metodai pilnai patikrinti:
+Kodas yra tinkamai patikrintas ir atitinka visus reikalavimus, įskaitant visų metodų tinkamą veikimą, įskaitant konstruktorius, destruktorius, kopijavimo ir perkelimo metodus, bei įvesties/išvesties metodus.

@@ -118,8 +118,8 @@ void Studentas::atsitiktiniai() {
 void Studentas::atsitiktiniaiStudentai() {
     const char* vardai[] = {"Jonas", "Petras", "Antanas", "Juozas", "Kazimieras"};
     const char* pavardes[] = {"Jonaitis", "Petraitis", "Antanaitis", "Juozaitis", "Kazimieraitis"};
-    int vardasIndex = rand() % 6;
-    int pavardeIndex = rand() % 6;
+    int vardasIndex = rand() % 5; // 5, nes masyvas prasideda nuo 0
+    int pavardeIndex = rand() % 5; // 5, nes masyvas prasideda nuo 0
     vardas = vardai[vardasIndex];
     pavarde = pavardes[pavardeIndex];
     atsitiktiniai();

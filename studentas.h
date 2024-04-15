@@ -1,10 +1,10 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include <string>
+#include "zmogus.h" // Įtraukiame abstrakčios bazinės klasės deklaraciją
 #include <vector>
 
-class Studentas
+class Studentas : public Human // Paveldime iš abstrakčios bazinės klasės
 {
 public:
     Studentas();
@@ -16,27 +16,28 @@ public:
     Studentas(Studentas &&other) noexcept;            // perkelimo konstruktorius
     Studentas &operator=(Studentas &&other) noexcept; // perkelimo priskyrimo operatorius
 
-    ~Studentas();
+    ~Studentas() override; // Virtualus destruktorius
 
-    void setVardas(const std::string &vardas);
-    std::string getVardas() const;
+    // Paveldėtos funkcijos iš abstrakčios bazinės klasės
+    void setVardas(const std::string &vardas) override;
+    std::string getVardas() const override;
 
-    void setPavarde(const std::string &pavarde);
-    std::string getPavarde() const;
+    void setPavarde(const std::string &pavarde) override;
+    std::string getPavarde() const override;
 
-    void setNamuDarbai(const std::vector<int> &nd);
-    std::vector<int> getNamuDarbai() const;
+    void setNamuDarbai(const std::vector<int> &nd) override;
+    std::vector<int> getNamuDarbai() const override;
 
-    void addNamuDarbas(int pazymys);
+    void addNamuDarbas(int pazymys) override;
 
-    void setEgzaminas(int egzaminas);
-    int getEgzaminas() const;
+    void setEgzaminas(int egzaminas) override;
+    int getEgzaminas() const override;
 
-    double skaiciuotiVidurki() const;
-    double skaiciuotiMediana() const;
-    double skaiciuotiGalutini(bool naudotiVidurki) const;
-    void atsitiktiniai();
-    void atsitiktiniaiStudentai();
+    double skaiciuotiVidurki() const override;
+    double skaiciuotiMediana() const override;
+    double skaiciuotiGalutini(bool naudotiVidurki) const override;
+    void atsitiktiniai() override;
+    void atsitiktiniaiStudentai() override;
 
 private:
     std::string vardas;
@@ -45,4 +46,4 @@ private:
     int egzaminas;
 };
 
-#endif // STUDENTAS_H
+#endif

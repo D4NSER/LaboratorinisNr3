@@ -3,22 +3,23 @@
 
 #include "zmogus.h"
 #include <vector>
+#include <iostream>
 
-class Studentas : public Human
-{
+class Studentas : public Human {
 public:
     Studentas();
     Studentas(const std::string &vardas, const std::string &pavarde);
 
     // Rule of Five
-    Studentas(const Studentas &other);                // kopijavimo konstruktorius
-    Studentas &operator=(const Studentas &other);     // priskyrimo operatorius
-    Studentas(Studentas &&other) noexcept;            // perkelimo konstruktorius
-    Studentas &operator=(Studentas &&other) noexcept; // perkelimo priskyrimo operatorius
+    Studentas(const Studentas &other);                // Copy constructor
+    Studentas &operator=(const Studentas &other);     // Assignment operator
+    Studentas(Studentas &&other) noexcept;            // Move constructor
+    Studentas &operator=(Studentas &&other) noexcept; // Move assignment operator
 
+    // Destructor
     ~Studentas() override;
 
-    // Abstrakčios klasės funkcijų realizacija
+    // Abstract class functions implementation
     void setVardas(const std::string &vardas) override;
     std::string getVardas() const override;
 
@@ -27,7 +28,6 @@ public:
 
     void setNamuDarbai(const std::vector<int> &nd) override;
     std::vector<int> getNamuDarbai() const override;
-
     void addNamuDarbas(int pazymys) override;
 
     void setEgzaminas(int egzaminas) override;
@@ -38,6 +38,9 @@ public:
     double skaiciuotiGalutini(bool naudotiVidurki) const override;
     void atsitiktiniai() override;
     void atsitiktiniaiStudentai() override;
+
+    friend std::ostream &operator<<(std::ostream &os, const Studentas &student);
+    friend std::istream &operator>>(std::istream &is, Studentas &student);
 
 private:
     std::string vardas;

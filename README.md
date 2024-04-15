@@ -30,3 +30,30 @@ Transfers resources from one object to another without copying them, simply tran
 Corresponds to the " = " operator but operates on moveable objects. Similar to the move constructor, it allows assigning another moveable object to an existing object, efficiently managing resources.
 
     Studentas &operator=(Studentas &&other) noexcept;
+
+## Input/Output operator methods:
+### Input and Output in the code:
+#### Input: 
+Input method let's us read the student data, which is a must.
+
+    std::istream& operator>>(std::istream& is, Studentas& student)
+#### Output: 
+Output methods gives us the most crucial thing in our code - prints our results.
+
+    std::ostream& operator<<(std::ostream& os, const Studentas& student)
+>[!NOTE]
+> These 2 parts are crucial for the code and without them they would simply not work
+
+### Manual Usage: 
+The operator >> method lets you manually input data from a stream (e.g., std::cin). With this method, you can directly input a student's name, surname, exam result, and homework grades from the terminal.
+
+### Automatic Usage: 
+The operator >> method can also automatically read data from another source, like a file. It enables reading from a file and populating a Student object with the data.
+
+
+
+### To Screen: 
+The operator << method allows you to display a Student object's data on the screen (e.g., std::cout). It outputs the student's name, surname, exam result, and homework grades to the terminal.
+
+### To File: 
+The operator << method can also be used to output data to a file. It lets you write a Student object's data to a file, which can later be read.

@@ -140,3 +140,32 @@ void Studentas::atsitiktiniaiStudentai()
     pavarde = pavardes[pavardeIndex];
     atsitiktiniai();
 }
+
+std::ostream& operator<<(std::ostream& os, const Studentas& student) {
+    os << "Vardas: " << student.vardas << ", Pavarde: " << student.pavarde << std::endl;
+    os << "Namu darbai: ";
+    for (int pazymys : student.nd_rezultatai) {
+        os << pazymys << " ";
+    }
+    os << std::endl;
+    os << "Egzaminas: " << student.egzaminas << std::endl;
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Studentas& student) {
+    std::cout << "Įveskite vardą: ";
+    is >> student.vardas;
+    std::cout << "Įveskite pavardę: ";
+    is >> student.pavarde;
+    std::cout << "Įveskite namų darbų rezultatus (baigti su -1): ";
+    int pazymys;
+    student.nd_rezultatai.clear();
+    while (true) {
+        is >> pazymys;
+        if (pazymys == -1) break;
+        student.nd_rezultatai.push_back(pazymys);
+    }
+    std::cout << "Įveskite egzamino rezultatą: ";
+    is >> student.egzaminas;
+    return is;
+}

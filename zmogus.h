@@ -7,9 +7,8 @@
 class Human
 {
 public:
-    virtual ~Human() = default; // Abstrakčios klasės destruktorius
+    virtual ~Human() = default;
 
-    // Virtualios funkcijos, kurias turės įgyvendinti išvestinės klasės
     virtual void setVardas(const std::string &vardas) = 0;
     virtual std::string getVardas() const = 0;
 

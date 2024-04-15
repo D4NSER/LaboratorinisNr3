@@ -1,10 +1,10 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include "zmogus.h" // Įtraukiame abstrakčios bazinės klasės deklaraciją
+#include "zmogus.h"
 #include <vector>
 
-class Studentas : public Human // Paveldime iš abstrakčios bazinės klasės
+class Studentas : public Human
 {
 public:
     Studentas();
@@ -16,9 +16,9 @@ public:
     Studentas(Studentas &&other) noexcept;            // perkelimo konstruktorius
     Studentas &operator=(Studentas &&other) noexcept; // perkelimo priskyrimo operatorius
 
-    ~Studentas() override; // Virtualus destruktorius
+    ~Studentas() override;
 
-    // Paveldėtos funkcijos iš abstrakčios bazinės klasės
+    // Abstrakčios klasės funkcijų realizacija
     void setVardas(const std::string &vardas) override;
     std::string getVardas() const override;
 

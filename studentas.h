@@ -38,6 +38,10 @@ public:
     void atsitiktiniai();
     void atsitiktiniaiStudentai();
 
+    friend std::ostream &operator<<(std::ostream &os, const Studentas &student);
+    friend std::istream &operator>>(std::istream &is, Studentas &student);
+
+
 private:
     std::string vardas;
     std::string pavarde;

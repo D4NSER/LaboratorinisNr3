@@ -1,171 +1,121 @@
 #include "studentas.h"
+#include <iostream>
 #include <algorithm>
 #include <cstdlib>
 
+// konstruktorius
 Studentas::Studentas() : egzaminas(0) {}
 
-Studentas::Studentas(const std::string &vardas, const std::string &pavarde)
+Studentas::Studentas(const std::string& vardas, const std::string& pavarde)
     : vardas(vardas), pavarde(pavarde), egzaminas(0) {}
 
-Studentas::~Studentas()
-{
-    nd_rezultatai.clear();
-    vardas.clear();
-    pavarde.clear();
-    egzaminas = 0;
-}
+Studentas::Studentas(const Studentas& other)
+    : vardas(other.vardas), pavarde(other.pavarde),
+      namuDarbai(other.namuDarbai), egzaminas(other.egzaminas) {}
 
-Studentas::Studentas(const Studentas &other)
-    : vardas(other.vardas), pavarde(other.pavarde), nd_rezultatai(other.nd_rezultatai), egzaminas(other.egzaminas) {}
-
-Studentas &Studentas::operator=(const Studentas &other)
-{
-    if (this != &other)
-    {
+Studentas& Studentas::operator=(const Studentas& other) {
+    if (this != &other) {
         vardas = other.vardas;
         pavarde = other.pavarde;
-        nd_rezultatai = other.nd_rezultatai;
+        namuDarbai = other.namuDarbai;
         egzaminas = other.egzaminas;
     }
     return *this;
 }
 
-Studentas::Studentas(Studentas &&other) noexcept
-    : vardas(std::move(other.vardas)), pavarde(std::move(other.pavarde)), nd_rezultatai(std::move(other.nd_rezultatai)), egzaminas(other.egzaminas)
-{
+Studentas::Studentas(Studentas&& other) noexcept
+    : vardas(std::move(other.vardas)), pavarde(std::move(other.pavarde)),
+      namuDarbai(std::move(other.namuDarbai)), egzaminas(other.egzaminas) {
     other.egzaminas = 0;
 }
 
-Studentas &Studentas::operator=(Studentas &&other) noexcept
-{
-    if (this != &other)
-    {
+Studentas& Studentas::operator=(Studentas&& other) noexcept {
+    if (this != &other) {
         vardas = std::move(other.vardas);
         pavarde = std::move(other.pavarde);
-        nd_rezultatai = std::move(other.nd_rezultatai);
+        namuDarbai = std::move(other.namuDarbai);
         egzaminas = other.egzaminas;
         other.egzaminas = 0;
     }
     return *this;
 }
-
-void Studentas::setVardas(const std::string &vardas)
-{
-    this->vardas = vardas;
+// destruktorius
+Studentas::~Studentas() {
+    namuDarbai.clear();
+    vardas.clear();
+    pavarde.clear();
+    egzaminas = 0;
 }
 
-std::string Studentas::getVardas() const
-{
-    return vardas;
-}
+void Studentas::setVardas(const std::string& vardas) { this->vardas = vardas; }
+std::string Studentas::getVardas() const { return vardas; }
 
-void Studentas::setPavarde(const std::string &pavarde)
-{
-    this->pavarde = pavarde;
-}
+void Studentas::setPavarde(const std::string& pavarde) { this->pavarde = pavarde; }
+std::string Studentas::getPavarde() const { return pavarde; }
 
-std::string Studentas::getPavarde() const
-{
-    return pavarde;
-}
+void Studentas::setNamuDarbai(const std::vector<int>& nd) { namuDarbai = nd; }
+std::vector<int> Studentas::getNamuDarbai() const { return namuDarbai; }
 
-void Studentas::setNamuDarbai(const std::vector<int> &nd)
-{
-    nd_rezultatai = nd;
-}
+void Studentas::addNamuDarbas(int pazymys) { namuDarbai.push_back(pazymys); }
 
-std::vector<int> Studentas::getNamuDarbai() const
-{
-    return nd_rezultatai;
-}
+void Studentas::setEgzaminas(int egzaminas) { this->egzaminas = egzaminas; }
+int Studentas::getEgzaminas() const { return egzaminas; }
 
-void Studentas::addNamuDarbas(int pazymys)
-{
-    nd_rezultatai.push_back(pazymys);
-}
-
-void Studentas::setEgzaminas(int egzaminas)
-{
-    this->egzaminas = egzaminas;
-}
-
-int Studentas::getEgzaminas() const
-{
-    return egzaminas;
-}
-
-double Studentas::skaiciuotiVidurki() const
-{
+double Studentas::skaiciuotiVidurki() const {
     double suma = 0.0;
-    for (int pazymys : nd_rezultatai)
-    {
+    for (int pazymys : namuDarbai) {
         suma += pazymys;
     }
-    return nd_rezultatai.empty() ? 0.0 : suma / nd_rezultatai.size();
+    return namuDarbai.empty() ? 0.0 : suma / namuDarbai.size();
 }
 
-double Studentas::skaiciuotiMediana() const
-{
-    if (nd_rezultatai.empty())
-        return 0.0;
-    std::vector<int> tempNamuDarbai = nd_rezultatai;
+double Studentas::skaiciuotiMediana() const {
+    if (namuDarbai.empty()) return 0.0;
+    std::vector<int> tempNamuDarbai = namuDarbai;
     std::sort(tempNamuDarbai.begin(), tempNamuDarbai.end());
     int dydis = tempNamuDarbai.size();
-    return (dydis % 2 == 0) ? (tempNamuDarbai[dydis / 2 - 1] + tempNamuDarbai[dydis / 2]) / 2.0 : tempNamuDarbai[dydis / 2];
+    return (dydis % 2 == 0) ? (tempNamuDarbai[dydis / 2 - 1] + tempNamuDarbai[dydis / 2]) / 2.0
+                            : tempNamuDarbai[dydis / 2];
 }
 
-double Studentas::skaiciuotiGalutini(bool naudotiVidurki) const
-{
-    double galutinis = naudotiVidurki ? (0.4 * skaiciuotiVidurki() + 0.6 * egzaminas) : (0.4 * skaiciuotiMediana() + 0.6 * egzaminas);
+double Studentas::skaiciuotiGalutini(bool naudotiVidurki) const {
+    double galutinis = naudotiVidurki ? (0.4 * skaiciuotiVidurki() + 0.6 * egzaminas)
+                                        : (0.4 * skaiciuotiMediana() + 0.6 * egzaminas);
     return galutinis;
 }
 
-void Studentas::atsitiktiniai()
-{
-    nd_rezultatai.resize(rand() % 10 + 1);
-    for (int &pazymys : nd_rezultatai)
-    {
+void Studentas::atsitiktiniai() {
+    namuDarbai.resize(rand() % 10 + 1);
+    for (int& pazymys : namuDarbai) {
         pazymys = rand() % 10 + 1;
     }
     egzaminas = rand() % 10 + 1;
 }
 
-void Studentas::atsitiktiniaiStudentai()
-{
-    const char *vardai[] = {"Jonas", "Petras", "Antanas", "Juozas", "Kazimieras"};
-    const char *pavardes[] = {"Jonaitis", "Petraitis", "Antanaitis", "Juozaitis", "Kazimieraitis"};
-    int vardasIndex = rand() % 5;
-    int pavardeIndex = rand() % 5;
+void Studentas::atsitiktiniaiStudentai() {
+    const char* vardai[] = {"Morta", "Aina", "Guoda", "Marija", "Paulina"};
+    const char* pavardes[] = {"Petraityte", "Jurksaityte", "Mockute", "Macaite", "Liekyte"};
+    int vardasIndex = rand() % 5; // 5, nes masyvas prasideda nuo 0
+    int pavardeIndex = rand() % 5; // 5, nes masyvas prasideda nuo 0
     vardas = vardai[vardasIndex];
     pavarde = pavardes[pavardeIndex];
     atsitiktiniai();
 }
 
 std::ostream& operator<<(std::ostream& os, const Studentas& student) {
-    os << "Vardas: " << student.vardas << ", Pavarde: " << student.pavarde << std::endl;
-    os << "Namu darbai: ";
-    for (int pazymys : student.nd_rezultatai) {
+    os << student.vardas << " " << student.pavarde << " " << student.egzaminas << " ";
+    for (int pazymys : student.namuDarbai) {
         os << pazymys << " ";
     }
-    os << std::endl;
-    os << "Egzaminas: " << student.egzaminas << std::endl;
     return os;
 }
 
 std::istream& operator>>(std::istream& is, Studentas& student) {
-    std::cout << "Įveskite vardą: ";
-    is >> student.vardas;
-    std::cout << "Įveskite pavardę: ";
-    is >> student.pavarde;
-    std::cout << "Įveskite namų darbų rezultatus (baigti su -1): ";
+    is >> student.vardas >> student.pavarde >> student.egzaminas;
+    student.namuDarbai.clear();
     int pazymys;
-    student.nd_rezultatai.clear();
-    while (true) {
-        is >> pazymys;
-        if (pazymys == -1) break;
-        student.nd_rezultatai.push_back(pazymys);
+    while (is >> pazymys) {
+        student.namuDarbai.push_back(pazymys);
     }
-    std::cout << "Įveskite egzamino rezultatą: ";
-    is >> student.egzaminas;
     return is;
 }

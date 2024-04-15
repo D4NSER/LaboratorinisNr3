@@ -12,11 +12,21 @@ The "Rule of Five" is a programming guideline that outlines five essential C++ c
 ## What does the rule of five contain?
 ### Destructor: 
 Responsible for releasing resources allocated by the class. It's invoked when an object of the class is destroyed or goes out of scope.
+
+     ~Studentas();
 ### Copy Constructor: 
 Copies an object of the class, which uses the same resource(-es) as the original object. It's essential to ensure deep copying to avoid double deletion of the same resource.
+
+    Studentas(const Studentas &other);
 ### Copy Assignment Operator: 
 Corresponds to the " = " operator. It copies the given object into an existing object that already has the same or similar resources. It's crucial to ensure that existing resources are released before assigning new ones.
+
+    Studentas &operator=(const Studentas &other);
 ### Move Constructor: 
 Transfers resources from one object to another without copying them, simply transferring resource ownership. It's more efficient than deep copying because it doesn't copy resources but transfers them.
+
+    Studentas(Studentas &&other) noexcept;
 ### Move Assignment Operator: 
 Corresponds to the " = " operator but operates on moveable objects. Similar to the move constructor, it allows assigning another moveable object to an existing object, efficiently managing resources.
+
+    Studentas &operator=(Studentas &&other) noexcept;

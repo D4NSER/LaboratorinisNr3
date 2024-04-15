@@ -57,3 +57,35 @@ The operator << method allows you to display a Student object's data on the scre
 
 ### To File: 
 The operator << method can also be used to output data to a file. It lets you write a Student object's data to a file, which can later be read.
+
+# The v1.5
+## Structure
+- `studentas.h` - Declaration of the Student class and its function descriptions.
+- `zmogus.h` - Declaration of the abstract class Human and its function descriptions.
+- `studentas.cpp` - Implementation of the Student class methods.
+
+## Features
+- Can create a new student and set their name, surname, homework, and exam results.
+- Can calculate a student's average or median.
+- Can calculate a student's final grade using either the average or median.
+- Can generate random student data.
+
+## Example usage
+
+```
+#include "studentas.h"
+#include <iostream>
+
+int main() {
+    Studentas student("Jonas", "Jonaitis");
+    student.addNamuDarbas(8);
+    student.addNamuDarbas(9);
+    student.setEgzaminas(7);
+
+    std::cout << "Average: " << student.skaiciuotiVidurki() << std::endl;
+    std::cout << "Final grade: " << student.skaiciuotiGalutini(true) << std::endl;
+
+    return 0;
+}
+```
+

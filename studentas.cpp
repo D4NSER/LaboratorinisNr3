@@ -128,7 +128,7 @@ void Studentas::atsitiktiniaiStudentai() {
 // Output Operator (Serialization)
 std::ostream& operator<<(std::ostream& os, const Studentas& student) {
     os << student.vardas << " " << student.pavarde << " " << student.egzaminas << " ";
-    for (int pazymys : student.namuDarbai) {
+    for (int pazymys : student.nd_rezultatai) {
         os << pazymys << " ";
     }
     return os;
@@ -137,10 +137,10 @@ std::ostream& operator<<(std::ostream& os, const Studentas& student) {
 // Input Operator (Deserialization)
 std::istream& operator>>(std::istream& is, Studentas& student) {
     is >> student.vardas >> student.pavarde >> student.egzaminas;
-    student.namuDarbai.clear();
+    student.nd_rezultatai.clear();
     int pazymys;
     while (is >> pazymys) {
-        student.namuDarbai.push_back(pazymys);
+        student.nd_rezultatai.push_back(pazymys);
     }
     return is;
 }

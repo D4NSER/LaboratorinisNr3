@@ -57,3 +57,29 @@ The operator << method allows you to display a Student object's data on the scre
 
 ### To File: 
 The operator << method can also be used to output data to a file. It lets you write a Student object's data to a file, which can later be read.
+
+## Timetables
+1000 students:
+Time taken to read data: 0.035504500s
+Time taken to sort data: 0.000010251s
+Time taken to divide students: 0.000000379s
+
+10000 students:
+Time taken to read data: 0.250501365s
+Time taken to sort data: 0.000000944s
+Time taken to divide students: 0.000000240s
+
+100000 students:
+Time taken to read data: 2.497297633s
+Time taken to sort data: 0.000001218s
+Time taken to divide students: 0.000000382s
+
+1000000 students:
+Time taken to read data: 25.255436066s
+Time taken to sort data: 0.000001066s
+Time taken to divide students: 0.000000172s
+
+10000000 students:
+Time taken to read data: 239.699752907s
+Time taken to sort data: 0.000001188s
+Time taken to divide students: 0.000000191s

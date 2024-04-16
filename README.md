@@ -97,3 +97,12 @@ int main() {
 | 100000             | 2.334580174           | 0.000000970           | 0.000000178                 |
 | 1000000            | 25.613205208          | 0.000000902           | 0.000000229                 |
 | 10000000           | 237.982180909         | 0.000001003           | 0.000000174                 |
+
+## Time comparison
+
+    Comparing the two versions of the tables, it seems that v1.5 generally has slightly 
+    lower times for reading data and dividing students across all student count categories. 
+    However, v1.2 has slightly lower times for sorting data in some cases.
+
+    In general, the differences between the two versions are relatively minor, so the choice 
+    between them may not significantly impact the overall performance or interpretation of the data.

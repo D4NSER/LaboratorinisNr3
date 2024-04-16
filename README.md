@@ -88,4 +88,28 @@ int main() {
     return 0;
 }
 ```
+## Timetables
+1000 students:
+Time taken to read data: 0.034256341s
+Time taken to sort data: 0.000020692s
+Time taken to divide students: 0.000000411s
 
+10000 students:
+Time taken to read data: 0.247214881s
+Time taken to sort data: 0.000001050s
+Time taken to divide students: 0.000000340s
+
+100000 students:
+Time taken to read data: 2.334580174s
+Time taken to sort data: 0.000000970s
+Time taken to divide students: 0.000000178s
+
+1000000 students:
+Time taken to read data: 25.613205208s
+Time taken to sort data: 0.000000902s
+Time taken to divide students: 0.000000229s
+
+10000000 students:
+Time taken to read data: 237.982180909s
+Time taken to sort data: 0.000001003s
+Time taken to divide students: 0.000000174s

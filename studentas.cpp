@@ -1,6 +1,7 @@
 #include "studentas.h"
 #include <algorithm>
 #include <cstdlib>
+#include <iostream>
 
 // Konstruktorius
 Studentas::Studentas() : egzaminas(0) {}

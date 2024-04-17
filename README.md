@@ -76,16 +76,58 @@ The operator << method can also be used to output data to a file. It lets you wr
 #include "studentas.h"
 #include <iostream>
 
-int main() {
-    Studentas student("Jonas", "Jonaitis");
-    student.addNamuDarbas(8);
-    student.addNamuDarbas(9);
-    student.setEgzaminas(7);
+void testRuleOfFive()
+{
+    // Create an original student
+    Studentas original("Mantas", "Globys");
+    original.addNamuDarbas(8);
+    original.addNamuDarbas(9);
+    original.setEgzaminas(10);
 
-    std::cout << "Average: " << student.skaiciuotiVidurki() << std::endl;
-    std::cout << "Final grade: " << student.skaiciuotiGalutini(true) << std::endl;
+    // Test copy constructor
+    Studentas copy(original);
+    // assert(copy.getVardas() == "Original Vardas");
+    // assert(copy.getPavarde() == "Original Pavarde");
+    // assert(copy.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(copy.getEgzaminas() == 10);
+    cout << copy << endl;
+    cout << original << endl;
 
-    return 0;
+    // Test copy assignment
+    Studentas copyAssignment;
+    copyAssignment = original;
+    // assert(copyAssignment.getVardas() == "Original Vardas");
+    // assert(copyAssignment.getPavarde() == "Original Pavarde");
+    // assert(copyAssignment.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(copyAssignment.getEgzaminas() == 10);
+    cout << copyAssignment << endl;
+    cout << original << endl;
+
+    // Test move constructor
+    Studentas moved(std::move(original));
+    // assert(moved.getVardas() == "Original Vardas");
+    // assert(moved.getPavarde() == "Original Pavarde");
+    // assert(moved.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(moved.getEgzaminas() == 10);
+    // assert(original.getVardas().empty()); // Original object should be empty after move
+    cout << original << endl;
+    cout << moved << endl;
+
+    // Test move assignment
+    Studentas moveAssignment;
+    moveAssignment = std::move(moved);
+    // assert(moveAssignment.getVardas() == "Original Vardas");
+    // assert(moveAssignment.getPavarde() == "Original Pavarde");
+    // assert(moveAssignment.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(moveAssignment.getEgzaminas() == 10);
+    // assert(moved.getVardas().empty()); // Moved object should be empty after move
+    cout << moved << endl;
+    cout << moveAssignment << endl;
+
+    std::cout << "Rule of Five tests passed successfully!" << std::endl;
+
+    int main(){
+        testRuleOfFive();
 }
 ```
 ## Timetable

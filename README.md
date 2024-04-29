@@ -160,6 +160,14 @@ void testRuleOfFive()
 2. First up, we need a little intro about how the comments are made and what are the rules:
    - **Comment Format:** Use a specific format for comments recognized by Doxygen, typically starting with /** or /*! to indicate a special comment block.
    - **Documentation Tags:** Utilize special tags like @brief, @param, @return, @see, etc., to provide structured information about your code elements.
+   - **Class Documentation:** Document classes using /** blocks above the class declaration, providing descriptions, usage notes, and any relevant information.
+   - **Function Documentation:** Document functions and methods with /** blocks preceding their declarations, including details such as parameters, return values, and usage examples.
+   - **Variable Documentation:** Document variables using /** blocks above their declarations, specifying their purpose, usage guidelines, and any additional details.
+   - **Grouping and Organization:** Group related elements together using \defgroup and \addtogroup commands to create logical hierarchies in your documentation.
+   - **File-level Documentation:** Include file-level documentation using /** blocks at the beginning of each source file, describing its purpose, contents, and usage.
+   - **Consistency and Clarity:** Maintain consistency in your commenting style and ensure clarity in your descriptions, making it easier for users to understand and navigate your documentation.
+3. Now once you are all set, start commenting everything in your header files
+
      
 
  

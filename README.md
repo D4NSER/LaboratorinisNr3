@@ -168,6 +168,13 @@ void testRuleOfFive()
    - **Consistency and Clarity:** Maintain consistency in your commenting style and ensure clarity in your descriptions, making it easier for users to understand and navigate your documentation.
 3. Now once you are all set, start commenting everything in your header files
 
+## Unit Testing
+>[!WARNING]
+>I hope you will stay as strong as I did throughout all the hell we will go now
+
+### IDE
+
+    So, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's for this kind of job. You can also use JetBrains as it is even better.
      
 
  

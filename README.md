@@ -133,6 +133,9 @@ void testRuleOfFive()
 
 
 # The v2.0
+>[!NOTE]
+>All of the tests before this were done on Mac, but because some of the parts are better done on Windows - this whole test was done on Windows11 VM
+
 ## Tasks for the last update
 - Doxygen Documentation
 - Unit Testing
@@ -176,5 +179,20 @@ void testRuleOfFive()
 
     So, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's for this kind of job. You can also use JetBrains as it is even better.
      
+### Setting everything up
+>[!NOTE]
+>Unit Testing, overviewed in this documentation is called Native Unit Testing
 
- 
+#### Preparing the project file
+1. Firstly open **Visual Studio**
+2. Press **Create New Project**
+3. Select **Native Unit Testing** because VS will do all the job by creating and editing your properties you will need here
+4. Now once the project is created head up to Project -> {name of the file} properties -> C/C++ -> All functions -> Precompiled Header and change it's value to **Not Using Precompiled Headers**
+5. Now press **Apply** and **OK**
+6. Now press Project button and add existing files that you will want to test
+   
+#### Making last changes to code
+1. Once you do this, just write new functions that test whatever you need
+2. Once it is all done, go to **Test** and open the **Test Explorer**
+3. Now just press **Run all test** and you have it
+4. If any of the builds fail, you will know that something is not working and if it does work, you are set

@@ -139,7 +139,7 @@ void testRuleOfFive()
 ## Tasks for the last update
 - Doxygen Documentation [^1]
 - Unit Testing [^2]
-- Github Editing
+- Github Editing [^3]
 
 ## Doxygen Documentation
 >[!WARNING]
@@ -253,6 +253,7 @@ void testRuleOfFive()
 11. **Have fun!**
 
 
-References:
+## References:
 [^1]: Doxygen is a tool designed to automatically generate documentation from source code, primarily written in C++, but also supporting other programming languages. Its operation is based on specially written comment tags adjacent to the code. These tags, typically starting with the symbol /**, allow for writing structured and detailed documentation about code functions, class members, modules, and variables.
-[^2]
+[^2]: Unit tests are intended to test individual parts (units) of a program to ensure they function correctly. This helps ensure that each part of the program performs the intended functions and behaves as expected.
+[^3]: Additionally, GitHub provides a platform for collaborative code editing and version control, allowing multiple developers to contribute to a project and make changes to code files.

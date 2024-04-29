@@ -177,7 +177,8 @@ void testRuleOfFive()
 
 ### IDE
 
-    So, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's for this kind of job. You can also use JetBrains as it is even better.
+    Well, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's 
+    for this kind of job. You can also use JetBrains as it is even better.
      
 ### Setting everything up
 >[!NOTE]
@@ -196,3 +197,58 @@ void testRuleOfFive()
 2. Once it is all done, go to **Test** and open the **Test Explorer**
 3. Now just press **Run all test** and you have it
 4. If any of the builds fail, you will know that something is not working and if it does work, you are set
+
+## How to run the code?
+### Makefile creation
+>[!NOTE]
+>The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate a few different methods for setting up and using the Makefile builder to execute my code.
+
+>[!WARNING]
+>Please be discrete when following these steps and after installing the compiler - configure it, because it will not work :) 
+
+#### First method (Windows Hard Method)
+1. **Go** to [this](https://sourceforge.net/projects/gnuwin32/files/make/3.81/) website, which navigates you into the compilator download link (the original site).
+2. **Download** the latest version of it.
+3. **Setup** the whole thing. It has quite clear intruction, but if you ever struggle, here's a [video](https://www.youtube.com/watch?v=taCJhnBXG_w) to help you!
+4. Now, once you have this, head up to you **project** on File Explorer.
+5. **Copy** the path of your project with all of the files (**INCLUDING THE MAKEFILE!**)
+6. **Open** CMD (Command Prompt).
+7. Type '**cd** ' and **paste** the path.
+8. Now press enter and just to make sure, that you're in the right place, type '**ls**' and **check** if all the files are there.
+9. Now just **type** 'make' and **wait**!
+10. Once everything is done, simply **type** 'programa.exe' as it is my target in the makefile (the main file that all of other files got compiled to)
+11. If **nothing** happends, you can add 'run' before the path.
+12. **Have fun!**
+
+#### Second method (MacBook Hard Method)
+1. **Go** to the app store or into the internet and download [Xcode](https://developer.apple.com/xcode/) because you will need a compilator.
+2. **Start** the Xcode after installing and configuring it.
+3. **Go** to _Xcode/Preferences_.
+4. Head up to the "_Downloads_" tab.
+5. Click on "_Components_".
+6. Press "_Install_" on the **command line tools line**.
+7. Once all of this is done, head up the Finder and **locate** your project with all of the files (**INCLUDING THE MAKEFILE!**)
+8. Now open up the **terminal** and type '**cd** '.
+9. Head back to the finder and press on the **name** of you **project**. A file with a plus should've appeared by now.
+10. **Drag** that file with a plus right **into the terminal** and press enter.
+11. To make sure, you are in the right project **type** '**ls**' and **check** if all of the files are there.
+12. Now **type** './' and the name of the file (in my case it's **programa**)
+13. **Enjoy your time!**
+
+#### Third method (The Smart One)
+1. **Download** either Xcode or MinGW compilator (see above for both Windows and Mac).
+2. Once the compilator is **installed** and set up. **Open** [VisualStudio Code](https://code.visualstudio.com/download).
+3. Now open the **project**.
+4. Go to the **extensions** tab and search for "**Makefile Tools**" By _Microsoft_.
+5. **Download** it and then restart VSCode for it to actually get installed into your **IDE**.
+6. Once this is done, press on the **extension** on the left side of the toolbar and you'll see 6 different paths, that the extension needs.
+7. For **Windows**:
+    - Edit the "**Make**" configuration to use mingw32-make.exe.
+    - Edit the "**Makefile**" configuration and paste the project path.
+8. For **MacBook**:
+    - Edit the "**Make**" configuration to use /usr/bin/make.
+    - Edit the "**Makefile**" configuration and paste the project path.
+9. Now just press the "**Build**" button (top left one) which will build the project.
+10. Then press the "**Run code**" button which will start it.
+11. **Have fun!**
+

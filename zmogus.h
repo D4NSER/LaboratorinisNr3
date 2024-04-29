@@ -1,52 +1,31 @@
-#ifndef STUDENTAS_H
-#define STUDENTAS_H
+#ifndef ZMOGUS_H
+#define ZMOGUS_H
 
-#include "zmogus.h"
+#include <string>
 #include <vector>
-#include <iostream>
 
-class Studentas : public Human {
+class Human
+{
 public:
-    Studentas();
-    Studentas(const std::string &vardas, const std::string &pavarde);
+    virtual ~Human() = default;
 
-    // Rule of Five
-    Studentas(const Studentas &other);                // Copy constructor
-    Studentas &operator=(const Studentas &other);     // Assignment operator
-    Studentas(Studentas &&other) noexcept;            // Move constructor
-    Studentas &operator=(Studentas &&other) noexcept; // Move assignment operator
+    virtual void setVardas(const std::string &vardas) = 0;
+    virtual std::string getVardas() const = 0;
 
-    // Destructor
-    ~Studentas() override;
+    virtual void setPavarde(const std::string &pavarde) = 0;
+    virtual std::string getPavarde() const = 0;
 
-    // Abstract class functions implementation
-    void setVardas(const std::string &vardas) override;
-    std::string getVardas() const override;
+    // virtual void setNamuDarbai(const std::vector<int> &nd) = 0;
+    // virtual std::vector<int> getNamuDarbai() const = 0;
 
-    void setPavarde(const std::string &pavarde) override;
-    std::string getPavarde() const override;
+    // virtual void addNamuDarbas(int pazymys) = 0;
 
-    void setNamuDarbai(const std::vector<int> &nd);
-    std::vector<int> getNamuDarbai() const;
-    void addNamuDarbas(int pazymys);
+    // virtual void setEgzaminas(int egzaminas) = 0;
+    // virtual int getEgzaminas() const = 0;
 
-    void setEgzaminas(int egzaminas);
-    int getEgzaminas() const;
-
-    double skaiciuotiVidurki() const;
-    double skaiciuotiMediana() const;
-    double skaiciuotiGalutini(bool naudotiVidurki) const;
-    void atsitiktiniai();
-    void atsitiktiniaiStudentai();
-
-    friend std::ostream &operator<<(std::ostream &os, const Studentas &student);
-    friend std::istream &operator>>(std::istream &is, Studentas &student);
-
-private:
-    std::string vardas;
-    std::string pavarde;
-    std::vector<int> nd_rezultatai;
-    int egzaminas;
+    // virtual double skaiciuotiVidurki() const = 0;
+    // virtual double skaiciuotiMediana() const = 0;
+    // virtual double skaiciuotiGalutini(bool naudotiVidurki) const = 0;
+    // virtual void atsitiktiniai() = 0;
+    // virtual void atsitiktiniaiStudentai() = 0;
 };
-
-#endif

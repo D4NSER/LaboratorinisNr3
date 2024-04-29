@@ -133,7 +133,7 @@ void testRuleOfFive()
 
 
 # The v2.0
->[!NOTE]
+>[!IMPORTANT]
 >All of the tests before this were done on Mac, but because some of the parts are better done on Windows - this whole test was done on Windows11 VM
 
 ## Tasks for the last update
@@ -172,7 +172,7 @@ void testRuleOfFive()
 3. Now once you are all set, start commenting everything in your header files
 
 ## Unit Testing
->[!WARNING]
+>[!CAUTION]
 >I hope you will stay as strong as I did throughout all the hell we will go now
 
 ### IDE

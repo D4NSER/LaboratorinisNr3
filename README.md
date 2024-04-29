@@ -130,3 +130,36 @@ void testRuleOfFive()
 
     In general, the differences between the two versions are relatively minor, so the choice 
     between them may not significantly impact the overall performance or interpretation of the data.
+
+
+# The v2.0
+## Tasks for the last update
+- Doxygen Documentation
+- Unit Testing
+- Github Editing
+
+## Doxygen Documentation
+>[!WARNING]
+> In this document I will try to run through everything you need to know, but it would be lovely if you would go to YouTube and watch a tutorial video, because I do not specialize in this area
+
+### Installation and Usage
+1. Firstly, head up to the [official Doxygen website][https://www.doxygen.nl/manual/index.html]
+2. Press the download button and install the program for the desired OS
+3. Set everything up and start the DoxygenWiz
+4. Now select the exact folder of your project, where all the files are shown
+5. Name your project, write your synopsis and the version, if you really need - add thee logo
+6. Head up to Run window and press the **Run doxygen** button
+7. Once the process finishes, just go right to your project files -> hmtl -> index.html
+8. Open it and vola, you have your whole documentation
+
+### Inside the code
+>[!NOTE]
+>Since Doxygen documentation only needs comments from header files, save your time and
+
+1. Open all your project's haeder files and get ready for this long and exhausting job
+2. First up, we need a little intro about how the comments are made and what are the rules:
+   - **Comment Format:** Use a specific format for comments recognized by Doxygen, typically starting with /** or /*! to indicate a special comment block.
+   - **Documentation Tags:** Utilize special tags like @brief, @param, @return, @see, etc., to provide structured information about your code elements.
+     
+
+ 

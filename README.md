@@ -137,8 +137,8 @@ void testRuleOfFive()
 >All of the tests before this were done on Mac, but because some of the parts are better done on Windows - this whole test was done on Windows11 VM
 
 ## Tasks for the last update
-- Doxygen Documentation
-- Unit Testing
+- Doxygen Documentation [^1]
+- Unit Testing [^2]
 - Github Editing
 
 ## Doxygen Documentation
@@ -251,3 +251,8 @@ void testRuleOfFive()
 9. Now just press the "**Build**" button (top left one) which will build the project.
 10. Then press the "**Run code**" button which will start it.
 11. **Have fun!**
+
+
+References:
+[^1]: Doxygen is a tool designed to automatically generate documentation from source code, primarily written in C++, but also supporting other programming languages. Its operation is based on specially written comment tags adjacent to the code. These tags, typically starting with the symbol /**, allow for writing structured and detailed documentation about code functions, class members, modules, and variables.
+[^2]

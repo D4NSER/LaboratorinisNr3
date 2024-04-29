@@ -251,4 +251,3 @@ void testRuleOfFive()
 9. Now just press the "**Build**" button (top left one) which will build the project.
 10. Then press the "**Run code**" button which will start it.
 11. **Have fun!**
-

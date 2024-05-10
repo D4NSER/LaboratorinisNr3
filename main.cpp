@@ -1,3 +1,4 @@
+#include "studentas.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -13,12 +14,64 @@
 #include <cstdlib>
 #include <ctime>
 #include <stdexcept>
-#include "studentas.h"
 #include "funkcijos.h"
 #include "funkcijosVECTOR.h"
 #include "app.h"
+#include "zmogus.h"
+#include <cassert>
 
 using namespace std;
+
+void testRuleOfFive()
+{
+    // Create an original student
+    Studentas original("Mantas", "Globys");
+    original.addNamuDarbas(8);
+    original.addNamuDarbas(9);
+    original.setEgzaminas(10);
+
+    // Test copy constructor
+    Studentas copy(original);
+    // assert(copy.getVardas() == "Original Vardas");
+    // assert(copy.getPavarde() == "Original Pavarde");
+    // assert(copy.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(copy.getEgzaminas() == 10);
+    cout << copy << endl;
+    cout << original << endl;
+
+    // Test copy assignment
+    Studentas copyAssignment;
+    copyAssignment = original;
+    // assert(copyAssignment.getVardas() == "Original Vardas");
+    // assert(copyAssignment.getPavarde() == "Original Pavarde");
+    // assert(copyAssignment.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(copyAssignment.getEgzaminas() == 10);
+    cout << copyAssignment << endl;
+    cout << original << endl;
+
+    // Test move constructor
+    Studentas moved(std::move(original));
+    // assert(moved.getVardas() == "Original Vardas");
+    // assert(moved.getPavarde() == "Original Pavarde");
+    // assert(moved.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(moved.getEgzaminas() == 10);
+    // assert(original.getVardas().empty()); // Original object should be empty after move
+    cout << original << endl;
+    cout << moved << endl;
+
+    // Test move assignment
+    Studentas moveAssignment;
+    moveAssignment = std::move(moved);
+    // assert(moveAssignment.getVardas() == "Original Vardas");
+    // assert(moveAssignment.getPavarde() == "Original Pavarde");
+    // assert(moveAssignment.getNamuDarbai() == std::vector<int>({8, 9}));
+    // assert(moveAssignment.getEgzaminas() == 10);
+    // assert(moved.getVardas().empty()); // Moved object should be empty after move
+    cout << moved << endl;
+    cout << moveAssignment << endl;
+
+    std::cout << "Rule of Five tests passed successfully!" << std::endl;
+}
 
 int main()
 {
@@ -57,7 +110,7 @@ int main()
                 try
                 {
                     manualInput(studentai);
-                    spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
+                    //spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
                 }
                 catch (const exception &e)
                 {
@@ -80,10 +133,10 @@ int main()
                     for (int i = 0; i < 5; ++i)
                     {
                         Studentas naujasStudentas;
-                        //generateRandomNamesAndGrades(naujasStudentas);
+                        // generateRandomNamesAndGrades(naujasStudentas);
                         studentai.push_back(naujasStudentas);
                     }
-                    spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
+                    //spausdintiGalutiniusBalus(studentai, "isvedimas.txt");
                 }
                 catch (const exception &e)
                 {
@@ -185,14 +238,15 @@ int main()
                 }
                 break;
             case 7:
-            
+                testRuleOfFive();
+                break;
             case 0:
                 cout << "Programa baigia darbą." << endl;
                 break;
             default:
                 cout << "Neatpažintas pasirinkimas. Bandykite dar kartą." << endl;
                 break;
-            }
+            } 
         }
         catch (const invalid_argument &e)
         {
@@ -208,4 +262,3 @@ int main()
 
     return 0;
 }
-

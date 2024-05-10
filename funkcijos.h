@@ -4,6 +4,12 @@
 #include "studentas.h"
 #include <vector>
 
+void manualInput(std::vector<Studentas> &studentai);
+void spausdintiGalutiniusBalus(const std::vector<Studentas> &studentai, const std::string &isvedimoFailoVardas, int rusiavimoTipas);
+void generateGradesOnly(std::vector<Studentas> &studentai);
+void readFileDataFromFile(std::vector<Studentas> &studentai, const std::string &failoVardas);
+
+
 /**
  * @brief Įrašo studentų duomenis į vektorių iš failo.
  * 

@@ -146,7 +146,7 @@ void testRuleOfFive()
 > In this document I will try to run through everything you need to know, but it would be lovely if you would go to YouTube and watch a tutorial video, because I do not specialize in this area
 
 ### Installation and Usage
-1. Firstly, head up to the [official Doxygen website][https://www.doxygen.nl/manual/index.html]
+1. Firstly, head up to the [official Doxygen website](https://www.doxygen.nl/manual/index.html)
 2. Press the download button and install the program for the desired OS
 3. Set everything up and start the DoxygenWiz
 4. Now select the exact folder of your project, where all the files are shown

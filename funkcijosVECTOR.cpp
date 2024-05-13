@@ -1,4 +1,6 @@
 #include "funkcijosVECTOR.h"
+#include "studentas.h"
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -8,38 +10,42 @@
 #include <sstream>
 #include <algorithm>
 #include <chrono>
+#include <random>
+#include <cstdlib>
+#include <ctime>
 
 void readDataVector(std::vector<Studentas> &studentai, const std::string &failoVardas)
 {
     std::ifstream file(failoVardas);
     if (!file)
     {
-        std::cerr << "Failed to open file: " << failoVardas << std::endl;
-        return; // Exit if file not opened successfully
+        std::cerr << "Nepavyko atidaryti failo: " << failoVardas << std::endl;
+        return;
     }
 
-    Studentas studentas;
     std::string line;
-    while (getline(file, line))
+    while (std::getline(file, line))
     {
         if (line.empty())
-            continue; // Skip any empty lines
+            continue;
 
         std::istringstream iss(line);
-        iss >> studentas.vardas >> studentas.pavarde;
+        std::string vardas, pavarde;
+        iss >> vardas >> pavarde;
+
+        Studentas studentas(vardas, pavarde);
 
         int pazymys;
-        studentas.nd_rezultatai.clear();
+        studentas.setNamuDarbai({});
         while (iss >> pazymys)
         {
-            studentas.nd_rezultatai.push_back(pazymys);
+            studentas.getNamuDarbai().push_back(pazymys);
         }
 
-        // Check if nd_rezultatai is not empty before accessing
-        if (!studentas.nd_rezultatai.empty())
+        if (!studentas.getNamuDarbai().empty())
         {
-            studentas.egzaminas = studentas.nd_rezultatai.back();
-            studentas.nd_rezultatai.pop_back();
+            studentas.setEgzaminas(studentas.getNamuDarbai().back());
+            studentas.getNamuDarbai().pop_back();
             studentai.push_back(studentas);
         }
     }
@@ -53,7 +59,7 @@ void generateStudentFilesVector(int size)
 
     if (!outFile)
     {
-        std::cerr << "Failed to open file: " << fileName << std::endl;
+        std::cerr << "Nepavyko atidaryti failo: " << fileName << std::endl;
         return;
     }
 
@@ -83,27 +89,24 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
 {
     std::vector<Studentas> studentai;
 
-    // Start timer for reading data
     auto readStart = std::chrono::high_resolution_clock::now();
     readDataVector(studentai, failoVardas);
     auto readEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> readElapsed = readEnd - readStart;
-    std::cout << "Skaitymas uztruko: " << readElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(9) << "Time taken to read data: " << readElapsed.count() << "s\n";
 
-    // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
     std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
-              { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+              { return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas()); });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
-    std::cout << "Rusiavimas uztruko: " << sortElapsed.count() << "s\n";
+    std::cout << "Time taken to sort data: " << sortElapsed.count() << "s\n";
 
-    // Start timer for dividing students
     auto divideStart = std::chrono::high_resolution_clock::now();
     std::vector<Studentas> kietiakai, vargsiukai;
     for (const auto &studentas : studentai)
     {
-        double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+        double galutinisBalas = 0.4 * studentas.skaiciuotiVidurki() + 0.6 * studentas.getEgzaminas();
         if (galutinisBalas < 5.0)
         {
             vargsiukai.push_back(studentas);
@@ -115,24 +118,23 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
     }
     auto divideEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> divideElapsed = divideEnd - divideStart;
-    std::cout << "Studentu skirstymas uztruko: " << divideElapsed.count() << "s\n";
+    std::cout << "Time taken to divide students: " << divideElapsed.count() << "s\n";
 
-    // Writing sorted students into separate files
     std::ofstream kietiakaiFile("kietiakai.txt"), vargsiukaiFile("vargsiukai.txt");
 
     for (const auto &studentas : kietiakai)
     {
-        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        kietiakaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                       << std::fixed << std::setprecision(2)
-                      << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                      << studentas.skaiciuotiGalutini(true)
                       << std::endl;
     }
 
     for (const auto &studentas : vargsiukai)
     {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                        << std::fixed << std::setprecision(2)
-                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                       << studentas.skaiciuotiGalutini(true)
                        << std::endl;
     }
 
@@ -140,58 +142,60 @@ void rusiuotStudentusVector(const std::string &failoVardas) // 1 strategija
     vargsiukaiFile.close();
 }
 
-void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
+void rusiuotStudentusVector2(const std::string &failoVardas) //2 startegija
 {
     std::vector<Studentas> studentai;
 
-    // Start timer for reading data
     auto readStart = std::chrono::high_resolution_clock::now();
     readDataVector(studentai, failoVardas);
     auto readEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> readElapsed = readEnd - readStart;
-    std::cout << "Skaitymas uztruko: " << readElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(7) << "Time taken to read data: " << readElapsed.count() << "s\n";
 
-    // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
-    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
-              { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+        return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas());
+    });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
-    std::cout << "Rusiavimas uztruko: " << sortElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(7) << "Time taken to sort data: " << sortElapsed.count() << "s\n";
 
-    // Start timer for dividing students
     auto divideStart = std::chrono::high_resolution_clock::now();
     std::vector<Studentas> vargsiukai;
-    auto it = std::remove_if(studentai.begin(), studentai.end(), [&vargsiukai](const Studentas &studentas)
-                             {
-        double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
+
+    for (auto it = studentai.begin(); it != studentai.end();)
+    {
+        double galutinisBalas = 0.4 * it->skaiciuotiVidurki() + 0.6 * it->getEgzaminas();
         if (galutinisBalas < 5.0)
         {
-            vargsiukai.push_back(studentas);
-            return true;
+            vargsiukai.push_back(*it);
+            it = studentai.erase(it);
         }
-        return false; });
-    studentai.erase(it, studentai.end());
+        else
+        {
+            ++it;
+        }
+    }
+
     auto divideEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> divideElapsed = divideEnd - divideStart;
-    std::cout << "Studentu skirstymas uztruko: " << divideElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(7) << "Time taken to divide students: " << divideElapsed.count() << "s\n";
 
-    // Writing sorted students into separate files
     std::ofstream kietiakaiFile("kietiakai.txt"), vargsiukaiFile("vargsiukai.txt");
 
     for (const auto &studentas : studentai)
     {
-        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        kietiakaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                       << std::fixed << std::setprecision(2)
-                      << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                      << studentas.skaiciuotiGalutini(true)
                       << std::endl;
     }
 
     for (const auto &studentas : vargsiukai)
     {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                        << std::fixed << std::setprecision(2)
-                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                       << studentas.skaiciuotiGalutini(true)
                        << std::endl;
     }
 
@@ -199,52 +203,50 @@ void rusiuotStudentusVector2(const std::string &failoVardas) // 2 startegija
     vargsiukaiFile.close();
 }
 
-void rusiuotStudentusVector3(const std::string &failoVardas)
+void rusiuotStudentusVector3(const std::string &failoVardas) //3 startegija
 {
     std::vector<Studentas> studentai;
 
-    // Start timer for reading data
     auto readStart = std::chrono::high_resolution_clock::now();
     readDataVector(studentai, failoVardas);
     auto readEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> readElapsed = readEnd - readStart;
-    std::cout << "Skaitymas uztruko (Vector): " << readElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(7) << "Time taken to read data: " << readElapsed.count() << "s\n";
 
-    // Start timer for sorting data
     auto sortStart = std::chrono::high_resolution_clock::now();
-    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
-              { return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas); });
+    std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b) {
+        return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas());
+    });
     auto sortEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> sortElapsed = sortEnd - sortStart;
-    std::cout << "Rusiavimas uztruko (Vector): " << sortElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(7) << "Time taken to sort data: " << sortElapsed.count() << "s\n";
 
-    // Start timer for dividing students
     auto divideStart = std::chrono::high_resolution_clock::now();
     std::vector<Studentas> kietiakai, vargsiukai;
-    auto iter = std::stable_partition(studentai.begin(), studentai.end(), [](const Studentas &studentas)
-                                      { return 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas >= 5.0; });
+    auto iter = std::stable_partition(studentai.begin(), studentai.end(), [](const Studentas &studentas) {
+        return studentas.skaiciuotiGalutini(true) >= 5.0;
+    });
     kietiakai.assign(studentai.begin(), iter);
     vargsiukai.assign(iter, studentai.end());
     auto divideEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> divideElapsed = divideEnd - divideStart;
-    std::cout << "Skirstymas uztruko (Vector): " << divideElapsed.count() << "s\n";
+    std::cout << std::fixed << std::setprecision(7) << "Time taken to divide students: " << divideElapsed.count() << "s\n";
 
-    // Writing sorted students into separate files
     std::ofstream kietiakaiFile("kietiakai.txt"), vargsiukaiFile("vargsiukai.txt");
 
     for (const auto &studentas : kietiakai)
     {
-        kietiakaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        kietiakaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                       << std::fixed << std::setprecision(2)
-                      << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                      << studentas.skaiciuotiGalutini(true)
                       << std::endl;
     }
 
     for (const auto &studentas : vargsiukai)
     {
-        vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " "
+        vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " "
                        << std::fixed << std::setprecision(2)
-                       << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas)
+                       << studentas.skaiciuotiGalutini(true)
                        << std::endl;
     }
 

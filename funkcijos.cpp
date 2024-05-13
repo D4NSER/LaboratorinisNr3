@@ -1,35 +1,44 @@
 #include "funkcijos.h"
-#include "studentas.h"
 #include <iostream>
 #include <fstream>
-#include <iomanip>
-#include <limits>
 #include <vector>
 #include <string>
-#include <sstream>
 #include <algorithm>
+#include <iomanip>
+#include <numeric>
+#include <random>
+#include <ctime>
+#include <sstream>
+#include <chrono>
+#include <cstdlib>
+#include <math.h>
+#include <stdexcept>
+#include <filesystem>
+#include <iomanip>
+#include "studentas.h"
+#include <limits>
 
 bool sortByVardas(const Studentas &a, const Studentas &b)
 {
-    return a.vardas < b.vardas;
+    return a.getVardas() < b.getVardas();
 }
 
 bool sortByPavarde(const Studentas &a, const Studentas &b)
 {
-    return a.pavarde < b.pavarde;
+    return a.getPavarde() < b.getPavarde();
 }
 
 bool sortByVidurkis(const Studentas &a, const Studentas &b)
 {
-    double vidurkisA = 0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas;
-    double vidurkisB = 0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas;
+    double vidurkisA = 0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas();
+    double vidurkisB = 0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas();
     return vidurkisA < vidurkisB;
 }
 
 bool sortByMediana(const Studentas &a, const Studentas &b)
 {
-    double medianaA = 0.4 * mediana(a.nd_rezultatai) + 0.6 * a.egzaminas;
-    double medianaB = 0.4 * mediana(b.nd_rezultatai) + 0.6 * b.egzaminas;
+    double medianaA = 0.4 * a.skaiciuotiMediana() + 0.6 * a.getEgzaminas();
+    double medianaB = 0.4 * b.skaiciuotiMediana() + 0.6 * b.getEgzaminas();
     return medianaA < medianaB;
 }
 
@@ -53,16 +62,16 @@ void spausdintiGalutiniusBalus(const std::vector<Studentas> &studentai, const st
     switch (rusiavimoTipas)
     {
     case 1:
-        sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
+        std::sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVardas);
         break;
     case 2:
-        sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByPavarde);
+        std::sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByPavarde);
         break;
     case 3:
-        sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVidurkis);
+        std::sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByVidurkis);
         break;
     case 4:
-        sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByMediana);
+        std::sort(surusiuotiStudentai.begin(), surusiuotiStudentai.end(), sortByMediana);
         break;
     }
 
@@ -74,9 +83,9 @@ void spausdintiGalutiniusBalus(const std::vector<Studentas> &studentai, const st
 
     for (const Studentas &studentas : surusiuotiStudentai)
     {
-        double galutinisVidurkis = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-        double galutineMediana = 0.4 * mediana(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-        *out << std::left << std::setw(15) << studentas.vardas << std::setw(15) << studentas.pavarde << std::setw(20) << galutinisVidurkis << std::setw(20) << galutineMediana << "\n";
+        double galutinisVidurkis = 0.4 * studentas.skaiciuotiVidurki() + 0.6 * studentas.getEgzaminas();
+        double galutineMediana = 0.4 * studentas.skaiciuotiMediana() + 0.6 * studentas.getEgzaminas();
+        *out << std::left << std::setw(15) << studentas.getVardas() << std::setw(15) << studentas.getPavarde() << std::setw(20) << galutinisVidurkis << std::setw(20) << galutineMediana << "\n";
     }
     *out << "----------------------------------------------------------------\n";
 
@@ -95,9 +104,12 @@ void manualInput(std::vector<Studentas> &studentai)
         std::string temp;
 
         std::cout << "Įveskite studento vardą: ";
-        std::cin >> naujasStudentas.vardas;
+        std::cin >> temp;
+        naujasStudentas.setVardas(temp);
+
         std::cout << "Įveskite studento pavardę: ";
-        std::cin >> naujasStudentas.pavarde;
+        std::cin >> temp;
+        naujasStudentas.setPavarde(temp);
 
         std::cout << "Įveskite namų darbų pažymius (0 norint baigti): ";
         int pazymys;
@@ -115,14 +127,14 @@ void manualInput(std::vector<Studentas> &studentai)
             {
                 break;
             }
-            naujasStudentas.nd_rezultatai.push_back(pazymys);
+            naujasStudentas.getNamuDarbai().push_back(pazymys);
         }
 
         std::cout << "Įveskite egzamino rezultatą: ";
         while (true)
         {
-            std::cin >> naujasStudentas.egzaminas;
-            if (std::cin.fail() || naujasStudentas.egzaminas < 0 || naujasStudentas.egzaminas > 10)
+            std::cin >> pazymys;
+            if (std::cin.fail() || pazymys < 0 || pazymys > 10)
             {
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -131,6 +143,7 @@ void manualInput(std::vector<Studentas> &studentai)
             }
             break;
         }
+        naujasStudentas.setEgzaminas(pazymys);
 
         studentai.push_back(naujasStudentas);
 
@@ -143,7 +156,7 @@ void generateGradesOnly(std::vector<Studentas> &studentai)
 {
     for (Studentas &studentas : studentai)
     {
-        generateRandomGrades(studentas);
+        studentas.atsitiktiniai();
     }
 }
 
@@ -155,30 +168,35 @@ void readFileDataFromFile(std::vector<Studentas> &studentai, const std::string &
         throw std::runtime_error("Nepavyko atidaryti failo: " + failoVardas);
     }
 
-    Studentas studentas;
     std::string eilute;
-
     while (getline(failas, eilute))
     {
         std::istringstream eilutesSrautas(eilute);
-        eilutesSrautas >> studentas.vardas >> studentas.pavarde;
+
+        std::string vardas, pavarde;
+        eilutesSrautas >> vardas >> pavarde;
+
+        Studentas studentas(vardas, pavarde);
 
         int pazymys;
-        studentas.nd_rezultatai.clear();
+        studentas.setNamuDarbai({});
         while (eilutesSrautas >> pazymys && pazymys != -1)
         {
-            studentas.nd_rezultatai.push_back(pazymys);
+            studentas.getNamuDarbai().push_back(pazymys);
         }
 
-        studentas.egzaminas = pazymys;
+        studentas.setEgzaminas(pazymys);
+
         studentai.push_back(studentas);
     }
 
     failas.close();
 }
 
-void generateStudentFiles(const std::vector<int> &sizes) //padarius su istringstream laikai pamazes (pataisysiu)
+void generateStudentFiles(const std::vector<int> &sizes)
 {
+    srand(time(nullptr));
+
     for (int size : sizes)
     {
         std::string fileName = "studentai" + std::to_string(size) + ".txt";
@@ -207,36 +225,48 @@ void generateStudentFiles(const std::vector<int> &sizes) //padarius su istringst
     }
 }
 
-void rusiuotiStudentus(const std::vector<int>& sizes) {
-    for (size_t index = 0; index < sizes.size(); ++index) {
+void rusiuotiStudentus(const std::vector<int> &sizes)
+{
+    for (size_t index = 0; index < sizes.size(); ++index)
+    {
         std::string fileName = "studentai" + std::to_string(sizes[index]) + ".txt";
         std::ifstream inFile(fileName);
 
-        if (!inFile) {
+        if (!inFile)
+        {
             std::cerr << "Nepavyko atidaryti failo: " << fileName << std::endl;
             continue;
         }
 
         std::vector<Studentas> studentai, kietiakiai, vargsiukai;
-        Studentas tempStudentas;
         std::string eilute;
-        std::getline(inFile, eilute); // Praleidžiame antraštę
+        std::getline(inFile, eilute); // Skipping the header line
 
         auto startRead = std::chrono::high_resolution_clock::now();
 
-        while (std::getline(inFile, eilute)) {
+        while (std::getline(inFile, eilute))
+        {
             std::istringstream eiluteStream(eilute);
-            eiluteStream >> tempStudentas.vardas >> tempStudentas.pavarde;
-            tempStudentas.nd_rezultatai.clear();
-            int pazymys;
+            Studentas tempStudentas;
+            std::string vardas, pavarde;
+            eiluteStream >> vardas >> pavarde;
+            tempStudentas.setVardas(vardas);   // Set vardas using a public setter method
+            tempStudentas.setPavarde(pavarde); // Similarly set pavarde if needed
 
-            while (eiluteStream >> pazymys) {
-                tempStudentas.nd_rezultatai.push_back(pazymys);
+            // Read grades for each student
+            int pazymys;
+            while (eiluteStream >> pazymys)
+            {
+                tempStudentas.addNamuDarbas(pazymys); // Add grade using a public member function
             }
-            
-            if (!tempStudentas.nd_rezultatai.empty()) {
-                tempStudentas.egzaminas = tempStudentas.nd_rezultatai.back();
-                tempStudentas.nd_rezultatai.pop_back();
+
+            // Process grades (calculate average, etc.)
+            std::vector<int> grades = tempStudentas.getNamuDarbai();
+            if (!grades.empty())
+            {
+                tempStudentas.setEgzaminas(grades.back()); // Set exam grade using a public setter method
+                grades.pop_back();                          // Remove last grade from nd_rezultatai
+                tempStudentas.setNamuDarbai(grades);        // Update grades vector using a public member function
             }
 
             studentai.push_back(tempStudentas);
@@ -250,15 +280,18 @@ void rusiuotiStudentus(const std::vector<int>& sizes) {
 
         auto startSort = std::chrono::high_resolution_clock::now();
 
-        std::sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
-            return (0.4 * vidurkis(a.nd_rezultatai) + 0.6 * a.egzaminas) < (0.4 * vidurkis(b.nd_rezultatai) + 0.6 * b.egzaminas);
-        });
+        std::sort(studentai.begin(), studentai.end(), [](const Studentas &a, const Studentas &b)
+                  { return (0.4 * a.skaiciuotiVidurki() + 0.6 * a.getEgzaminas()) < (0.4 * b.skaiciuotiVidurki() + 0.6 * b.getEgzaminas()); });
 
-        for (const auto& studentas : studentai) {
-            double galutinisBalas = 0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas;
-            if (galutinisBalas < 5.0) {
+        for (const auto &studentas : studentai)
+        {
+            double galutinisBalas = studentas.skaiciuotiGalutini(true);
+            if (galutinisBalas < 5.0)
+            {
                 vargsiukai.push_back(studentas);
-            } else {
+            }
+            else
+            {
                 kietiakiai.push_back(studentas);
             }
         }
@@ -267,15 +300,26 @@ void rusiuotiStudentus(const std::vector<int>& sizes) {
         std::chrono::duration<double> elapsedSort = endSort - startSort;
         std::cout << "Studentų rūšiavimas užtruko: " << elapsedSort.count() << " sekundžių." << std::endl;
 
-        // Išvedimas į failus
         std::ofstream kietiakiaiFile("kietiakiai.txt"), vargsiukaiFile("vargsiukai.txt");
 
-        for (const auto &studentas : kietiakiai) {
-            kietiakiaiFile << studentas.vardas << " " << studentas.pavarde << " " << std::fixed << std::setprecision(2) << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) << std::endl;
+        for (const auto &studentas : kietiakiai)
+        {
+            kietiakiaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " ";
+            for (int pazymys : studentas.getNamuDarbai())
+            {
+                kietiakiaiFile << pazymys << " ";
+            }
+            kietiakiaiFile << studentas.getEgzaminas() << std::endl;
         }
 
-        for (const auto &studentas : vargsiukai) {
-            vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " " << std::fixed << std::setprecision(2) << (0.4 * vidurkis(studentas.nd_rezultatai) + 0.6 * studentas.egzaminas) << std::endl;
+        for (const auto &studentas : vargsiukai)
+        {
+            vargsiukaiFile << studentas.getVardas() << " " << studentas.getPavarde() << " ";
+            for (int pazymys : studentas.getNamuDarbai())
+            {
+                vargsiukaiFile << pazymys << " ";
+            }
+            vargsiukaiFile << studentas.getEgzaminas() << std::endl;
         }
 
         kietiakiaiFile.close();

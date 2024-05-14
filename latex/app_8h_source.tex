@@ -1,0 +1,26 @@
+\doxysection{app.\+h}
+\hypertarget{app_8h_source}{}\label{app_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FUNCTIONS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FUNCTIONS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}studentas.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}funkcijos.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{enum\ class}\ ContainerType\ \{\ None,\ \mbox{\hyperlink{class_vector}{Vector}}\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{enum\ class}\ Action\ \{\ None,\ Generate,\ Sort\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00024\ ContainerType\ getContainerChoice();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ Action\ getActionChoice();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ performAction(ContainerType\ containerChoice,\ Action\ actionChoice,\ \textcolor{keyword}{const}\ std::vector<int>\&\ sizes);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ runApp();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FUNCTIONS\_H}}
+
+\end{DoxyCode}

@@ -224,7 +224,7 @@ int main()
             case 7:
                 testRuleOfFive();
                 break;
- case 8:
+            case 8:
             {
                 // Default constructor
                 Vector<int> intVector;
@@ -329,8 +329,25 @@ int main()
                 }
                 std::cout << "\n";
 
+                // Testing additional methods
+                Vector<int> testVector;
+                testVector.push_back(10);
+                testVector.push_back(20);
+                testVector.push_back(30);
+
+                // Test is_sorted method
+                std::cout << "Is testVector sorted? " << (testVector.is_sorted() ? "Yes" : "No") << std::endl;
+
+                // Test index_of method
+                std::cout << "Index of element 20: " << testVector.index_of(20) << std::endl;
+
+                // Test swap_elements method
+                testVector.swap_elements(0, 2);
+                std::cout << "After swapping elements: " << testVector << std::endl;
+
                 break;
             }
+
             case 0:
                 cout << "Programa baigia darbą." << endl;
                 break;

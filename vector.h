@@ -128,18 +128,17 @@ public:
         m_data[length++] = value;
     }
 
-    // Išimti elementą iš galo
+    // Pašalinti paskutinį elementą
     /**
-     * @brief Išima elementą iš vektoriaus galo.
+     * @brief Pašalinti paskutinį elementą.
      *
-     * Elementas yra tik pašalinamas iš vektoriaus, bet ne atlaisvinama jo užimta atmintis.
+     * @throw std::logic_error Jei vektorius yra tuščias.
      */
     void pop_back()
     {
-        if (length > 0)
-        {
-            --length;
-        }
+        if (length == 0)
+            throw std::logic_error("Vektorius yra tuščias");
+        --length;
     }
 
     // Išvalyti vektorių
@@ -586,6 +585,51 @@ public:
         {
             start[rightLength + i] = std::move(temp[i]);
         }
+    }
+
+    // Patikrinkite, ar vektorius yra surikiuotas didėjančia tvarka
+    /**
+     * @brief Patikrina, ar vektorius yra surikiuotas didėjančia tvarka.
+     *
+     * @return true, jei vektorius yra surikiuotas didėjančia tvarka, false, jei ne.
+     */
+    bool is_sorted() const
+    {
+        return std::is_sorted(begin(), end());
+    }
+
+    // Gauti indeksą, kuriame pirmą kartą pasitaiko elementas
+    /**
+     * @brief Gražina indeksą, kuriame pirmą kartą pasitaiko elementas.
+     *
+     * @param value Ieškomas elementas.
+     * @return size_t Indeksas, kuriame pirmą kartą pasitaiko elementas.
+     * @throw std::out_of_range Jei elementas neegzistuoja vektoriuje.
+     */
+    size_t index_of(const T &value) const
+    {
+        const_iterator it = std::find(begin(), end(), value);
+        if (it == end())
+        {
+            throw std::out_of_range("Elementas neegzistuoja vektoriuje");
+        }
+        return it - begin();
+    }
+
+    // Sukurti funkciją, kuri sukeičia du elementus pagal jų indeksus
+    /**
+     * @brief Sukeičia du elementus pagal jų indeksus.
+     *
+     * @param index1 Indeksas pirmam elementui.
+     * @param index2 Indeksas antram elementui.
+     */
+    void swap_elements(size_t index1, size_t index2)
+    {
+        if (index1 >= length || index2 >= length)
+        {
+            throw std::out_of_range("Indeksas už ribų");
+        }
+        std::swap(m_data[index1], m_data[index2]);
     }
 };
 

@@ -224,16 +224,11 @@ int main()
             case 7:
                 testRuleOfFive();
                 break;
-            case 8:
+ case 8:
             {
                 // Default constructor
                 Vector<int> intVector;
-                std::cout << "Vector contents after default construction: ";
-                for (size_t i = 0; i < intVector.size(); ++i)
-                {
-                    std::cout << intVector[i] << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Vector contents after default construction: " << intVector << std::endl;
 
                 // Constructor with push_back
                 Vector<int> intVector2;
@@ -242,32 +237,16 @@ int main()
                 intVector2.push_back(3);
                 intVector2.push_back(4);
                 intVector2.push_back(5);
-
-                std::cout << "Vector contents after push_back construction: ";
-                for (size_t i = 0; i < intVector2.size(); ++i)
-                {
-                    std::cout << intVector2[i] << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Vector contents after push_back construction: " << intVector2 << std::endl;
 
                 // Push back elements
                 intVector.push_back(10);
                 intVector.push_back(20);
-                std::cout << "Vector contents after push_back: ";
-                for (size_t i = 0; i < intVector.size(); ++i)
-                {
-                    std::cout << intVector[i] << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Vector contents after push_back: " << intVector << std::endl;
 
                 // Pop back element
                 intVector.pop_back();
-                std::cout << "Vector contents after pop_back: ";
-                for (size_t i = 0; i < intVector.size(); ++i)
-                {
-                    std::cout << intVector[i] << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Vector contents after pop_back: " << intVector << std::endl;
 
                 // Size of vector
                 std::cout << "Size of the vector: " << intVector.size() << std::endl;
@@ -282,21 +261,11 @@ int main()
 
                 // Test copy constructor and copy assignment operator
                 Vector<int> copiedVector = intVector;
-                std::cout << "Copied vector contents: ";
-                for (size_t i = 0; i < copiedVector.size(); ++i)
-                {
-                    std::cout << copiedVector[i] << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Copied vector contents: " << copiedVector << std::endl;
 
                 // Test move constructor and move assignment operator
                 Vector<int> movedVector = std::move(intVector2);
-                std::cout << "Moved vector contents: ";
-                for (size_t i = 0; i < movedVector.size(); ++i)
-                {
-                    std::cout << movedVector[i] << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Moved vector contents: " << movedVector << std::endl;
 
                 // Test clear
                 movedVector.clear();
@@ -358,11 +327,10 @@ int main()
                     // Print results in a table with proper formatting
                     std::cout << std::setw(15) << sz << " | " << std::setw(27) << elapsed_v1.count() << " | " << std::setw(20) << elapsed_v2.count() << " | " << std::setw(20) << reallocations_std_vector << " | " << std::setw(15) << reallocations_custom_vector << "\n";
                 }
-
                 std::cout << "\n";
+
                 break;
             }
-
             case 0:
                 cout << "Programa baigia darbą." << endl;
                 break;

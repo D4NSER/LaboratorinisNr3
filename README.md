@@ -7,8 +7,6 @@
 > All of the testing was done with the same files that contained 1000, 10000, 100000, 1000000, 10000000 students.
 
 # Creating my own vector
->[!NOTE]
->Creating this vector was a really hard and long process, so I am very sorry if I have missed or haven't done something fully
 
 ## Overview
 This repository contains an implementation of a dynamic array, similar to std::vector, written in C++. The Vector class template provides a flexible array that can grow dynamically as elements are added. It supports a wide range of functionalities, from basic operations to advanced features like sorting and benchmarking.
@@ -122,7 +120,38 @@ After sorting: [1, 2, 2, 3]
 After reversing: [3, 2, 2, 1]
 First duplicate: 2
 ```
-## Doxygen
+### More tests
+1. Test `push_back` and `size`:
+```
+Vector<int> vec;
+vec.push_back(1);
+vec.push_back(2);
+assert(vec.size() == 2);
+```
+2. Test `pop_back` and `empty`:
+```
+Vector<int> vec;
+vec.push_back(1);
+vec.pop_back();
+assert(vec.empty());
+```
+3. Test element access with `operator[]`:
+```
+Vector<int> vec;
+vec.push_back(10);
+assert(vec[0] == 10);
+```
+4. Test `sort` method:
+```
+Vector<int> vec;
+vec.push_back(3);
+vec.push_back(1);
+vec.push_back(2);
+vec.sort();
+assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
+```
+
+## Doxygen documentation
 >[!NOTE]
 >The repository includes comprehensive Doxygen documentation. This documentation provides detailed descriptions of all classes, methods, and member variables.
 
@@ -140,3 +169,6 @@ First duplicate: 2
 - **HTML:** Located in the `v3.0/html` directory. Open index.html to view.
 - **LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
 - **PDF:** A pre-generated PDF document is available in the repository for easy reference.
+
+## Its efficiency and speed
+

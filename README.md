@@ -153,7 +153,7 @@ assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
 
 ## Doxygen documentation
 >[!NOTE]
->The repository includes comprehensive Doxygen documentation. This documentation provides detailed descriptions of all classes, methods, and member variables.
+>The repository includes comprehensive Doxygen[^1] documentation. This documentation provides detailed descriptions of all classes, methods, and member variables.
 
 ### Installation and Usage
 1. Firstly, head up to the [official Doxygen website](https://www.doxygen.nl/manual/index.html)
@@ -185,32 +185,134 @@ assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
 The table above shows the time taken to perform operations on vectors of increasing sizes for both std::vector my our custom Vector class. The number of reallocations is also compared, demonstrating the efficiency and performance of the Vector class.
 
 ## Unit testing
-Pilnai ištestuotas sukurtas konteineris naudojant Unit Native Testing per Visual Studio.
-Testai apima įvairias vektoriaus klasės funkcijas, užtikrinant jos teisingumą ir patikimumą.
+The container created has been thoroughly tested using the Native Unit Testing via Visual Studio. The tests cover various functionalities of the Vector class, ensuring its correctness and reliability.
 
-Apie testus:
-1. InitiallyEmpty: Patikrina, ar vektorius iš pradžių yra tuščias.
-2. PushBack: Patikrina push_back metodą.
-3. PopBack: Patikrina pop_back metodą.
-4. Clear:  Patikrina clear metodą.
-5. Capacity: Patikrina capacity metodą.
-6. Iterators: Patikrina iteratorių funkcionalumą.
-7. Sort: Patikrina sort metodą.
-8. Reverse: Patikrina reverse metodą.
-9. AccessByIndex: Patikrina elemento prieigą pagal indeksą.
-10. AccessByIndexOutOfRange: Patikrina elemento prieigą už ribų.
-11. CopyConstructor: Patikrina kopijos konstruktorių.
-12. CopyAssignmentOperator: Patikrina kopijos priskyrimo operatorių.
-13. MoveConstructor: Patikrina perkėlimo konstruktorių.
-14. MoveAssignmentOperator: Patikrina perkėlimo priskyrimo operatorių.
-15. Insert: Patikrina insert metodą.
-16. Erase: Patikrina erase metodą.
-17. IsSorted: Patikrina is_sorted metodą.
-18. AccessInvalidIndex: Patikrina prieigą prie elementų naudojant netinkamus indeksus.
-19. SortPerformance: Patikrina sort metodo našumą.
-20. InsertAtDifferentPositions: Patikrina įterpimą į skirtingas pozicijas.
+### About the Tests:
+
+**InitiallyEmpty:** Checks if the vector is initially empty.
+**PushBack:** Validates the push_back method.
+**PopBack:** Verifies the pop_back method.
+**Clear:** Ensures the clear method functions correctly.
+**Capacity:** Validates the capacity method.
+**Iterators:** Checks the functionality of iterators.
+**Sort:** Validates the sort method.
+**Reverse:** Ensures the reverse method works as expected.
+**AccessByIndex:** Verifies element access by index.
+**AccessByIndexOutOfRange:** Checks element access beyond boundaries.
+**CopyConstructor:** Validates the copy constructor.
+**CopyAssignmentOperator:** Ensures the copy assignment operator functions correctly.
+**MoveConstructor:** Verifies the move constructor.
+**MoveAssignmentOperator:** Validates the move assignment operator.
+**Insert:** Checks the insert method.
+**Erase:** Verifies the erase method.
+**IsSorted:** Ensures the is_sorted method functions correctly.
+**AccessInvalidIndex:** Checks access to elements using invalid indices.
+**SortPerformance:** Validates the performance of the sort method.
+**InsertAtDifferentPositions:** Checks insertion at different positions.
     
 ![image](![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/565f9d4f-7553-4e22-812a-5d7b019b95ca)
 
-Įdomu tai, kad naudojant C++ Unit Testing platformą (CppUnitTest.h), galima lengvai kurti ir vykdyti testus tiesiogiai iš C++ kodo, todėl visi testai gali būti sukompiliuoti kartu su pagrindine programa. 
-Tai palengvina testų kūrimą ir vykdymą, nes nereikia naudoti atskirų įrankių ar aplinkų bei iškart matome, kurie testai įvyko sėkmingai, o kurie ne.
+An interesting aspect is that using the C++ Unit Testing platform (CppUnitTest.h), tests can be easily created and executed directly from C++ code, allowing all tests to be compiled together with the main program. This simplifies the creation and execution of tests, eliminating the need for separate tools or environments, and provides immediate feedback on successful and failed tests.
+
+# Preparing, creating, setuping and running your files
+## Doxygen
+>[!NOTE]
+>Since Doxygen documentation only needs comments from header files, save your time and
+
+1. Open all your project's haeder files and get ready for this long and exhausting job
+2. First up, we need a little intro about how the comments are made and what are the rules:
+   - **Comment Format:** Use a specific format for comments recognized by Doxygen, typically starting with /** or /*! to indicate a special comment block.
+   - **Documentation Tags:** Utilize special tags like @brief, @param, @return, @see, etc., to provide structured information about your code elements.
+   - **Class Documentation:** Document classes using /** blocks above the class declaration, providing descriptions, usage notes, and any relevant information.
+   - **Function Documentation:** Document functions and methods with /** blocks preceding their declarations, including details such as parameters, return values, and usage examples.
+   - **Variable Documentation:** Document variables using /** blocks above their declarations, specifying their purpose, usage guidelines, and any additional details.
+   - **Grouping and Organization:** Group related elements together using \defgroup and \addtogroup commands to create logical hierarchies in your documentation.
+   - **File-level Documentation:** Include file-level documentation using /** blocks at the beginning of each source file, describing its purpose, contents, and usage.
+   - **Consistency and Clarity:** Maintain consistency in your commenting style and ensure clarity in your descriptions, making it easier for users to understand and navigate your documentation.
+3. Now once you are all set, start commenting everything in your header files
+
+## Unit Testing
+>[!CAUTION]
+>I hope you will stay as strong as I did throughout all the hell we will go now
+
+### IDE
+    Well, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's 
+    for this kind of job. You can also use JetBrains as it is even better.
+     
+### Setting everything up
+>[!NOTE]
+>Unit Testing, overviewed in this documentation is called Native Unit Testing
+
+#### Preparing the project file
+1. Firstly open **Visual Studio**
+2. Press **Create New Project**
+3. Select **Native Unit Testing** because VS will do all the job by creating and editing your properties you will need here
+4. Now once the project is created head up to Project -> {name of the file} properties -> C/C++ -> All functions -> Precompiled Header and change it's value to **Not Using Precompiled Headers**
+5. Now press **Apply** and **OK**
+6. Now press Project button and add existing files that you will want to test
+   
+#### Making last changes to code
+1. Once you do this, just write new functions that test whatever you need
+2. Once it is all done, go to **Test** and open the **Test Explorer**
+3. Now just press **Run all test** and you have it
+4. If any of the builds fail, you will know that something is not working and if it does work, you are set
+
+## How to run the code?
+### Makefile creation
+>[!NOTE]
+>The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate a few different methods for setting up and using the Makefile builder to execute my code.
+
+>[!WARNING]
+>Please be discrete when following these steps and after installing the compiler - configure it, because it will not work :) 
+
+#### First method (Windows Hard Method)
+1. **Go** to [this](https://sourceforge.net/projects/gnuwin32/files/make/3.81/) website, which navigates you into the compilator download link (the original site).
+2. **Download** the latest version of it.
+3. **Setup** the whole thing. It has quite clear intruction, but if you ever struggle, here's a [video](https://www.youtube.com/watch?v=taCJhnBXG_w) to help you!
+4. Now, once you have this, head up to you **project** on File Explorer.
+5. **Copy** the path of your project with all of the files (**INCLUDING THE MAKEFILE!**)
+6. **Open** CMD (Command Prompt).
+7. Type '**cd** ' and **paste** the path.
+8. Now press enter and just to make sure, that you're in the right place, type '**ls**' and **check** if all the files are there.
+9. Now just **type** 'make' and **wait**!
+10. Once everything is done, simply **type** 'programa.exe' as it is my target in the makefile (the main file that all of other files got compiled to)
+11. If **nothing** happends, you can add 'run' before the path.
+12. **Have fun!**
+
+#### Second method (MacBook Hard Method)
+1. **Go** to the app store or into the internet and download [Xcode](https://developer.apple.com/xcode/) because you will need a compilator.
+2. **Start** the Xcode after installing and configuring it.
+3. **Go** to _Xcode/Preferences_.
+4. Head up to the "_Downloads_" tab.
+5. Click on "_Components_".
+6. Press "_Install_" on the **command line tools line**.
+7. Once all of this is done, head up the Finder and **locate** your project with all of the files (**INCLUDING THE MAKEFILE!**)
+8. Now open up the **terminal** and type '**cd** '.
+9. Head back to the finder and press on the **name** of you **project**. A file with a plus should've appeared by now.
+10. **Drag** that file with a plus right **into the terminal** and press enter.
+11. To make sure, you are in the right project **type** '**ls**' and **check** if all of the files are there.
+12. Now **type** './' and the name of the file (in my case it's **programa**)
+13. **Enjoy your time!**
+
+#### Third method (The Smart One)
+1. **Download** either Xcode or MinGW compilator (see above for both Windows and Mac).
+2. Once the compilator is **installed** and set up. **Open** [VisualStudio Code](https://code.visualstudio.com/download).
+3. Now open the **project**.
+4. Go to the **extensions** tab and search for "**Makefile Tools**" By _Microsoft_.
+5. **Download** it and then restart VSCode for it to actually get installed into your **IDE**.
+6. Once this is done, press on the **extension** on the left side of the toolbar and you'll see 6 different paths, that the extension needs.
+7. For **Windows**:
+    - Edit the "**Make**" configuration to use mingw32-make.exe.
+    - Edit the "**Makefile**" configuration and paste the project path.
+8. For **MacBook**:
+    - Edit the "**Make**" configuration to use /usr/bin/make.
+    - Edit the "**Makefile**" configuration and paste the project path.
+9. Now just press the "**Build**" button (top left one) which will build the project.
+10. Then press the "**Run code**" button which will start it.
+11. **Have fun!**
+
+
+## References:
+[^1]: Doxygen is a tool designed to automatically generate documentation from source code, primarily written in C++, but also supporting other programming languages. Its operation is based on specially written comment tags adjacent to the code. These tags, typically starting with the symbol /**, allow for writing structured and detailed documentation about code functions, class members, modules, and variables.
+[^2]: Unit tests are intended to test individual parts (units) of a program to ensure they function correctly. This helps ensure that each part of the program performs the intended functions and behaves as expected.
+[^3]: Additionally, GitHub provides a platform for collaborative code editing and version control, allowing multiple developers to contribute to a project and make changes to code files.

@@ -185,30 +185,30 @@ assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
 The table above shows the time taken to perform operations on vectors of increasing sizes for both std::vector my our custom Vector class. The number of reallocations is also compared, demonstrating the efficiency and performance of the Vector class.
 
 ## Unit testing
-The container created has been thoroughly tested using the Native Unit Testing via Visual Studio. The tests cover various functionalities of the Vector class, ensuring its correctness and reliability.
+The container created has been thoroughly tested using the Native Unit Testing[^2] via Visual Studio. The tests cover various functionalities of the Vector class, ensuring its correctness and reliability.
 
 ### About the Tests:
 
-**InitiallyEmpty:** Checks if the vector is initially empty.
-**PushBack:** Validates the push_back method.
-**PopBack:** Verifies the pop_back method.
-**Clear:** Ensures the clear method functions correctly.
-**Capacity:** Validates the capacity method.
-**Iterators:** Checks the functionality of iterators.
-**Sort:** Validates the sort method.
-**Reverse:** Ensures the reverse method works as expected.
-**AccessByIndex:** Verifies element access by index.
-**AccessByIndexOutOfRange:** Checks element access beyond boundaries.
-**CopyConstructor:** Validates the copy constructor.
-**CopyAssignmentOperator:** Ensures the copy assignment operator functions correctly.
-**MoveConstructor:** Verifies the move constructor.
-**MoveAssignmentOperator:** Validates the move assignment operator.
-**Insert:** Checks the insert method.
-**Erase:** Verifies the erase method.
-**IsSorted:** Ensures the is_sorted method functions correctly.
-**AccessInvalidIndex:** Checks access to elements using invalid indices.
-**SortPerformance:** Validates the performance of the sort method.
-**InsertAtDifferentPositions:** Checks insertion at different positions.
+- **InitiallyEmpty:** Checks if the vector is initially empty.
+- **PushBack:** Validates the push_back method.
+- **PopBack:** Verifies the pop_back method.
+- **Clear:** Ensures the clear method functions correctly.
+- **Capacity:** Validates the capacity method.
+- **Iterators:** Checks the functionality of iterators.
+- **Sort:** Validates the sort method.
+- **Reverse:** Ensures the reverse method works as expected.
+- **AccessByIndex:** Verifies element access by index.
+- **AccessByIndexOutOfRange:** Checks element access beyond boundaries.
+- **CopyConstructor:** Validates the copy constructor.
+- **CopyAssignmentOperator:** Ensures the copy assignment operator functions correctly.
+- **MoveConstructor:** Verifies the move constructor.
+- **MoveAssignmentOperator:** Validates the move assignment operator.
+- **Insert:** Checks the insert method.
+- **Erase:** Verifies the erase method.
+- **IsSorted:** Ensures the is_sorted method functions correctly.
+- **AccessInvalidIndex:** Checks access to elements using invalid indices.
+- **SortPerformance:** Validates the performance of the sort method.
+- **InsertAtDifferentPositions:** Checks insertion at different positions.
     
 ![image](![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/565f9d4f-7553-4e22-812a-5d7b019b95ca)
 
@@ -315,4 +315,3 @@ An interesting aspect is that using the C++ Unit Testing platform (CppUnitTest.h
 ## References:
 [^1]: Doxygen is a tool designed to automatically generate documentation from source code, primarily written in C++, but also supporting other programming languages. Its operation is based on specially written comment tags adjacent to the code. These tags, typically starting with the symbol /**, allow for writing structured and detailed documentation about code functions, class members, modules, and variables.
 [^2]: Unit tests are intended to test individual parts (units) of a program to ensure they function correctly. This helps ensure that each part of the program performs the intended functions and behaves as expected.
-[^3]: Additionally, GitHub provides a platform for collaborative code editing and version control, allowing multiple developers to contribute to a project and make changes to code files.

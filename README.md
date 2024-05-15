@@ -210,7 +210,7 @@ Apie testus:
 19. SortPerformance: Patikrina sort metodo našumą.
 20. InsertAtDifferentPositions: Patikrina įterpimą į skirtingas pozicijas.
     
-![image](https://github.com/UgIzMo/Objektinisprog3/assets/152986822/4a9796be-1331-4d5e-9a96-7fe39c1b6474)
+![image](![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/565f9d4f-7553-4e22-812a-5d7b019b95ca)
 
 Įdomu tai, kad naudojant C++ Unit Testing platformą (CppUnitTest.h), galima lengvai kurti ir vykdyti testus tiesiogiai iš C++ kodo, todėl visi testai gali būti sukompiliuoti kartu su pagrindine programa. 
 Tai palengvina testų kūrimą ir vykdymą, nes nereikia naudoti atskirų įrankių ar aplinkų bei iškart matome, kurie testai įvyko sėkmingai, o kurie ne.

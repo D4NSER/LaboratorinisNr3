@@ -137,6 +137,6 @@ First duplicate: 2
 8. Open it and vola, you have your whole documentation
 
 ### Available Documentation Formats
-**HTML:** Located in the `v3.0/html` directory. Open index.html to view.
-**LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
-**PDF:** A pre-generated PDF document is available in the repository for easy reference.
+- **HTML:** Located in the `v3.0/html` directory. Open index.html to view.
+- **LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
+- **PDF:** A pre-generated PDF document is available in the repository for easy reference.

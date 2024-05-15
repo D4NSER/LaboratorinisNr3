@@ -1,5 +1,5 @@
 # Specs
-### To start this project's review, I need to give a little intro about my computer. I have a MacBook, with these specs:
+**To start this project's review, I need to give a little intro about my computer. I have a MacBook, with these specs:**
     CPU: 2,3 GHz Quad-Core Intel Core i5 
     RAM: 6 GB 2133 MHz LPDDR3 
     SSD: Macintosh HD 
@@ -14,12 +14,12 @@
 This repository contains an implementation of a dynamic array, similar to std::vector, written in C++. The Vector class template provides a flexible array that can grow dynamically as elements are added. It supports a wide range of functionalities, from basic operations to advanced features like sorting and benchmarking.
 
 ## Key Features
-- Dynamic resizing
-- Copy and move semantics
-- Range-based operations
-- Sorting and reversing
-- Element access and manipulation
-- Performance benchmarking
+- **Dynamic resizing:** Automatically grows in size as elements are added.
+- **Iterators:** Provides both regular and constant iterators for element access.
+- **Element access:** Supports operator[], front(), back(), and other access methods.
+- **Modifiers:** Includes push_back(), pop_back(), insert(), erase(), clear(), reserve(), and resize().
+- **Algorithms:** Methods for sorting, reversing, and finding duplicates.
+- **Utility functions:** Benchmarks for performance measurement and rotation of elements.
 
 ## Examples and testing
 ### Test 1: Basic Operations
@@ -27,7 +27,7 @@ This repository contains an implementation of a dynamic array, similar to std::v
 
 The Code:
 ```
-#include "Vector.h"
+#include "vector.h"
 #include <iostream>
 
 int main() {
@@ -60,7 +60,7 @@ After modifying first element: [15, 20]
 
 The Code:
 ```
-#include "Vector.h"
+#include "vector.h"
 #include <iostream>
 
 int main() {
@@ -89,7 +89,7 @@ vec3 (after move): [1, 2, 3]
 
 The Code:
 ```
-#include "Vector.h"
+#include "vector.h"
 #include <iostream>
 
 int main() {
@@ -122,4 +122,21 @@ After sorting: [1, 2, 2, 3]
 After reversing: [3, 2, 2, 1]
 First duplicate: 2
 ```
+## Doxygen
+>[!NOTE]
+>The repository includes comprehensive Doxygen documentation. This documentation provides detailed descriptions of all classes, methods, and member variables.
 
+### Installation and Usage
+1. Firstly, head up to the [official Doxygen website](https://www.doxygen.nl/manual/index.html)
+2. Press the download button and install the program for the desired OS
+3. Set everything up and start the DoxygenWiz
+4. Now select the exact folder of your project, where all the files are shown
+5. Name your project, write your synopsis and the version, if you really need - add thee logo
+6. Head up to Run window and press the **Run doxygen** button
+7. Once the process finishes, just go right to your project files -> hmtl -> index.html
+8. Open it and vola, you have your whole documentation
+
+### Available Documentation Formats
+**HTML:** Located in the `v3.0/html` directory. Open index.html to view.
+**LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
+**PDF:** A pre-generated PDF document is available in the repository for easy reference.

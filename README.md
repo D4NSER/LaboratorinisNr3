@@ -170,5 +170,18 @@ assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
 - **LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
 - **PDF:** A pre-generated PDF document is available in the repository for easy reference.
 
-## Its efficiency and speed
+## Its efficiency and speed and reallocations
+>[!IMPORTANT]
+>The performance of the Vector class is benchmarked against std::vector to ensure it is efficient in terms of time complexity and memory reallocations.
 
+| Element Count  | `std::vector` Time (s) | `Vector` Time (s) | `std::vector` Reallocs | `Vector` Reallocs |
+|----------------|------------------------|-------------------|------------------------|-------------------|
+| 10,000         | 0.001619               | 0.000305          | 14                     | 14                |
+| 100,000        | 0.009946               | 0.001816          | 17                     | 17                |
+| 1,000,000      | 0.064191               | 0.014089          | 20                     | 20                |
+| 10,000,000     | 0.752756               | 0.156575          | 24                     | 24                |
+| 100,000,000    | 7.036739               | 1.725960          | 27                     | 27                |
+
+The table above shows the time taken to perform operations on vectors of increasing sizes for both std::vector my our custom Vector class. The number of reallocations is also compared, demonstrating the efficiency and performance of the Vector class.
+
+## 

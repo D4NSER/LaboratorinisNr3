@@ -252,11 +252,6 @@ Once we've created the setup file, we need to firstly run the code to create the
 - Once you've done everything there should've appeared a desktop shorcut file for the project, which once ran, should simply run thee project's code and if you did everything as listed it should work properly without any errors. The screen should be something like this:
 ![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/3e7320c3-b2ef-49ef-8c6e-2ab4a7c33c85)
 
-
-
-
-
-
 # Preparing, creating, setuping and running your files
 ## Doxygen
 >[!NOTE]

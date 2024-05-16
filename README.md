@@ -214,10 +214,12 @@ The container created has been thoroughly tested using the Native Unit Testing[^
 
 An interesting aspect is that using the C++ Unit Testing platform (CppUnitTest.h), tests can be easily created and executed directly from C++ code, allowing all tests to be compiled together with the main program. This simplifies the creation and execution of tests, eliminating the need for separate tools or environments, and provides immediate feedback on successful and failed tests.
 
+# Creating a downloadable and installable setup wizard
+
 # Preparing, creating, setuping and running your files
 ## Doxygen
 >[!NOTE]
->Since Doxygen documentation only needs comments from header files, save your time and
+>Since Doxygen documentation only needs comments from header files, save your time and:
 
 1. Open all your project's haeder files and get ready for this long and exhausting job
 2. First up, we need a little intro about how the comments are made and what are the rules:
@@ -232,8 +234,6 @@ An interesting aspect is that using the C++ Unit Testing platform (CppUnitTest.h
 3. Now once you are all set, start commenting everything in your header files
 
 ## Unit Testing
->[!CAUTION]
->I hope you will stay as strong as I did throughout all the hell we will go now
 
 ### IDE
     Well, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's 

@@ -151,25 +151,6 @@ vec.sort();
 assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
 ```
 
-## Doxygen documentation
->[!NOTE]
->The repository includes comprehensive Doxygen[^1] documentation. This documentation provides detailed descriptions of all classes, methods, and member variables.
-
-### Installation and Usage
-1. Firstly, head up to the [official Doxygen website](https://www.doxygen.nl/manual/index.html)
-2. Press the download button and install the program for the desired OS
-3. Set everything up and start the DoxygenWiz
-4. Now select the exact folder of your project, where all the files are shown
-5. Name your project, write your synopsis and the version, if you really need - add thee logo
-6. Head up to Run window and press the **Run doxygen** button
-7. Once the process finishes, just go right to your project files -> hmtl -> index.html
-8. Open it and vola, you have your whole documentation
-
-### Available Documentation Formats
-- **HTML:** Located in the `v3.0/html` directory. Open index.html to view.
-- **LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
-- **PDF:** A pre-generated PDF document is available in the repository for easy reference.
-
 ## Its efficiency and speed and reallocations
 >[!IMPORTANT]
 >The performance of the Vector class is benchmarked against std::vector to ensure it is efficient in terms of time complexity and memory reallocations.
@@ -184,10 +165,29 @@ assert(vec[0] == 1 && vec[1] == 2 && vec[2] == 3);
 
 The table above shows the time taken to perform operations on vectors of increasing sizes for both std::vector my our custom Vector class. The number of reallocations is also compared, demonstrating the efficiency and performance of the Vector class.
 
-## Unit testing
+# Doxygen documentation
+>[!NOTE]
+>The repository includes comprehensive Doxygen[^1] documentation. This documentation provides detailed descriptions of all classes, methods, and member variables.
+
+## Installation and Usage
+1. Firstly, head up to the [official Doxygen website](https://www.doxygen.nl/manual/index.html)
+2. Press the download button and install the program for the desired OS
+3. Set everything up and start the DoxygenWiz
+4. Now select the exact folder of your project, where all the files are shown
+5. Name your project, write your synopsis and the version, if you really need - add thee logo
+6. Head up to Run window and press the **Run doxygen** button
+7. Once the process finishes, just go right to your project files -> hmtl -> index.html
+8. Open it and vola, you have your whole documentation
+
+## Available Documentation Formats
+- **HTML:** Located in the `v3.0/html` directory. Open index.html to view.
+- **LaTeX:** Located in the `v3.0/latex` directory. Can be compiled to a PDF using a LaTeX editor.
+- **PDF:** A pre-generated PDF document is available in the repository for easy reference.
+  
+# Unit testing
 The container created has been thoroughly tested using the Native Unit Testing[^2] via Visual Studio. The tests cover various functionalities of the Vector class, ensuring its correctness and reliability.
 
-### About the Tests:
+## About the Tests:
 
 - **InitiallyEmpty:** Checks if the vector is initially empty.
 - **PushBack:** Validates the push_back method.
@@ -269,17 +269,17 @@ Once we've created the setup file, we need to firstly run the code to create the
    - **Consistency and Clarity:** Maintain consistency in your commenting style and ensure clarity in your descriptions, making it easier for users to understand and navigate your documentation.
 3. Now once you are all set, start commenting everything in your header files
 
-## Unit Testing
+# Unit Testing
 
-### IDE
+## IDE
     Well, for starters, I used Visual Studio 2022 for Unit testing as it is one of the best IDE's 
     for this kind of job. You can also use JetBrains as it is even better.
      
-### Setting everything up
+## Setting everything up
 >[!NOTE]
 >Unit Testing, overviewed in this documentation is called Native Unit Testing
 
-#### Preparing the project file
+### Preparing the project file
 1. Firstly open **Visual Studio**
 2. Press **Create New Project**
 3. Select **Native Unit Testing** because VS will do all the job by creating and editing your properties you will need here
@@ -287,21 +287,21 @@ Once we've created the setup file, we need to firstly run the code to create the
 5. Now press **Apply** and **OK**
 6. Now press Project button and add existing files that you will want to test
    
-#### Making last changes to code
+### Making last changes to code
 1. Once you do this, just write new functions that test whatever you need
 2. Once it is all done, go to **Test** and open the **Test Explorer**
 3. Now just press **Run all test** and you have it
 4. If any of the builds fail, you will know that something is not working and if it does work, you are set
 
-## How to run the code?
-### Makefile creation
+# How to run the code?
+## Makefile creation
 >[!NOTE]
 >The Makefile was designed to ensure successful linking of various files in the code. This tutorial will demonstrate a few different methods for setting up and using the Makefile builder to execute my code.
 
 >[!WARNING]
 >Please be discrete when following these steps and after installing the compiler - configure it, because it will not work :) 
 
-#### First method (Windows Hard Method)
+## First method (Windows Hard Method)
 1. **Go** to [this](https://sourceforge.net/projects/gnuwin32/files/make/3.81/) website, which navigates you into the compilator download link (the original site).
 2. **Download** the latest version of it.
 3. **Setup** the whole thing. It has quite clear intruction, but if you ever struggle, here's a [video](https://www.youtube.com/watch?v=taCJhnBXG_w) to help you!
@@ -315,7 +315,7 @@ Once we've created the setup file, we need to firstly run the code to create the
 11. If **nothing** happends, you can add 'run' before the path.
 12. **Have fun!**
 
-#### Second method (MacBook Hard Method)
+## Second method (MacBook Hard Method)
 1. **Go** to the app store or into the internet and download [Xcode](https://developer.apple.com/xcode/) because you will need a compilator.
 2. **Start** the Xcode after installing and configuring it.
 3. **Go** to _Xcode/Preferences_.
@@ -330,7 +330,7 @@ Once we've created the setup file, we need to firstly run the code to create the
 12. Now **type** './' and the name of the file (in my case it's **programa**)
 13. **Enjoy your time!**
 
-#### Third method (The Smart One)
+## Third method (The Smart One)
 1. **Download** either Xcode or MinGW compilator (see above for both Windows and Mac).
 2. Once the compilator is **installed** and set up. **Open** [VisualStudio Code](https://code.visualstudio.com/download).
 3. Now open the **project**.
@@ -348,6 +348,6 @@ Once we've created the setup file, we need to firstly run the code to create the
 11. **Have fun!**
 
 
-## References:
+# References:
 [^1]: Doxygen is a tool designed to automatically generate documentation from source code, primarily written in C++, but also supporting other programming languages. Its operation is based on specially written comment tags adjacent to the code. These tags, typically starting with the symbol /**, allow for writing structured and detailed documentation about code functions, class members, modules, and variables.
 [^2]: Unit tests are intended to test individual parts (units) of a program to ensure they function correctly. This helps ensure that each part of the program performs the intended functions and behaves as expected.

@@ -216,6 +216,16 @@ An interesting aspect is that using the C++ Unit Testing platform (CppUnitTest.h
 
 # Creating a downloadable and installable setup wizard
 
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/3e7320c3-b2ef-49ef-8c6e-2ab4a7c33c85)
+
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/efd2d7ee-09d0-452e-9c29-f6ea4d9531b3)
+
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/b9fee2c7-cdd4-4881-ba3f-99cca00358d2)
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/e7b0007e-f0c4-472b-bbb7-21b468fbe7c4)
+
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/d9d2e4b5-8e8f-437d-a7f4-e5b43c87cd1a)
+
+
 # Preparing, creating, setuping and running your files
 ## Doxygen
 >[!NOTE]

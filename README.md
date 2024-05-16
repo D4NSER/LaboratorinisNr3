@@ -216,14 +216,45 @@ An interesting aspect is that using the C++ Unit Testing platform (CppUnitTest.h
 
 # Creating a downloadable and installable setup wizard
 
+## Preparing for the setup file creation
+
+To be able to create my own setup installer I had to download a certain program because doing it on Visual Studio is a very long and hard way. To fasten the progress I downloaded [Inno Setup Compiler](https://inno-setup-compiler.en.lo4d.com/windows). Now once everything is setup we can begin.
+
+## Creating the setup
+
+- To begin creating the setup file we need to launch the program and press on the _Create new Inno Setup Script wizard_ button
+- Then on the first page, you can  change everything how you like (Application name, its version, publisher and website)
+- On the second screen we do nothing and press next
+- On the third window, we need to locate the .exe file of the poject and provide it's location
+- Then we need to add a whole folder of our project, which contains all of the files and press _Next_
+- On the fourth window we ought to press next
+- Now on the fifth window, we need to check 'Allow user to create a desktop shorcut' box, because this was listed in the task
+- On the _Application Documentation_ window we do nothing and go further
+- Same with the other window
+- On the next window we also skip everything and press _Next_
+- On the _Compiler settings_ window, we need to create a new folder, where the installed project's output will be going and put it's location
+- Then optionally you can put the icon's file location if you have one and then press _Next_
+- Now on the last window we press _Next_ and then _Finish_
+
+## Running the setup
+
+Once we've created the setup file, we need to firstly run the code to create the setup.exe file:
+
+- Once created press _Yes_ twice and select the loccation of your project setup file
+- Then press _Run_ button and wait for the code to finish. If you did everything correctly, this should be the screen after the code has finished creating the setup file:
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/d9d2e4b5-8e8f-437d-a7f4-e5b43c87cd1a)
+- Once everything is finished head up to the location you provided and run the .exe file that was created there. It should look like this:
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/efd2d7ee-09d0-452e-9c29-f6ea4d9531b3)
+- Once you've ran it, simply select what you need and give your administrative permissions, because the code needs it
+- To check if the project has successfully been installed into your ccomputer, you can simply go to the location you provided for the project to be downloaded and all of these files should be there like this:
+  ![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/b9fee2c7-cdd4-4881-ba3f-99cca00358d2)
+![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/e7b0007e-f0c4-472b-bbb7-21b468fbe7c4)
+- Once you've done everything there should've appeared a desktop shorcut file for the project, which once ran, should simply run thee project's code and if you did everything as listed it should work properly without any errors. The screen should be something like this:
 ![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/3e7320c3-b2ef-49ef-8c6e-2ab4a7c33c85)
 
-![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/efd2d7ee-09d0-452e-9c29-f6ea4d9531b3)
 
-![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/b9fee2c7-cdd4-4881-ba3f-99cca00358d2)
-![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/e7b0007e-f0c4-472b-bbb7-21b468fbe7c4)
 
-![image](https://github.com/D4NSER/LaboratorinisNr3/assets/62251258/d9d2e4b5-8e8f-437d-a7f4-e5b43c87cd1a)
+
 
 
 # Preparing, creating, setuping and running your files
